@@ -393,7 +393,7 @@ var DAYS=[
   {t:'10:23 AM',x:'Seattle layover · 3 h 17 m',s:'Seattle is 3 hours behind Atlanta. Lunch here.'},
   {t:'1:40 PM',x:'Delta 3748 · Seattle to Vancouver',s:'Lands 3:54 PM Vancouver time (5:54 PM Atlanta). 1 h 14 m. Clocks jump ahead 1 hour on landing.'},
   {t:'3:54 PM',x:'Land at YVR · Canada customs and bags',s:'Allow 30 to 60 minutes.'},
-  {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Listed for 4:00 PM. About 135 km, 2 to 2.5 hours on the Sea-to-Sky Highway.'},
+  {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Booked for 4:00 PM. About 135 km, 2 to 2.5 hours on the Sea-to-Sky Highway.'},
   {t:'About 7 PM',x:'Check in · The Westin Resort & Spa, Whistler',s:'9 PM Atlanta time. Easy dinner and early night.'}]},
  {date:'2026-12-26',dow:'Sat',d:'26',mon:'Dec',cls:'ski',place:'Whistler · Ski day 1',items:[
   {t:'Morning',x:'Ski fitting if not done the night before',s:'See the ski rental task.'},
@@ -416,14 +416,14 @@ var DAYS=[
   {t:'5:45 PM',x:'Car to the Fairmont',s:'Normally 20 minutes. Rush hour on the Lions Gate Bridge can make it 45.'},
   {t:'About 6:30 PM',x:'Check in · Fairmont Pacific Rim',s:'8:30 PM Atlanta time.'},
   {t:'8:00 PM',x:'Dinner: Mott 32 · Peking duck',s:'A 12-minute walk, inside the Paradox Hotel. Pre-order the duck when you book.'}]},
- {date:'2026-12-30',dow:'Wed',d:'30',mon:'Dec',cls:'',place:'Vancouver · Granville Island, Vij\'s and hockey',items:[
+ {date:'2026-12-30',dow:'Wed',d:'30',mon:'Dec',cls:'',place:'Vancouver · Granville Island, dinner and hockey',items:[
   {t:'Morning',x:'Granville Island',s:'Little Aquabus ferry across False Creek. Public Market and the Kids Market.'},
   {t:'12:30 PM',x:'Lunch: Miku',s:'Flame-seared aburi sushi, 5 minutes on foot from the hotel.'},
   {t:'Afternoon',x:'Rest at the hotel',s:'Pool or nap before a late night.'},
-  {t:'5:15 PM',x:'Cab to Vij\'s',s:'About 15 minutes up Cambie Street. Casual-dressy: jeans and sweaters work for dinner and the game.'},
-  {t:'5:30 PM',x:'Dinner: Vij\'s',s:'Tell the server you have a 7:30 game. Order the lamb popsicles right away.'},
-  {t:'6:45 PM',x:'Cab to Rogers Arena',s:'10 to 15 minutes straight up Cambie.'},
-  {t:'7:30 PM',x:'Canucks vs. Seattle Kraken',s:'About 2.5 hours with intermissions. Ends around 10 PM.'},
+  {t:'5:30 PM',x:'Cab to Yaletown',s:'About 10 minutes. Jeans and sweaters work for dinner and the game.'},
+  {t:'5:45 PM',x:'Dinner: Tasty Indian Bistro',s:'Booked. 1261 Hamilton St, Yaletown.'},
+  {t:'7:00 PM',x:'Walk or cab to Rogers Arena',s:'About 15 minutes on foot, 5 by cab.'},
+  {t:'7:30 PM',x:'Canucks vs. Seattle Kraken',s:'Tickets bought. About 2.5 hours with intermissions. Ends around 10 PM.'},
   {t:'About 10:30 PM',x:'Back at the hotel by SkyTrain',s:'Walk 5 minutes to Stadium–Chinatown, two stops to Waterfront, 5-minute walk. Everyone taps their own card or phone.'}]},
  {date:'2026-12-31',dow:'Thu',d:'31',mon:'Dec',cls:'nye',place:'Vancouver · Easy day, then the gala',items:[
   {t:'Morning',x:'Late breakfast, nothing scheduled',s:'Sleep in after the hockey night.'},
@@ -471,7 +471,7 @@ var DN_PLAN=[
  {night:'Mon Dec 28 · Whistler',name:'Wild Blue',tag:'special',blurb:'Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. Book early.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
  {night:'Tue Dec 29 · 8:00 PM · Vancouver',name:'Mott 32 · Peking duck',tag:'special',blurb:'Ranked No. 1 Chinese restaurant in Canada in 2026. Applewood-roasted Peking duck carved at the table, in a glamorous room inside the Paradox Hotel. A 12-minute walk. Pre-order the duck when you book.',site:'https://www.paradoxhotels.com/vancouver/dining/mott32-vancouver',map:'Mott 32 Vancouver'},
  {night:'Wed Dec 30 · lunch · Vancouver',name:'Miku',tag:'idea',blurb:'Flame-seared aburi sushi, a Vancouver original, on the waterfront 5 minutes from the Fairmont.',site:'https://mikurestaurant.com/',map:'Miku Vancouver'},
- {night:'Wed Dec 30 · 5:30 PM · Vancouver',name:'Vij\'s',tag:'special',blurb:'Vancouver\'s landmark modern Indian restaurant since 1994, under a ceiling of 6,000 chai cups. Order the lamb popsicles in fenugreek curry. Casual-dressy. Book on OpenTable about 30 days out.',site:'https://vijs.ca',map:'Vij\'s Restaurant 3106 Cambie St Vancouver'},
+ {night:'Wed Dec 30 · 5:45 PM · Vancouver',name:'Tasty Indian Bistro · Yaletown',tag:'special',blurb:'Booked. Modern North Indian in a lively room, a 15-minute walk from Rogers Arena.',site:'https://www.opentable.com/r/tasty-indian-bistro-yaletown-reservations-vancouver',map:'Tasty Indian Bistro 1261 Hamilton St Vancouver'},
  {night:'Thu Dec 31 · Vancouver',name:'New Year\'s Eve Gala · Fairmont Pacific Rim',tag:'special',blurb:'Tickets bought. Doors 6:30 PM, four-course dinner at 7:30 PM, live music and dancing until 1 AM.',map:'Fairmont Pacific Rim Vancouver'}
 ];
 var DN_MORE=[
@@ -479,6 +479,7 @@ var DN_MORE=[
  {name:'Mekong · Whistler Creekside',blurb:'Fine-dining Thai from the chef behind Vancouver\'s Maenam. A short taxi from the village.',map:'Mekong Fine Thai Cuisine Whistler'},
  {name:'Ohyama Ramen · Whistler',blurb:'Quick, warming bowls after skiing.',map:'Ohyama Ramen Whistler'},
  {name:'Harajuku Izakaya · Whistler',blurb:'Casual Japanese small plates the boys will like.',map:'Harajuku Izakaya Whistler'},
+ {name:'Vij\'s · Vancouver',blurb:'The city\'s landmark modern Indian restaurant, famous for lamb popsicles. On Cambie Street, 15 minutes by cab.',site:'https://vijs.ca',map:'Vij\'s Restaurant 3106 Cambie St Vancouver'},
  {name:'Kingyo Izakaya · Vancouver West End',blurb:'Many locals call it the best izakaya in town. Small plates, so everyone picks what they like. Great lunch sets.',map:'Kingyo Izakaya Vancouver'},
  {name:'Guu Original · Vancouver',blurb:'Vancouver\'s first izakaya, loud and fun. About 15 minutes on foot.',map:'Guu Original Thurlow Vancouver'},
  {name:'Phnom Penh · Vancouver Chinatown',blurb:'Bib Gourmand Cambodian and Vietnamese. Famous chicken wings. Expect a line.',map:'Phnom Penh Restaurant Vancouver'}
@@ -498,7 +499,7 @@ var DRIVES=[
  {r:'YVR airport to the Westin, Whistler',d:'2 to 2.5 h',t:'About 135 km on the Sea-to-Sky Highway. Longer in snow or holiday traffic.',a:'Vancouver International Airport',b:WESTIN},
  {r:'Westin, Whistler to Capilano Suspension Bridge',d:'About 1¾ h',t:'Dec 29. Capilano is in North Vancouver, before the bridge into downtown.',a:WESTIN,b:'Capilano Suspension Bridge Park'},
  {r:'Capilano to Fairmont Pacific Rim',d:'20 to 45 min',t:'Across the Lions Gate Bridge. At rush hour only one lane runs into downtown.',a:'Capilano Suspension Bridge Park',b:FAIRMONT},
- {r:'Fairmont to Vij\'s, then Rogers Arena',d:'15 + 15 min',t:'Dec 30 by cab. Back by SkyTrain from Stadium–Chinatown to Waterfront.',a:FAIRMONT,b:'Vij\'s Restaurant 3106 Cambie St Vancouver'},
+ {r:'Fairmont to Tasty Indian Bistro, then Rogers Arena',d:'10 + 5 min',t:'Dec 30 by cab, or walk 15 minutes from dinner to the arena. Back by SkyTrain from Stadium–Chinatown to Waterfront.',a:FAIRMONT,b:'Tasty Indian Bistro 1261 Hamilton St Vancouver'},
  {r:'Fairmont Pacific Rim to YVR airport',d:'25 to 35 min',t:'About 14 km. Quiet roads at 5:30 AM on New Year\'s Day.',a:FAIRMONT,b:'Vancouver International Airport'}
 ];
 var HOTELS=[
@@ -511,7 +512,7 @@ var NOTES=[
  {h:'Skiing',li:['Planned lift hours through Jan 15: <b>9:00 AM to 3:30 PM</b>. Check the live lift status each morning.','Sunrise is near 9 AM and sunset about 5:15 PM.','Buy lift tickets ahead. Advance passes usually go off sale in early December and window prices are higher.','The Westin is a few minutes on foot from the Whistler Village Gondola.','Lessons start 30 minutes later than usual this season.'],site:'https://www.whistlerblackcomb.com/explore-the-resort/about-the-resort/hours-of-operation.aspx'},
  {h:'Ski rentals',li:['<b>Black Tie</b> delivers and fits in your room. Listed hours 7:30 AM to 9 PM, so a Christmas-night fitting may be possible.','<b>Can-Ski</b> is inside the Westin: 604-905-2262. Easy swaps mid-trip.','Have heights, weights, shoe sizes and ability levels ready for all four.']},
  {h:'New Year\'s Eve',li:['You have tickets to the New Year\'s Eve Gala at the Fairmont Pacific Rim: doors 6:30 PM, dinner 7:30 PM, dancing until 1 AM.','It is in your hotel, so bed is an elevator ride away.','No public fireworks are expected in downtown Vancouver.','You leave for the airport at 5:30 AM the next morning. Pack completely before the gala and head up by 12:15.']},
- {h:'Hockey night, Dec 30',li:['Vij\'s at 5:30 PM, leave by 6:45, puck drop 7:30 at Rogers Arena.','Jeans and sweaters work for both dinner and the game.','After the game skip the Uber crush: SkyTrain from Stadium–Chinatown two stops to Waterfront, then a 5-minute walk.']},
+ {h:'Hockey night, Dec 30',li:['Tasty Indian Bistro at 5:45 PM (booked), leave by 7:00, puck drop 7:30 at Rogers Arena. Tickets bought.','Jeans and sweaters work for both dinner and the game.','After the game skip the Uber crush: SkyTrain from Stadium–Chinatown two stops to Waterfront, then a 5-minute walk.']},
  {h:'Crossing the border',li:['Passports for all four.','On Jan 1 you clear US customs inside Vancouver airport, so arrive by about 6:00 AM.','Canada uses Canadian dollars. Cards work everywhere. Tip 15 to 20 percent.']},
  {h:'Weather and packing',li:['Whistler village: around freezing, colder up top. Vancouver: mild and often rainy.','Pack waterproof shells, warm layers, goggles, and dressy outfits for Wild Blue and the New Year\'s Eve Gala.','The Sea-to-Sky Highway requires winter tires from October to March. Your car service handles this.']}
 ];
@@ -522,7 +523,6 @@ var TASKS=[
    {label:'Black Tie, in-room',summary:'Going with Black Tie in-room fitting.',adds:[{date:'2026-12-25',time:'Evening',title:'In-room ski fitting · Black Tie',detail:'Type the confirmed time on the task to update this.'}]},
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
  {id:'lift',title:'Buy lift tickets for Dec 26, 27 and 28',day:'2026-12-26',by:'Before early December',detail:'Four people, three days. Advance prices beat the ticket window.',opts:[{label:'Bought',summary:'Lift tickets bought.',adds:[{date:'2026-12-26',time:'',title:'Lift tickets bought for all three ski days',detail:''}]}]},
- {id:'pickup',title:'Confirm the YVR pickup time',day:'2026-12-25',by:'Luxury Transport Inc.',detail:'Pickup is listed for 4:00 PM but you land at 3:54 PM and still have customs and bags. Confirm they track the flight and wait.',opts:[{label:'Confirmed, they track the flight',summary:'Driver tracks the flight and waits.',adds:[{date:'2026-12-25',time:'',title:'Pickup confirmed: driver tracks the flight and waits after customs',detail:''}]}]},
  {id:'return',title:'Book the Dec 29 car: Whistler to Capilano to the Fairmont',day:'2026-12-29',by:'',detail:'Pick up at the Westin at 2:15 PM, wait at Capilano with your bags from about 4:00 to 5:45, then drop at the Fairmont.',opts:[]},
  {id:'latecheckout',title:'Ask the Westin for a 1 or 2 PM late check-out on Dec 29',day:'2026-12-29',by:'Westin front desk',detail:'So you have the room for a shower and packing before the 2:15 PM car.',opts:[{label:'Approved',summary:'Late check-out approved.',adds:[{date:'2026-12-29',time:'',title:'Late check-out approved at the Westin',detail:''}]},{label:'Not available',summary:'No late check-out. Leave bags with the bell desk at 11.',adds:[]}]},
  {id:'capilano',title:'Buy Capilano Canyon Lights tickets for Dec 29, 4:00 PM slot',day:'2026-12-29',by:'capbridge.com',detail:'Four tickets. Arrival windows are 30 minutes, so 4:00 or 4:30.',opts:[]},
@@ -530,8 +530,6 @@ var TASKS=[
  {id:'wildblue',title:'Book Wild Blue for Dec 28',day:'2026-12-28',by:'Book early',detail:'Table for 4.',opts:[]},
  {id:'harbour',title:'Ask the Fairmont for a harbour-view room',day:'2026-12-29',by:'Fairmont Pacific Rim concierge',detail:'Worth a request for the New Year\'s Eve stay.',opts:[{label:'Requested',summary:'Harbour-view room requested.',adds:[]}]},
  {id:'mott',title:'Book Mott 32 for Dec 29 at 8:00 PM and pre-order the Peking duck',day:'2026-12-29',by:'Mott 32 at the Paradox Hotel',detail:'Table for 4. The duck must be ordered when you reserve.',opts:[]},
- {id:'vijs',title:'Book Vij\'s for Dec 30 at 5:30 PM',day:'2026-12-30',by:'OpenTable, about 30 days out (around Nov 30)',detail:'Table for 4. Mention you need to leave by 6:45 for the hockey game.',opts:[]},
- {id:'canucks',title:'Buy Canucks vs. Kraken tickets for Dec 30, 7:30 PM',day:'2026-12-30',by:'Ticketmaster or the Canucks site',detail:'Four seats at Rogers Arena.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
  {id:'passports',title:'Check all four passports',day:'2026-12-25',by:'',detail:'Make sure none expire before you travel.',opts:[{label:'All valid',summary:'Passports checked.',adds:[]}]}
@@ -1039,7 +1037,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261114214054';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261114222550';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
