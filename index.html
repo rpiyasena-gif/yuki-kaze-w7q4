@@ -385,7 +385,7 @@ var REDUCE=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').m
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function mapLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q)}
 function dirLink(a,b){return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)}
-function dlLink(f){return f?'<div class="dlrow"><a class="dl" href="flydelta://">Open Delta app ›</a><a class="dl" href="https://www.delta.com/flightstatus/search?flightNumber='+f[0]+'&flightDate='+f[1]+'" target="_blank" rel="noopener">Flight status ›</a></div>':''}
+function dlLink(f){return f?'<div class="dlrow"><a class="dl" href="https://www.delta.com/flightstatus/search?flightNumber='+f[0]+'&flightDate='+f[1]+'" target="_blank" rel="noopener">Delta flight status ›</a></div>':''}
 function linkRow(o){var h='<div class="links">';if(o.site)h+='<a href="'+esc(o.site)+'" target="_blank" rel="noopener">Website</a>';if(o.map)h+='<a class="map" href="'+esc(mapLink(o.map))+'" target="_blank" rel="noopener">Google Maps</a>';return h+'</div>'}
 var WESTIN='The Westin Resort & Spa Whistler, 4090 Whistler Way, Whistler BC';
 var FAIRMONT='Fairmont Pacific Rim, 1038 Canada Place, Vancouver BC';
@@ -1040,7 +1040,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261115210816';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261115210954';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
