@@ -409,12 +409,12 @@ var DAYS=[
  {date:'2026-12-28',dow:'Mon',d:'28',mon:'Dec',cls:'ski',place:'Whistler · Ski day 3',items:[
   {t:'9:00 AM',x:'Lifts open',s:'Last ski day.'},
   {t:'3:30 PM',x:'Lifts close · return rental skis',s:''},
-  {t:'Evening',x:'Special dinner: Wild Blue',s:'Not booked yet. See Tasks.'}]},
+  {t:'9:15 PM',x:'Special dinner: Wild Blue',s:'Booked, table for 4. Have a snack after skiing. The restaurant will call if a time near 7:00 PM opens up.'}]},
  {date:'2026-12-29',dow:'Tue',d:'29',mon:'Dec',cls:'',place:'Whistler to Vancouver · Peking duck · Canyon Lights',items:[
-  {t:'Morning',x:'Sleep in, breakfast, pack',s:'No rush. Check-out at the Westin is 11:00 AM.'},
-  {t:'About 11 AM',x:'Leave Whistler for Vancouver',s:'About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge.'},
+  {t:'Morning',x:'Sleep in, big brunch, pack',s:'Make it a big one: it carries you to dinner. Check-out at the Westin is 11:00 AM.'},
+  {t:'11:00 AM',x:'Private SUV to Vancouver',s:'About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge.'},
   {t:'About 1 PM',x:'Fairmont Pacific Rim · drop the bags',s:'Check-in is 3:00 PM. The hotel holds your bags if the room is not ready. 3 PM Atlanta time.'},
-  {t:'1:30 PM',x:'Lunch, then explore on foot',s:'Canada Place and the seawall are across the street. Gastown is a 10-minute walk.'},
+  {t:'1:30 PM',x:'Explore on foot, with a snack',s:'Canada Place and the seawall are across the street. Gastown is a 10-minute walk. Keep it light and save room for the duck.'},
   {t:'5:00 PM',x:'Dinner: Mott 32 · Peking duck',s:'A 5-minute Uber or 12-minute walk, inside the Paradox Hotel. Pre-order the duck when you book.'},
   {t:'About 7 PM',x:'Free shuttle to Capilano',s:'From the Hyatt Regency stop, a 5-minute walk from Mott 32. About 20 minutes. Canada Place is the other stop.'},
   {t:'7:30 PM',x:'Capilano Suspension Bridge · Canyon Lights',s:'The bridge, treetops and cliff walk in full dark, with the lights at their best. The park closes at 9, and you may stay until 10.'},
@@ -470,7 +470,7 @@ var DN_PLAN=[
  {night:'Fri Dec 25 · Whistler',name:'At the Westin or nearby',task:'xmas',blurb:'You arrive around 7 PM on Christmas night and many places are closed or full. Reserve something simple.',site:'https://www.whistler.com/dining/',map:WESTIN},
  {night:'Sat Dec 26 · Whistler',name:'Sushi Village',st:'suggested',blurb:'A Whistler institution, casual, open from 5 PM. First come, first served: arrive early and put your name on the list.',site:'https://www.sushivillage.com/',map:'Sushi Village Whistler'},
  {night:'Sun Dec 27 · Whistler',name:'Bar Oso',st:'suggested',blurb:'Lively Spanish small plates in a tiny room. Walk in early, or call ahead to ask about a table.',site:'https://baroso.ca/',map:'Bar Oso Whistler'},
- {night:'Mon Dec 28 · Whistler',name:'Wild Blue',task:'wildblue',blurb:'Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. Book early.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
+ {night:'Mon Dec 28 · 9:15 PM · Whistler',name:'Wild Blue',st:'reserved',blurb:'Booked, table for 4. Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. They will call if a time near 7:00 PM opens up.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
  {night:'Tue Dec 29 · 5:00 PM · Vancouver',name:'Mott 32 · Peking duck',task:'mott',blurb:'Ranked No. 1 Chinese restaurant in Canada in 2026. Applewood-roasted Peking duck carved at the table, in a glamorous room inside the Paradox Hotel. A 12-minute walk. Pre-order the duck when you book.',site:'https://www.paradoxhotels.com/vancouver/dining/mott32-vancouver',map:'Mott 32 Vancouver'},
  {night:'Wed Dec 30 · lunch · Vancouver',name:'Miku',task:'miku',blurb:'Flame-seared aburi sushi, a Vancouver original, on the waterfront 5 minutes from the Fairmont.',site:'https://mikurestaurant.com/',map:'Miku Vancouver'},
  {night:'Wed Dec 30 · 5:45 PM · Vancouver',name:'Tasty Indian Bistro · Yaletown',st:'reserved',blurb:'Booked. Modern North Indian in a lively room, a 15-minute walk from Rogers Arena.',site:'https://www.opentable.com/r/tasty-indian-bistro-yaletown-reservations-vancouver',map:'Tasty Indian Bistro 1261 Hamilton St Vancouver'},
@@ -525,10 +525,9 @@ var TASKS=[
    {label:'Black Tie, in-room',summary:'Going with Black Tie in-room fitting.',adds:[{date:'2026-12-25',time:'Evening',title:'In-room ski fitting · Black Tie',detail:'Type the confirmed time on the task to update this.'}]},
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
  {id:'lift',title:'Buy lift tickets for Dec 26, 27 and 28',day:'2026-12-26',by:'Before early December',detail:'Four people, three days. Advance prices beat the ticket window.',opts:[{label:'Bought',summary:'Lift tickets bought.',adds:[{date:'2026-12-26',time:'',title:'Lift tickets bought for all three ski days',detail:''}]}]},
- {id:'return',title:'Book the Dec 29 ride: Westin to the Fairmont Pacific Rim',day:'2026-12-29',by:'',detail:'A private car or a scheduled coach leaving about 11:00 AM. One way, about 2 hours, no stops.',opts:[]},
+ {id:'return',title:'Book the Dec 29 SUV: Westin to the Fairmont Pacific Rim',day:'2026-12-29',by:'Luxury Transport, through the Westin concierge',detail:'Luxury SUV at 11:00 AM, one way. Rate sheet: $525, or $661.50 with service fee and GST. Confirm the Whistler-to-Vancouver rate and ask about a discount for two trips.',opts:[]},
  {id:'capilano',title:'Buy Capilano Canyon Lights tickets for Dec 29, 7:30 PM slot',day:'2026-12-29',by:'capbridge.com',detail:'Four tickets. Arrival windows are 30 minutes. Check the free shuttle timetable for that night when it is posted.',opts:[]},
  {id:'xmas',title:'Reserve Christmas-night dinner in Whistler',day:'2026-12-25',by:'',detail:'You arrive around 7 PM. Ask the Westin what is open.',opts:[]},
- {id:'wildblue',title:'Book Wild Blue for Dec 28',day:'2026-12-28',by:'Book early',detail:'Table for 4.',opts:[]},
  {id:'harbour',title:'Ask the Fairmont for a harbour-view room',day:'2026-12-29',by:'Fairmont Pacific Rim concierge',detail:'Worth a request for the New Year\'s Eve stay.',opts:[{label:'Requested',summary:'Harbour-view room requested.',adds:[]}]},
  {id:'mott',title:'Book Mott 32 for Dec 29 at 5:00 PM and pre-order the Peking duck',day:'2026-12-29',by:'Mott 32 at the Paradox Hotel',detail:'Table for 4. The duck must be ordered when you reserve.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
@@ -1038,7 +1037,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261115183642';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261115204954';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
