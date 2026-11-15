@@ -471,17 +471,17 @@ var DN_PLAN=[
  {night:'Tue Dec 29 · 7:15 PM · Vancouver',name:'Mott 32 · Peking duck',task:'mott',blurb:'Ranked No. 1 Chinese restaurant in Canada in 2026. Applewood-roasted Peking duck carved at the table, in a glamorous room inside the Paradox Hotel. A 12-minute walk. Pre-order the duck when you book.',site:'https://www.paradoxhotels.com/vancouver/dining/mott32-vancouver',map:'Mott 32 Vancouver'},
  {night:'Wed Dec 30 · lunch · Vancouver',name:'Miku',task:'miku',blurb:'Flame-seared aburi sushi, a Vancouver original, on the waterfront 5 minutes from the Fairmont.',site:'https://mikurestaurant.com/',map:'Miku Vancouver'},
  {night:'Wed Dec 30 · 5:45 PM · Vancouver',name:'Tasty Indian Bistro · Yaletown',st:'reserved',blurb:'Booked. Modern North Indian in a lively room, a 15-minute walk from Rogers Arena.',site:'https://www.opentable.com/r/tasty-indian-bistro-yaletown-reservations-vancouver',map:'Tasty Indian Bistro 1261 Hamilton St Vancouver'},
- {night:'Thu Dec 31 · Vancouver',name:'New Year\'s Eve Gala · Fairmont Pacific Rim',st:'tickets',blurb:'Tickets bought. Doors 6:30 PM, four-course dinner at 7:30 PM, live music and dancing until 1 AM.',map:'Fairmont Pacific Rim Vancouver'}
+ {night:'Thu Dec 31 · Vancouver',name:'New Year\'s Eve Gala · Fairmont Pacific Rim',st:'reserved',blurb:'Tickets bought. Doors 6:30 PM, four-course dinner at 7:30 PM, live music and dancing until 1 AM.',map:'Fairmont Pacific Rim Vancouver'}
 ];
 var DN_MORE=[
- {name:'Araxi · Whistler',blurb:'Long-running seafood and oyster bar on Village Square.',site:'https://www.araxi.com/',map:'Araxi Restaurant Whistler'},
- {name:'Mekong · Whistler Creekside',blurb:'Fine-dining Thai from the chef behind Vancouver\'s Maenam. A short taxi from the village.',site:'https://www.88mekong.com/',map:'Mekong Fine Thai Cuisine Whistler'},
- {name:'Ohyama Ramen · Whistler',blurb:'Quick, warming bowls after skiing.',site:'https://ohyamaramen.com/',map:'Ohyama Ramen Whistler'},
- {name:'Harajuku Izakaya · Whistler',blurb:'Casual Japanese small plates the boys will like.',site:'https://harajuku.ca/',map:'Harajuku Izakaya Whistler'},
- {name:'Vij\'s · Vancouver',blurb:'The city\'s landmark modern Indian restaurant, famous for lamb popsicles. On Cambie Street, 15 minutes by cab.',site:'https://vijs.ca',map:'Vij\'s Restaurant 3106 Cambie St Vancouver'},
- {name:'Kingyo Izakaya · Vancouver West End',blurb:'Many locals call it the best izakaya in town. Small plates, so everyone picks what they like. Great lunch sets.',site:'https://kingyo-izakaya.ca/',map:'Kingyo Izakaya Vancouver'},
- {name:'Guu Original · Vancouver',blurb:'Vancouver\'s first izakaya, loud and fun. About 15 minutes on foot.',site:'https://guu-izakaya.com/',map:'Guu Original Thurlow Vancouver'},
- {name:'Phnom Penh · Vancouver Chinatown',blurb:'Bib Gourmand Cambodian and Vietnamese. Famous chicken wings. Expect a line.',site:'https://phnompenhrestaurant.ca/',map:'Phnom Penh Restaurant Vancouver'}
+ {st:'idea',name:'Araxi · Whistler',blurb:'Long-running seafood and oyster bar on Village Square.',site:'https://www.araxi.com/',map:'Araxi Restaurant Whistler'},
+ {st:'idea',name:'Mekong · Whistler Creekside',blurb:'Fine-dining Thai from the chef behind Vancouver\'s Maenam. A short taxi from the village.',site:'https://www.88mekong.com/',map:'Mekong Fine Thai Cuisine Whistler'},
+ {st:'idea',name:'Ohyama Ramen · Whistler',blurb:'Quick, warming bowls after skiing.',site:'https://ohyamaramen.com/',map:'Ohyama Ramen Whistler'},
+ {st:'idea',name:'Harajuku Izakaya · Whistler',blurb:'Casual Japanese small plates the boys will like.',site:'https://harajuku.ca/',map:'Harajuku Izakaya Whistler'},
+ {st:'idea',name:'Vij\'s · Vancouver',blurb:'The city\'s landmark modern Indian restaurant, famous for lamb popsicles. On Cambie Street, 15 minutes by cab.',site:'https://vijs.ca',map:'Vij\'s Restaurant 3106 Cambie St Vancouver'},
+ {st:'idea',name:'Kingyo Izakaya · Vancouver West End',blurb:'Many locals call it the best izakaya in town. Small plates, so everyone picks what they like. Great lunch sets.',site:'https://kingyo-izakaya.ca/',map:'Kingyo Izakaya Vancouver'},
+ {st:'idea',name:'Guu Original · Vancouver',blurb:'Vancouver\'s first izakaya, loud and fun. About 15 minutes on foot.',site:'https://guu-izakaya.com/',map:'Guu Original Thurlow Vancouver'},
+ {st:'idea',name:'Phnom Penh · Vancouver Chinatown',blurb:'Bib Gourmand Cambodian and Vietnamese. Famous chicken wings. Expect a line.',site:'https://phnompenhrestaurant.ca/',map:'Phnom Penh Restaurant Vancouver'}
 ];
 
 var FLIGHTS=[
@@ -664,7 +664,7 @@ function render(){renderDays();renderTasks();cardList('dn-plan',DN_PLAN);if(docu
 
 function cardList(id,items){
   $(id).innerHTML=items.map(function(o){
-    var tk=o.task&&state.tasks[o.task],tag=o.st==='tickets'?'<span class="badge b-ok">Tickets bought</span>':(o.st==='reserved'||(tk&&tk.status==='done'))?'<span class="badge b-ok">Reserved</span>':o.task?'<span class="badge b-book">Needs reservation</span>':'';
+    var tk=o.task&&state.tasks[o.task],tag=(o.st==='reserved'||(tk&&tk.status==='done'))?'<span class="badge b-ok">Reserved</span>':o.task?'<span class="badge b-book" style="white-space:normal;text-align:right">Suggested · needs reservation</span>':o.st==='idea'?'<span class="badge b-idea">Idea</span>':'';
     return '<div class="card pad"><div class="e-hd"><div><div class="e-name">'+esc(o.name)+'</div>'+((o.when||o.night)?'<div class="e-when">'+esc(o.when||o.night)+'</div>':'')+'</div>'+tag+'</div><div class="e-blurb">'+(o.html?o.blurb:esc(o.blurb))+'</div>'+linkRow(o)+'</div>';
   }).join('');
 }
@@ -1038,7 +1038,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261115012750';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261115012936';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
