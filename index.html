@@ -72,6 +72,7 @@ main,header{position:relative;z-index:1}
 .links{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .links a{font-size:0.8438rem;font-weight:500;text-decoration:none;padding:7px 13px;border-radius:18px;background:var(--pine2);border:1px solid var(--line);color:var(--snow)}
 .links a.map{color:var(--ice)}
+.dl{display:inline-block;margin-top:5px;font-size:0.8125rem;font-weight:500;color:var(--ice);text-decoration:underline;text-underline-offset:3px}
 
 /* schedule */
 .day{display:flex;align-items:stretch}
@@ -383,6 +384,7 @@ var REDUCE=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion:reduce)').m
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function mapLink(q){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q)}
 function dirLink(a,b){return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(a)+'&destination='+encodeURIComponent(b)}
+function dlLink(f){return f?'<a class="dl" href="https://www.delta.com/flightstatus/search?flightNumber='+f[0]+'&flightDate='+f[1]+'" target="_blank" rel="noopener">Delta flight status ›</a>':''}
 function linkRow(o){var h='<div class="links">';if(o.site)h+='<a href="'+esc(o.site)+'" target="_blank" rel="noopener">Website</a>';if(o.map)h+='<a class="map" href="'+esc(mapLink(o.map))+'" target="_blank" rel="noopener">Google Maps</a>';return h+'</div>'}
 var WESTIN='The Westin Resort & Spa Whistler, 4090 Whistler Way, Whistler BC';
 var FAIRMONT='Fairmont Pacific Rim, 1038 Canada Place, Vancouver BC';
@@ -391,9 +393,9 @@ var FAIRMONT='Fairmont Pacific Rim, 1038 Canada Place, Vancouver BC';
 var DAYS=[
  {date:'2026-12-25',dow:'Fri',d:'25',mon:'Dec',cls:'fly',place:'Christmas Day · Atlanta to Whistler',items:[
   {t:'5:30 AM ET',x:'Be at the Atlanta airport',s:'Suggested: about 2 hours before a holiday-morning flight.'},
-  {t:'7:35 AM ET',x:'Delta 444 · Atlanta to Seattle',s:'Lands 10:23 AM Seattle time (1:23 PM Atlanta). 5 h 48 m in the air.'},
+  {t:'7:35 AM ET',x:'Delta 444 · Atlanta to Seattle',s:'Lands 10:23 AM Seattle time (1:23 PM Atlanta). 5 h 48 m in the air.',fl:['444','2026-12-25']},
   {t:'10:23 AM',x:'Seattle layover · 3 h 17 m',s:'Seattle is 3 hours behind Atlanta. Lunch here.'},
-  {t:'1:40 PM',x:'Delta 3748 · Seattle to Vancouver',s:'Lands 3:54 PM Vancouver time (5:54 PM Atlanta). 1 h 14 m. Clocks jump ahead 1 hour on landing.'},
+  {t:'1:40 PM',x:'Delta 3748 · Seattle to Vancouver',s:'Lands 3:54 PM Vancouver time (5:54 PM Atlanta). 1 h 14 m. Clocks jump ahead 1 hour on landing.',fl:['3748','2026-12-25']},
   {t:'3:54 PM',x:'Land at YVR · Canada customs and bags',s:'Allow 30 to 60 minutes.'},
   {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Booked for 4:00 PM. About 135 km, 2 to 2.5 hours on the Sea-to-Sky Highway.'},
   {t:'About 7 PM',x:'Check in · The Westin Resort & Spa, Whistler',s:'9 PM Atlanta time. Easy dinner and early night.'}]},
@@ -439,9 +441,9 @@ var DAYS=[
  {date:'2027-01-01',dow:'Fri',d:'1',mon:'Jan',cls:'fly',place:'New Year\'s Day · Home',items:[
   {t:'4:45 AM',x:'Wake up',s:'Bags are already packed.'},
  {t:'5:30 AM',x:'Leave the Fairmont for YVR',s:'7:30 AM Atlanta. About 30 minutes. You clear US customs in Vancouver before boarding.'},
-  {t:'8:28 AM',x:'Delta 3764 · Vancouver to Seattle',s:'Lands 8:45 AM Seattle time. 1 h 17 m. Clocks go back 1 hour.'},
+  {t:'8:28 AM',x:'Delta 3764 · Vancouver to Seattle',s:'Lands 8:45 AM Seattle time. 1 h 17 m. Clocks go back 1 hour.',fl:['3764','2027-01-01']},
   {t:'8:45 AM',x:'Seattle layover · 2 h 57 m',s:'Breakfast here.'},
-  {t:'11:42 AM',x:'Delta 554 · Seattle to Atlanta',s:'2:42 PM Atlanta time at takeoff. 4 h 47 m.'},
+  {t:'11:42 AM',x:'Delta 554 · Seattle to Atlanta',s:'2:42 PM Atlanta time at takeoff. 4 h 47 m.',fl:['554','2027-01-01']},
   {t:'7:29 PM ET',x:'Land in Atlanta',s:''}]}
 ];
 
@@ -489,13 +491,13 @@ var DN_MORE=[
 
 var FLIGHTS=[
  {title:'Fri Dec 25 · outbound',legs:[
-  {r:'Delta 444 · Atlanta to Seattle',d:'5 h 48 m',t:'Departs <b>7:35 AM</b> Atlanta. Arrives <b>10:23 AM</b> Seattle (1:23 PM Atlanta).'},
+  {r:'Delta 444 · Atlanta to Seattle',d:'5 h 48 m',t:'Departs <b>7:35 AM</b> Atlanta. Arrives <b>10:23 AM</b> Seattle (1:23 PM Atlanta).',fl:['444','2026-12-25']},
   {r:'Layover in Seattle',d:'3 h 17 m',t:'Seattle is 3 hours behind Atlanta.'},
-  {r:'Delta 3748 · Seattle to Vancouver',d:'1 h 14 m',t:'Departs <b>1:40 PM</b> Seattle (4:40 PM Atlanta). Arrives <b>3:54 PM</b> Vancouver (5:54 PM Atlanta).'}]},
+  {r:'Delta 3748 · Seattle to Vancouver',d:'1 h 14 m',t:'Departs <b>1:40 PM</b> Seattle (4:40 PM Atlanta). Arrives <b>3:54 PM</b> Vancouver (5:54 PM Atlanta).',fl:['3748','2026-12-25']}]},
  {title:'Fri Jan 1 · return',legs:[
-  {r:'Delta 3764 · Vancouver to Seattle',d:'1 h 17 m',t:'Departs <b>8:28 AM</b> Vancouver (10:28 AM Atlanta). Arrives <b>8:45 AM</b> Seattle (11:45 AM Atlanta).'},
+  {r:'Delta 3764 · Vancouver to Seattle',d:'1 h 17 m',t:'Departs <b>8:28 AM</b> Vancouver (10:28 AM Atlanta). Arrives <b>8:45 AM</b> Seattle (11:45 AM Atlanta).',fl:['3764','2027-01-01']},
   {r:'Layover in Seattle',d:'2 h 57 m',t:'You already cleared US customs in Vancouver.'},
-  {r:'Delta 554 · Seattle to Atlanta',d:'4 h 47 m',t:'Departs <b>11:42 AM</b> Seattle (2:42 PM Atlanta). Arrives <b>7:29 PM</b> Atlanta.'}]}
+  {r:'Delta 554 · Seattle to Atlanta',d:'4 h 47 m',t:'Departs <b>11:42 AM</b> Seattle (2:42 PM Atlanta). Arrives <b>7:29 PM</b> Atlanta.',fl:['554','2027-01-01']}]}
 ];
 var DRIVES=[
  {r:'YVR airport to the Westin, Whistler',d:'2 to 2.5 h',t:'About 135 km on the Sea-to-Sky Highway. Longer in snow or holiday traffic.',a:'Vancouver International Airport',b:WESTIN},
@@ -624,7 +626,7 @@ function timeKey(t){var m=/(\d{1,2})(?::(\d{2}))?\s*(AM|PM)/i.exec(t||'');if(!m)
 function renderDays(){
   $('days').innerHTML=DAYS.map(function(d){
     var adds=state.adds.filter(function(a){return a.date===d.date}).sort(function(a,b){return timeKey(a.time)-timeKey(b.time)});
-    var rows=d.items.map(function(i){return '<div class="it"><time>'+esc(i.t)+'</time><div><div class="x">'+esc(i.x)+'</div>'+(i.s?'<div class="s">'+esc(i.s)+'</div>':'')+'</div></div>'}).join('');
+    var rows=d.items.map(function(i){return '<div class="it"><time>'+esc(i.t)+'</time><div><div class="x">'+esc(i.x)+'</div>'+(i.s?'<div class="s">'+esc(i.s)+'</div>':'')+dlLink(i.fl)+'</div></div>'}).join('');
     rows+=adds.map(function(a){return '<div class="it added"><time>'+esc(a.time||'Confirmed')+'</time><div><div class="x">'+esc(a.title)+'</div>'+(a.detail?'<div class="s">'+esc(a.detail)+'</div>':'')+'</div></div>'}).join('');
     var open=allTasks().filter(function(t){return t.day===d.date&&!(state.tasks[t.id]&&state.tasks[t.id].status==='done')}).length;
     return '<div class="day '+d.cls+'"><div class="date"><small>'+d.dow+'</small><strong>'+d.d+'</strong><small>'+d.mon+'</small></div><div class="dbody"><div class="place">'+esc(d.place)+(DECO[d.date]||'')+'</div>'+rows+(open?'<button class="jump" type="button" data-go="tasks">'+open+' open task'+(open>1?'s':'')+' for this day</button>':'')+'</div></div>';
@@ -670,7 +672,7 @@ function cardList(id,items){
 function renderStatic(){
   cardList('ex-whistler',EX_W);cardList('ex-vancouver',EX_V);cardList('dn-plan',DN_PLAN);cardList('dn-more',DN_MORE);
   cardList('tr-hotels',HOTELS.map(function(h){return {name:h.name,when:h.when,blurb:h.blurb,html:true,map:h.map}}));
-  $('tr-flights').innerHTML=FLIGHTS.map(function(f){return '<div class="card"><div class="pad" style="padding-bottom:4px"><div class="e-name">'+esc(f.title)+'</div></div>'+f.legs.map(function(l){return '<div class="leg"><div class="r">'+esc(l.r)+'</div><div class="d">'+esc(l.d)+'</div><div class="t">'+l.t+'</div></div>'}).join('')+'</div>'}).join('')+'<p class="intro" style="padding:4px 4px 0">'+esc(FLIGHT_CONF)+'</p>';
+  $('tr-flights').innerHTML=FLIGHTS.map(function(f){return '<div class="card"><div class="pad" style="padding-bottom:4px"><div class="e-name">'+esc(f.title)+'</div></div>'+f.legs.map(function(l){return '<div class="leg"><div class="r">'+esc(l.r)+'</div><div class="d">'+esc(l.d)+'</div><div class="t">'+l.t+dlLink(l.fl)+'</div></div>'}).join('')+'</div>'}).join('')+'<p class="intro" style="padding:4px 4px 0">'+esc(FLIGHT_CONF)+'</p>';
   $('tr-drives').innerHTML=DRIVES.map(function(d){return '<div class="leg"><div class="r">'+esc(d.r)+'</div><div class="d">'+esc(d.d)+'</div><div class="t">'+esc(d.t)+' <a href="'+esc(dirLink(d.a,d.b))+'" target="_blank" rel="noopener">Directions</a></div></div>'}).join('');
   $('notes-list').innerHTML=NOTES.map(function(n){return '<div class="card pad note"><h3>'+esc(n.h)+'</h3><ul>'+n.li.map(function(l){return '<li>'+l+'</li>'}).join('')+'</ul>'+(n.site?linkRow({site:n.site}):'')+'</div>'}).join('');
 }
@@ -1037,7 +1039,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261115204954';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261115210555';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
