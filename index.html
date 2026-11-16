@@ -259,7 +259,7 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
 .jstop{cursor:pointer;transition:opacity .5s}
 .jstop text,.jlab{font-family:var(--body);font-weight:600;font-size:30px;fill:#0a2152;stroke:#fff;stroke-width:7px;paint-order:stroke;stroke-linejoin:round}
 .jstop.sel .dot{fill:#ffd166}
-.jcap{position:absolute;left:10px;right:10px;top:16px;text-align:center;pointer-events:none}
+.jcap{padding:10px 12px 0;text-align:center;pointer-events:none}
 .jcap span{display:inline-block;background:rgba(6,17,39,.88);color:#fff;font-size:0.8438rem;font-weight:500;padding:7px 13px;border-radius:18px;border:1px solid rgba(127,220,255,.5)}
 .jcap span:empty{display:none}
 .jbar{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px 0}
@@ -348,8 +348,8 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
           <g class="jstop" id="js-wh" tabindex="0" role="button" aria-label="wh"><circle cx="602" cy="113" r="46" fill="transparent"/><circle class="dot" cx="602" cy="113" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/></g><g class="jstop" id="js-sq" tabindex="0" role="button" aria-label="Squamish"><circle cx="450" cy="612" r="46" fill="transparent"/><circle class="dot" cx="450" cy="612" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="478" y="580" text-anchor="start">Squamish</text></g><g class="jstop" id="js-cap" tabindex="0" role="button" aria-label="cap"><circle cx="473" cy="1062" r="46" fill="transparent"/><circle class="dot" cx="473" cy="1062" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/></g><g class="jstop" id="js-fair" tabindex="0" role="button" aria-label="Fairmont"><circle cx="473" cy="1133" r="46" fill="transparent"/><circle class="dot" cx="473" cy="1133" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="448" y="1150" text-anchor="end">Fairmont</text></g><g class="jstop" id="js-yvr" tabindex="0" role="button" aria-label="YVR"><circle cx="424" cy="1247" r="46" fill="transparent"/><circle class="dot" cx="424" cy="1247" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="398" y="1262" text-anchor="end">YVR</text></g>
           <g class="jmv" id="jcar"><circle r="17" fill="#ffd166" stroke="#0a2152" stroke-width="6"/></g>
         </svg></div>
-        <div class="jcap" id="jcap"><span></span></div>
       </div>
+      <div class="jcap" id="jcap" style="display:none"><span></span></div>
       <div class="jbar"><button class="ghost" id="jplay" type="button" style="margin-top:0">Replay the journey</button><small>Map: Google Maps</small></div>
       <div class="jinfo" id="jinfo">Tap a stop on the map for details.</div>
     </div></div>
@@ -993,7 +993,7 @@ function jStage(k,instant){
   else if(k===2){jSet(3,JM.s32,a[3],a[2],0,instant);jSet(2,1,Z,Z,1,instant);jSet(1,1/JM.s21,a[1],a[2],0,instant)}
   else{jSet(3,JM.s32,a[3],a[2],0,instant);jSet(2,JM.s21,a[2],a[1],0,instant);jSet(1,1,Z,Z,1,instant)}
 }
-function jCap(t){$('jcap').firstChild.textContent=t}
+function jCap(t){$('jcap').firstChild.textContent=t;$('jcap').style.display=t?'':'none'}
 function jAll(sel,fn){Array.prototype.forEach.call(document.querySelectorAll(sel),fn)}
 function jDraw(cls,moverId,dur,rot,cb){
   var paths=document.querySelectorAll('.'+cls),p=paths[0],L=p.getTotalLength(),mv=$(moverId),t0=null,run=jRun;
@@ -1049,9 +1049,40 @@ var jW0=0;addEventListener('resize',function(){var w=$('jmap').clientWidth;if(w&
 jEnd();
 var _show=show;show=function(n,i){_show(n,i);if(n==='travel'&&!jPlayed&&!REDUCE&&$('tab-travel').classList.contains('active')){jPlayed=true;setTimeout(jPlay,i?700:2500)}};
 
+/* ---------- idle reset: after 5 minutes away, back to the schedule ---------- */
+var IDLE_MS=300000,lastAct=Date.now(),idleTimer=null;
+function markAct(){lastAct=Date.now();try{localStorage.setItem('wv-last',String(lastAct))}catch(e){}}
+function armIdle(){markAct();if(idleTimer)clearTimeout(idleTimer);idleTimer=setTimeout(idleReset,IDLE_MS)}
+function scrollToToday(){
+  var t=vanToday(),el=$('day-'+t);
+  if(!el){window.scrollTo(0,0);return}
+  var y=el.getBoundingClientRect().top+window.pageYOffset-$('daynav').offsetHeight-8;
+  markDay(t);dayLock=Date.now()+900;window.scrollTo(0,Math.max(0,y));
+}
+function idleReset(instant){
+  if(document.activeElement&&/INPUT|TEXTAREA/.test(document.activeElement.tagName))document.activeElement.blur();
+  if($('jplay').textContent.indexOf('Skip')===0)jEnd();
+  $('jinfo').innerHTML='Tap a stop on the map for details.';jAll('.jstop',function(g){g.classList.remove('sel')});
+  var onSched=$('v-schedule').classList.contains('active');
+  if(onSched||instant||trBusy){if(!onSched){trBusy=false;show('schedule',true)}scrollToToday()}
+  else{show('schedule');setTimeout(scrollToToday,2400)}
+  markAct();
+}
+['click','touchstart','scroll','keydown','pointerdown'].forEach(function(e){document.addEventListener(e,armIdle,{passive:true})});
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='visible'){if(Date.now()-lastAct>=IDLE_MS)idleReset();armIdle()}
+  else markAct();
+});
+window.addEventListener('pageshow',function(e){if(e.persisted&&Date.now()-lastAct>=IDLE_MS)idleReset(true)});
+
 /* ---------- start ---------- */
 renderStatic();buildDayNav();render();
-try{var saved=localStorage.getItem('wv-tab');if(saved&&$('v-'+saved))show(saved,true);else show('schedule',true)}catch(e){show('schedule',true)}
+(function(){
+  var away=Infinity;try{var l=+localStorage.getItem('wv-last');if(l)away=Date.now()-l}catch(e){}
+  if(away>=IDLE_MS){show('schedule',true);scrollToToday()}
+  else{try{var saved=localStorage.getItem('wv-tab');if(saved&&$('v-'+saved))show(saved,true);else show('schedule',true)}catch(e){show('schedule',true)}}
+  armIdle();
+})();
 
 function useLocal(){
   localOnly=true;loaded=true;readOnly=true;
@@ -1076,7 +1107,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116135317';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116141916';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
