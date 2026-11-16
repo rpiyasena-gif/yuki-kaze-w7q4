@@ -832,6 +832,9 @@ function renderStatic(){
 })();
 
 /* ---------- header trees ---------- */
+function tree(tx,ty,s,col){
+  return '<g transform="translate('+tx+' '+ty+') scale('+s+')"><rect x="-5" y="34" width="10" height="16" fill="#3b2a1a"/><path d="M0-90 26-40H12l22 36H16l26 40h-84l26-40h-18l22-36h-14z" fill="'+(col||'#0d3a5c')+'"/><path d="M0-90 14-62 6-66 0-58-6-66-14-62zM-22-4l10-7 12 8 12-8 10 7-9-15h-26zM-34 36l14-9 20 10 20-10 14 9-11-17h-46z" fill="#f4f9ff"/></g>';
+}
 function pine(x,y,s){
   // small snowy pine: three drooping tiers, lit left, shaded right
   var t='<g transform="translate('+x+' '+y+') scale('+s+')"><rect x="-3" y="-4" width="6" height="10" fill="#1c1a24"/>';
@@ -1212,7 +1215,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116234233';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116234619';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
