@@ -410,7 +410,8 @@ var DAYS=[
   {t:'1:40 PM',x:'Delta 3748 · Seattle to Vancouver',s:'Lands 3:54 PM Vancouver time (5:54 PM Atlanta). 1 h 14 m. Clocks jump ahead 1 hour on landing.',fl:['3748','2026-12-25']},
   {t:'3:54 PM',x:'Land at YVR · Canada customs and bags',s:'Allow 30 to 60 minutes.'},
   {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Booked for 4:00 PM. About 135 km, 2 to 2.5 hours on the Sea-to-Sky Highway.'},
-  {t:'About 7 PM',x:'Check in · The Westin Resort & Spa, Whistler',s:'9 PM Atlanta time. Easy dinner and early night.'}]},
+  {t:'About 7 PM',x:'Check in · The Westin Resort & Spa, Whistler',s:'9 PM Atlanta time.'},
+  {t:'8:00 PM',x:'Christmas dinner: Trattoria Di Como',s:'Booked, table for 4. Northern Italian, about a 5-minute walk through the village. Early night after.'}]},
  {date:'2026-12-26',dow:'Sat',d:'26',mon:'Dec',cls:'ski',place:'Whistler · Ski day 1',items:[
   {t:'Morning',x:'Ski fitting if not done the night before',s:'See the ski rental task.'},
   {t:'9:00 AM',x:'Lifts open',s:'The Whistler Village Gondola is a few minutes on foot from the Westin.'},
@@ -483,7 +484,7 @@ var EX_V=[
 ];
 
 var DN_PLAN=[
- {night:'Fri Dec 25 · Whistler',name:'At the Westin or nearby',task:'xmas',blurb:'You arrive around 7 PM on Christmas night and many places are closed or full. Reserve something simple.',site:'https://www.whistler.com/dining/',map:WESTIN},
+ {night:'Fri Dec 25 · 8:00 PM · Whistler',name:'Trattoria Di Como',st:'reserved',blurb:'Booked, table for 4, for Christmas night. Northern Italian in a warm, classic room: the revival of the long-loved Trattoria di Umberto. About a 5-minute walk from the Westin.',site:'https://www.opentable.com/r/trattoria-di-como-whistler',map:'Trattoria Di Como Whistler'},
  {night:'Sat Dec 26 · Whistler',name:'Sushi Village',st:'suggested',blurb:'A Whistler institution, casual, open from 5 PM. First come, first served: arrive early and put your name on the list.',site:'https://www.sushivillage.com/',map:'Sushi Village Whistler'},
  {night:'Sun Dec 27 · Whistler',name:'Bar Oso',st:'suggested',blurb:'Lively Spanish small plates in a tiny room. Walk in early, or call ahead to ask about a table.',site:'https://baroso.ca/',map:'Bar Oso Whistler'},
  {night:'Mon Dec 28 · 9:15 PM · Whistler',name:'Wild Blue',st:'reserved',blurb:'Booked, table for 4. Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. OpenTable alerts are set for an earlier time.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
@@ -544,7 +545,6 @@ var TASKS=[
  {id:'lift',title:'Buy lift tickets for Dec 26, 27 and 28',day:'2026-12-26',by:'Before early December',detail:'Four people, three days. Advance prices beat the ticket window.',opts:[{label:'Bought',summary:'Lift tickets bought.',adds:[{date:'2026-12-26',time:'',title:'Lift tickets bought for all three ski days',detail:''}]}]},
  {id:'return',title:'Book the Dec 29 SUV: Westin to the Fairmont Pacific Rim',day:'2026-12-29',by:'Luxury Transport, through the Westin concierge',detail:'Luxury SUV at 11:00 AM, one way. Rate sheet: $525, or $661.50 with service fee and GST. Confirm the Whistler-to-Vancouver rate and ask about a discount for two trips.',opts:[]},
  {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
- {id:'xmas',title:'Reserve Christmas-night dinner in Whistler',day:'2026-12-25',by:'',detail:'You arrive around 7 PM. Ask the Westin what is open.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
  {id:'passports',title:'Check all four passports',day:'2026-12-25',by:'',detail:'Make sure none expire before you travel.',opts:[{label:'All valid',summary:'Passports checked.',adds:[]}]}
@@ -1106,7 +1106,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116144012';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116154334';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
