@@ -534,7 +534,6 @@ var TASKS=[
  {id:'return',title:'Book the Dec 29 SUV: Westin to the Fairmont Pacific Rim',day:'2026-12-29',by:'Luxury Transport, through the Westin concierge',detail:'Luxury SUV at 11:00 AM, one way. Rate sheet: $525, or $661.50 with service fee and GST. Confirm the Whistler-to-Vancouver rate and ask about a discount for two trips.',opts:[]},
  {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
  {id:'xmas',title:'Reserve Christmas-night dinner in Whistler',day:'2026-12-25',by:'',detail:'You arrive around 7 PM. Ask the Westin what is open.',opts:[]},
- {id:'harbour',title:'Decide on a paid harbour-view upgrade at the Fairmont',day:'2026-12-29',by:'Fairmont Pacific Rim concierge',detail:'Your free upgrade request is noted but not guaranteed. To guarantee the view, ask the concierge for paid upgrade prices.',opts:[{label:'Keeping the free request',summary:'Harbour view requested, not guaranteed.',adds:[]},{label:'Paid upgrade booked',summary:'Harbour-view room guaranteed.',adds:[]}]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
  {id:'passports',title:'Check all four passports',day:'2026-12-25',by:'',detail:'Make sure none expire before you travel.',opts:[{label:'All valid',summary:'Passports checked.',adds:[]}]}
@@ -1042,7 +1041,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116041652';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116042535';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
