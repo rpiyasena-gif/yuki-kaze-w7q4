@@ -412,7 +412,7 @@ var DAYS=[
  {date:'2026-12-28',dow:'Mon',d:'28',mon:'Dec',cls:'ski',place:'Whistler · Ski day 3',items:[
   {t:'9:00 AM',x:'Lifts open',s:'Last ski day.'},
   {t:'3:30 PM',x:'Lifts close · return rental skis',s:''},
-  {t:'9:15 PM',x:'Special dinner: Wild Blue',s:'Booked, table for 4. Have a snack after skiing. The restaurant will call if a time near 7:00 PM opens up.'}]},
+  {t:'9:15 PM',x:'Special dinner: Wild Blue',s:'Booked, table for 4. Have a snack after skiing. OpenTable alerts are set in case an earlier time opens.'}]},
  {date:'2026-12-29',dow:'Tue',d:'29',mon:'Dec',cls:'',place:'Whistler to Vancouver · Stanley Park, duck, Canyon Lights',items:[
   {t:'Morning',x:'Sleep in, big brunch, pack',s:'Make it a big one: it carries you to dinner. Check-out at the Westin is 11:00 AM.'},
   {t:'11:00 AM',x:'Private SUV to Vancouver',s:'About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge.'},
@@ -475,7 +475,7 @@ var DN_PLAN=[
  {night:'Fri Dec 25 · Whistler',name:'At the Westin or nearby',task:'xmas',blurb:'You arrive around 7 PM on Christmas night and many places are closed or full. Reserve something simple.',site:'https://www.whistler.com/dining/',map:WESTIN},
  {night:'Sat Dec 26 · Whistler',name:'Sushi Village',st:'suggested',blurb:'A Whistler institution, casual, open from 5 PM. First come, first served: arrive early and put your name on the list.',site:'https://www.sushivillage.com/',map:'Sushi Village Whistler'},
  {night:'Sun Dec 27 · Whistler',name:'Bar Oso',st:'suggested',blurb:'Lively Spanish small plates in a tiny room. Walk in early, or call ahead to ask about a table.',site:'https://baroso.ca/',map:'Bar Oso Whistler'},
- {night:'Mon Dec 28 · 9:15 PM · Whistler',name:'Wild Blue',st:'reserved',blurb:'Booked, table for 4. Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. They will call if a time near 7:00 PM opens up.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
+ {night:'Mon Dec 28 · 9:15 PM · Whistler',name:'Wild Blue',st:'reserved',blurb:'Booked, table for 4. Whistler\'s top table: Pacific Northwest seafood in a dressed-up room. OpenTable alerts are set for an earlier time.',site:'https://www.wildbluerestaurant.com/',map:'Wild Blue Restaurant Whistler'},
  {night:'Tue Dec 29 · 5:00 PM · Vancouver',name:'Mott 32 · Peking duck',st:'reserved',blurb:'Booked by the Fairmont concierge, table for 4, with the duck pre-ordered. Ranked No. 1 Chinese restaurant in Canada in 2026. Applewood-roasted Peking duck carved at the table, in a glamorous room inside the Paradox Hotel. A 12-minute walk. Smart casual.',site:'https://www.paradoxhotels.com/vancouver/dining/mott32-vancouver',map:'Mott 32 Vancouver'},
  {night:'Wed Dec 30 · lunch · Vancouver',name:'Miku',task:'miku',blurb:'Flame-seared aburi sushi, a Vancouver original, on the waterfront 5 minutes from the Fairmont.',site:'https://mikurestaurant.com/',map:'Miku Vancouver'},
  {night:'Wed Dec 30 · 5:45 PM · Vancouver',name:'Tasty Indian Bistro · Yaletown',st:'reserved',blurb:'Booked. Modern North Indian in a lively room, a 15-minute walk from Rogers Arena.',site:'https://www.opentable.com/r/tasty-indian-bistro-yaletown-reservations-vancouver',map:'Tasty Indian Bistro 1261 Hamilton St Vancouver'},
@@ -1042,7 +1042,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116041639';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116041652';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
