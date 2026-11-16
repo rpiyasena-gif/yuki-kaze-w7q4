@@ -408,8 +408,8 @@ var DAYS=[
   {t:'7:35 AM ET',x:'Delta 444 · Atlanta to Seattle',s:'Lands 10:23 AM Seattle time (1:23 PM Atlanta). 5 h 48 m in the air.',fl:['444','2026-12-25']},
   {t:'10:23 AM',x:'Seattle layover · 3 h 17 m',s:'Seattle is 3 hours behind Atlanta. Lunch here.'},
   {t:'1:40 PM',x:'Delta 3748 · Seattle to Vancouver',s:'Lands 3:54 PM Vancouver time (5:54 PM Atlanta). 1 h 14 m. Clocks jump ahead 1 hour on landing.',fl:['3748','2026-12-25']},
-  {t:'3:54 PM',x:'Land at YVR · Canada customs and bags',s:'Allow 30 to 60 minutes.'},
-  {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Booked for 4:00 PM. About 135 km, 2 to 2.5 hours on the Sea-to-Sky Highway.'},
+  {t:'3:54 PM',x:'Land at YVR · Canada customs and bags',s:'Allow 30 to 60 minutes. Your Seattle flight counts as international, so you arrive in the International Terminal.'},
+  {t:'After customs',x:'Luxury Transport Inc. to Whistler',s:'Booked, SUV for 4. The driver meets you about 30 minutes after landing in the public area of the International Terminal, to the right of the two large wooden statues. Trouble finding them: text 778-715-0490. About 2 to 2.5 hours on the Sea-to-Sky Highway, reaching the Westin around 7:25 PM. Tip already included.'},
   {t:'About 7 PM',x:'Check in · The Westin Resort & Spa, Whistler',s:'9 PM Atlanta time.'},
   {t:'8:00 PM',x:'Christmas dinner: Trattoria Di Como',s:'Booked, table for 4. Northern Italian, about a 5-minute walk through the village. Early night after.'}]},
  {date:'2026-12-26',dow:'Sat',d:'26',mon:'Dec',cls:'ski',place:'Whistler · Ski day 1',items:[
@@ -427,8 +427,8 @@ var DAYS=[
   {t:'9:15 PM',x:'Special dinner: Wild Blue',s:'Booked, table for 4. Have a snack after skiing. OpenTable alerts are set in case an earlier time opens.'}]},
  {date:'2026-12-29',dow:'Tue',d:'29',mon:'Dec',cls:'',place:'Whistler to Vancouver · Stanley Park, duck, Canyon Lights',items:[
   {t:'Morning',x:'Sleep in, big brunch, pack',s:'Make it a big one: it carries you to dinner. Check-out at the Westin is 11:00 AM.'},
-  {t:'11:00 AM',x:'Private SUV to Vancouver',s:'About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge.'},
-  {t:'About 1 PM',x:'Fairmont Pacific Rim · drop the bags',s:'Check-in is 3:00 PM. Ask for early check-in, a benefit of your booking when a room is free. Otherwise the hotel holds your bags.'},
+  {t:'11:00 AM',x:'Luxury Transport SUV to Vancouver',s:'Booked, pickup at the Westin. About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge. Tip already included.'},
+  {t:'1:00 PM',x:'Fairmont Pacific Rim · drop the bags',s:'Check-in is 3:00 PM. Ask for early check-in, a benefit of your booking when a room is free. Otherwise the hotel holds your bags.'},
   {t:'1:30 PM',x:'Stanley Park: totem poles and the seawall',s:'Grab a snack to go and look at the Olympic Cauldron across the street. Then a 10-minute cab to the totem poles at Brockton Point, and walk the flat seawall back along Coal Harbour, about 45 minutes. Dress for a cold, wet walk. Keep the snack light and save room for the duck. Rain plan: Vancouver Aquarium, inside the park.'},
   {t:'4:00 PM',x:'Back at the hotel · change for dinner',s:'The only change of the day. Mott 32 is smart casual: dark jeans or trousers with a collared shirt or sweater. No ski jackets, hoodies or athletic wear at the table. You go straight to Capilano after, so wear shoes with grip that also suit a nice restaurant.'},
   {t:'5:00 PM',x:'Dinner: Mott 32 · Peking duck',s:'A 5-minute Uber or 12-minute walk, inside the Paradox Hotel. Booked by the Fairmont concierge, table for 4, with the duck pre-ordered. Bring warm waterproof coats, hats and gloves for Capilano and ask to check them. Aim to leave by 6:55.'},
@@ -543,7 +543,6 @@ var TASKS=[
    {label:'Black Tie, in-room',summary:'Going with Black Tie in-room fitting.',adds:[{date:'2026-12-25',time:'Evening',title:'In-room ski fitting · Black Tie',detail:'Type the confirmed time on the task to update this.'}]},
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
  {id:'lift',title:'Buy lift tickets for Dec 26, 27 and 28',day:'2026-12-26',by:'Before early December',detail:'Four people, three days. Advance prices beat the ticket window.',opts:[{label:'Bought',summary:'Lift tickets bought.',adds:[{date:'2026-12-26',time:'',title:'Lift tickets bought for all three ski days',detail:''}]}]},
- {id:'return',title:'Book the Dec 29 SUV: Westin to the Fairmont Pacific Rim',day:'2026-12-29',by:'Luxury Transport, through the Westin concierge',detail:'Luxury SUV at 11:00 AM, one way. Rate sheet: $525, or $661.50 with service fee and GST. Confirm the Whistler-to-Vancouver rate and ask about a discount for two trips.',opts:[]},
  {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
@@ -1106,7 +1105,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116154334';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116190616';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
