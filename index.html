@@ -346,7 +346,7 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
           <path class="jr jr3" pathLength="1" d="M473 1133 L462,1125 455,1100 452,1068 473,1062 481,1074 480,1100 482,1120 473,1133" stroke="#fff" stroke-width="9"/><path class="jr jr3" pathLength="1" d="M473 1133 L462,1125 455,1100 452,1068 473,1062 481,1074 480,1100 482,1120 473,1133" stroke="#8a4fff" stroke-width="4.5"/>
           <path class="jr jr4" pathLength="1" d="M473 1133 L468,1155 458,1180 456,1230 450,1246 424,1247" stroke="#ffd166" stroke-width="5" stroke-dasharray="1"/>
           <g class="jstop" id="js-wh" tabindex="0" role="button" aria-label="wh"><circle cx="602" cy="113" r="46" fill="transparent"/><circle class="dot" cx="602" cy="113" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/></g><g class="jstop" id="js-sq" tabindex="0" role="button" aria-label="Squamish"><circle cx="450" cy="612" r="46" fill="transparent"/><circle class="dot" cx="450" cy="612" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="478" y="580" text-anchor="start">Squamish</text></g><g class="jstop" id="js-cap" tabindex="0" role="button" aria-label="cap"><circle cx="473" cy="1062" r="46" fill="transparent"/><circle class="dot" cx="473" cy="1062" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/></g><g class="jstop" id="js-fair" tabindex="0" role="button" aria-label="Fairmont"><circle cx="473" cy="1133" r="46" fill="transparent"/><circle class="dot" cx="473" cy="1133" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="448" y="1150" text-anchor="end">Fairmont</text></g><g class="jstop" id="js-yvr" tabindex="0" role="button" aria-label="YVR"><circle cx="424" cy="1247" r="46" fill="transparent"/><circle class="dot" cx="424" cy="1247" r="15" fill="#fff" stroke="#0a2152" stroke-width="7"/><text x="398" y="1262" text-anchor="end">YVR</text></g>
-          <g class="jmv" id="jcar"><circle r="17" fill="#ffd166" stroke="#0a2152" stroke-width="6"/></g>
+          <g class="jmv" id="jcar"><g transform="scale(1.15)"><rect x="-15" y="-27" width="30" height="54" rx="9" fill="#0a2152" stroke="#fff" stroke-width="3"/><rect x="-19" y="-12" width="5" height="7" rx="2" fill="#0a2152" stroke="#fff" stroke-width="1.8"/><rect x="14" y="-12" width="5" height="7" rx="2" fill="#0a2152" stroke="#fff" stroke-width="1.8"/><path d="M-11 -14 Q0 -19 11 -14 L9.5 -6 Q0 -9 -9.5 -6 Z" fill="#7fdcff"/><rect x="-9.5" y="-3" width="19" height="15" rx="3" fill="#163a75"/><path d="M-6 0 H6 M-6 4 H6 M-6 8 H6" stroke="#7fdcff" stroke-width="1.4" opacity=".55"/><path d="M-9.5 15 Q0 18 9.5 15 L10.5 21 Q0 23.5 -10.5 21 Z" fill="#7fdcff" opacity=".85"/><rect x="-12" y="-26" width="6" height="3" rx="1.5" fill="#ffd166"/><rect x="6" y="-26" width="6" height="3" rx="1.5" fill="#ffd166"/><rect x="-12" y="23.5" width="6" height="2.5" rx="1.2" fill="#ff4f6e"/><rect x="6" y="23.5" width="6" height="2.5" rx="1.2" fill="#ff4f6e"/></g></g><g class="jmv" id="jbus"><g transform="scale(1.05)"><rect x="-13" y="-33" width="26" height="66" rx="6" fill="#5b2bd6" stroke="#fff" stroke-width="3"/><path d="M-10 -28 Q0 -31 10 -28 L9 -21 H-9 Z" fill="#cdeeff"/><rect x="-9" y="-15" width="18" height="40" rx="2.5" fill="#7a4cf0"/><path d="M-9 -7 H9 M-9 1 H9 M-9 9 H9 M-9 17 H9" stroke="#cdeeff" stroke-width="1.6" opacity=".7"/><rect x="-4" y="-10" width="8" height="4" rx="1" fill="#fff" opacity=".9"/><rect x="-10" y="-32.5" width="5" height="2.5" rx="1.2" fill="#ffd166"/><rect x="5" y="-32.5" width="5" height="2.5" rx="1.2" fill="#ffd166"/><rect x="-10" y="30" width="5" height="2.5" rx="1.2" fill="#ff4f6e"/><rect x="5" y="30" width="5" height="2.5" rx="1.2" fill="#ff4f6e"/></g></g>
         </svg></div>
       </div>
       <div class="jcap" id="jcap" style="display:none"><span></span></div>
@@ -1000,11 +1000,11 @@ function jDraw(cls,moverId,dur,rot,cb){
   mv.style.opacity=1;
   function step(t){
     if(run!==jRun)return;if(t0===null)t0=t;
-    var u=Math.min(1,(t-t0)/dur),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2,a=p.getPointAtLength(L*e),b=p.getPointAtLength(Math.min(L,L*e+2));
+    var u=Math.min(1,(t-t0)/dur),e=u<.5?2*u*u:1-Math.pow(-2*u+2,2)/2,a=p.getPointAtLength(L*e),b0=p.getPointAtLength(Math.max(0,L*e-3)),b=p.getPointAtLength(Math.min(L,L*e+3));
     for(var i=0;i<paths.length;i++)paths[i].style.strokeDashoffset=(1-e).toFixed(4);
-    var ang=rot?Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI+90:0;
+    var ang=rot?Math.atan2(b.y-b0.y,b.x-b0.x)*180/Math.PI+90:0;
     mv.setAttribute('transform','translate('+a.x.toFixed(1)+' '+a.y.toFixed(1)+') rotate('+ang.toFixed(1)+')');
-    if(u<1)requestAnimationFrame(step);else{if(rot)mv.style.opacity=0;if(cb)cb()}
+    if(u<1)requestAnimationFrame(step);else{if(rot&&rot!=='keep')mv.style.opacity=0;if(cb)cb()}
   }
   requestAnimationFrame(step);
 }
@@ -1024,12 +1024,12 @@ function jPlay(){
     jT(ok(function(){jStage(2)}),300);
     jT(ok(function(){jCap('Dec 25 · Seattle to Vancouver · 1 h 14 m');jDraw('jf2','jp2',1500,true,ok(function(){
       jT(ok(function(){jStage(1)}),300);
-      jT(ok(function(){jShow(['yvr']);jCap('Dec 25 · YVR to Whistler · 2 to 2.5 h');jDraw('jr1','jcar',3000,false,ok(function(){
+      jT(ok(function(){jShow(['yvr']);jCap('Dec 25 · YVR to Whistler · 2 to 2.5 h');jDraw('jr1','jcar',3000,'keep',ok(function(){
         jShow(['wh','sq']);
-        jT(ok(function(){jCap('Dec 29 · Whistler to the Fairmont · about 2 h');jDraw('jr2','jcar',3000,false,ok(function(){
+        jT(ok(function(){jCap('Dec 29 · Whistler to the Fairmont · about 2 h');jDraw('jr2','jcar',3000,'keep',ok(function(){
           jShow(['fair']);
-          jT(ok(function(){jCap('Dec 29 evening · shuttle to Canyon Lights and back');jShow(['cap']);jDraw('jr3','jcar',1600,false,ok(function(){
-            jT(ok(function(){jCap('Jan 1 · Fairmont to YVR · leave 5:30 AM');jDraw('jr4','jcar',1100,false,ok(function(){jT(ok(jEnd),1400)}))}),1300);
+          jT(ok(function(){jCap('Dec 29 evening · shuttle to Canyon Lights and back');$('jcar').style.opacity=0;jShow(['cap']);jDraw('jr3','jbus',2200,'keep',ok(function(){$('jbus').style.opacity=0;
+            jT(ok(function(){jCap('Jan 1 · Fairmont to YVR · leave 5:30 AM');jDraw('jr4','jcar',1300,'keep',ok(function(){jT(ok(jEnd),1400)}))}),1300);
           }))}),1100);
         }))}),1200);
       }))}),2500);
@@ -1106,7 +1106,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116142729';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116143153';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
