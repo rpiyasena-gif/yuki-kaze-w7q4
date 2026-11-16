@@ -178,6 +178,8 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
 .gondola .sway{transform-box:view-box;transform-origin:60px 5px;animation:gsway 4.6s ease-in-out infinite}
 @keyframes gsway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
 .hscene .halo{animation:halo 3.2s ease-in-out infinite}
+.hscene .blink{animation:blink 2.4s ease-in-out infinite}
+@keyframes blink{0%,60%,100%{opacity:.15}75%{opacity:1}}
 @keyframes halo{0%,100%{opacity:.65}50%{opacity:1}}
 .cane{height:7px;background:repeating-linear-gradient(135deg,#ff4f6e 0 11px,#fff 11px 22px);box-shadow:0 2px 10px rgba(0,0,0,.35);position:relative;z-index:1}
 .card{background:linear-gradient(180deg,rgba(127,220,255,.1),rgba(127,220,255,0) 60px),rgba(12,29,61,.8);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);position:relative;box-shadow:0 6px 22px rgba(2,8,24,.45)}
@@ -252,7 +254,7 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
 @keyframes fws{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
 .sc-fw .fw-flash{opacity:0;animation:fwf 520ms ease-out both;transform-box:fill-box;transform-origin:center}
 @keyframes fwf{0%{opacity:.9;transform:scale(.1)}100%{opacity:0;transform:scale(1)}}
-@media (prefers-reduced-motion:reduce){.view.arriving{animation:none}.hscene .tw,.hscene .halo,.gondola .sway{animation:none}}
+@media (prefers-reduced-motion:reduce){.view.arriving{animation:none}.hscene .tw,.hscene .halo,.hscene .blink,.gondola .sway{animation:none}}
 
 /* ===== journey map ===== */
 .jmap{position:relative;aspect-ratio:985/1600;overflow:hidden;background:#8fd0e4}
@@ -317,6 +319,7 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
       <linearGradient id="hsTree" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3cc08f"/><stop offset=".45" stop-color="#16805a"/><stop offset="1" stop-color="#0a4a37"/></linearGradient>
       <linearGradient id="hsPine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1e5a7a"/><stop offset="1" stop-color="#0b2c49"/></linearGradient>
       <radialGradient id="hsStar" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff3c4" stop-opacity=".95"/><stop offset=".35" stop-color="#ffd166" stop-opacity=".5"/><stop offset="1" stop-color="#ffd166" stop-opacity="0"/></radialGradient>
+      <radialGradient id="hsCity" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffcf8a" stop-opacity=".28"/><stop offset="1" stop-color="#ffcf8a" stop-opacity="0"/></radialGradient>
       <radialGradient id="hsWarm" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ffd9a0" stop-opacity=".55"/><stop offset="1" stop-color="#ffd9a0" stop-opacity="0"/></radialGradient>
     </defs>
     <ellipse cx="318" cy="62" rx="140" ry="58" fill="url(#hsGlow)"/>
@@ -339,6 +342,30 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
     <path d="M168 120 182 100 200 96 222 92 246 94 270 88 296 92 322 86 350 90 376 86 400 90V120Z" fill="url(#hsRidge)" opacity=".9"/>
     <ellipse cx="350" cy="102" rx="52" ry="12" fill="url(#hsWarm)"/>
     <g id="htrees"></g>
+    <g class="skyline">
+    <ellipse cx="82" cy="96" rx="96" ry="24" fill="url(#hsCity)"/>
+    <rect x="8" y="86" width="10" height="18" fill="#21467d" opacity=".75"/>
+    <rect x="30" y="80" width="8" height="24" fill="#21467d" opacity=".75"/>
+    <rect x="46" y="84" width="9" height="20" fill="#21467d" opacity=".75"/>
+    <rect x="68" y="82" width="7" height="22" fill="#21467d" opacity=".75"/>
+    <rect x="86" y="86" width="9" height="18" fill="#21467d" opacity=".75"/>
+    <rect x="110" y="84" width="8" height="20" fill="#21467d" opacity=".75"/>
+    <rect x="150" y="88" width="10" height="16" fill="#21467d" opacity=".75"/>
+    <rect x="18" y="76" width="9" height="28" fill="#0f2b58"/>
+    <rect x="29" y="70" width="7" height="34" fill="#0f2b58"/>
+    <rect x="39" y="80" width="10" height="24" fill="#0f2b58"/>
+    <rect x="52" y="68" width="8" height="36" fill="#0f2b58"/>
+    <rect x="63" y="77" width="11" height="27" fill="#0f2b58"/>
+    <rect x="103" y="78" width="9" height="26" fill="#0f2b58"/>
+    <rect x="113" y="83" width="6" height="21" fill="#0f2b58"/>
+    <rect x="157" y="84" width="7" height="20" fill="#0f2b58"/>
+    <path d="M75 104H82L84.5 71L73 73.5Z" fill="#0f2b58"/>
+    <rect x="93" y="71" width="5" height="33" fill="#0f2b58"/><ellipse cx="95.5" cy="70" rx="7" ry="2.6" fill="#163a70"/><rect x="88.5" y="69.5" width="14" height="1.4" fill="#ffd58a" opacity=".85"/><path d="M95.5 67.4v-4" stroke="#163a70" stroke-width="1"/>
+    <path d="M52 68h8l-4-4z" fill="#0f2b58"/><path d="M29 70h7l-3.5-3z" fill="#0f2b58"/>
+    <g fill="#ffd58a" opacity=".75"><rect x="21" y="79" width="1" height="1.2"/><rect x="25" y="79" width="1" height="1.2"/><rect x="23" y="82" width="1" height="1.2"/><rect x="19" y="85" width="1" height="1.2"/><rect x="23" y="85" width="1" height="1.2"/><rect x="25" y="85" width="1" height="1.2"/><rect x="23" y="88" width="1" height="1.2"/><rect x="25" y="88" width="1" height="1.2"/><rect x="21" y="94" width="1" height="1.2"/><rect x="25" y="94" width="1" height="1.2"/><rect x="19" y="97" width="1" height="1.2"/><rect x="21" y="97" width="1" height="1.2"/><rect x="19" y="100" width="1" height="1.2"/><rect x="32" y="73" width="1" height="1.2"/><rect x="34" y="73" width="1" height="1.2"/><rect x="30" y="76" width="1" height="1.2"/><rect x="30" y="82" width="1" height="1.2"/><rect x="30" y="85" width="1" height="1.2"/><rect x="34" y="88" width="1" height="1.2"/><rect x="32" y="91" width="1" height="1.2"/><rect x="32" y="94" width="1" height="1.2"/><rect x="30" y="97" width="1" height="1.2"/><rect x="40" y="89" width="1" height="1.2"/><rect x="42" y="92" width="1" height="1.2"/><rect x="40" y="95" width="1" height="1.2"/><rect x="44" y="95" width="1" height="1.2"/><rect x="46" y="95" width="1" height="1.2"/><rect x="40" y="98" width="1" height="1.2"/><rect x="44" y="98" width="1" height="1.2"/><rect x="46" y="98" width="1" height="1.2"/><rect x="44" y="101" width="1" height="1.2"/><rect x="55" y="70" width="1" height="1.2"/><rect x="53" y="76" width="1" height="1.2"/><rect x="55" y="76" width="1" height="1.2"/><rect x="57" y="76" width="1" height="1.2"/><rect x="53" y="79" width="1" height="1.2"/><rect x="53" y="82" width="1" height="1.2"/><rect x="55" y="82" width="1" height="1.2"/><rect x="55" y="91" width="1" height="1.2"/><rect x="57" y="97" width="1" height="1.2"/><rect x="55" y="100" width="1" height="1.2"/><rect x="57" y="100" width="1" height="1.2"/><rect x="64" y="80" width="1" height="1.2"/><rect x="66" y="80" width="1" height="1.2"/><rect x="70" y="80" width="1" height="1.2"/><rect x="72" y="80" width="1" height="1.2"/><rect x="64" y="83" width="1" height="1.2"/><rect x="66" y="83" width="1" height="1.2"/><rect x="70" y="83" width="1" height="1.2"/><rect x="66" y="86" width="1" height="1.2"/><rect x="68" y="86" width="1" height="1.2"/><rect x="64" y="89" width="1" height="1.2"/><rect x="64" y="92" width="1" height="1.2"/><rect x="66" y="92" width="1" height="1.2"/><rect x="70" y="92" width="1" height="1.2"/><rect x="64" y="95" width="1" height="1.2"/><rect x="66" y="95" width="1" height="1.2"/><rect x="72" y="95" width="1" height="1.2"/><rect x="66" y="98" width="1" height="1.2"/><rect x="66" y="101" width="1" height="1.2"/><rect x="70" y="101" width="1" height="1.2"/><rect x="110" y="81" width="1" height="1.2"/><rect x="108" y="87" width="1" height="1.2"/><rect x="106" y="90" width="1" height="1.2"/><rect x="108" y="90" width="1" height="1.2"/><rect x="110" y="90" width="1" height="1.2"/><rect x="104" y="93" width="1" height="1.2"/><rect x="104" y="99" width="1" height="1.2"/><rect x="106" y="99" width="1" height="1.2"/><rect x="108" y="99" width="1" height="1.2"/><rect x="110" y="99" width="1" height="1.2"/><rect x="114" y="89" width="1" height="1.2"/><rect x="114" y="98" width="1" height="1.2"/><rect x="162" y="90" width="1" height="1.2"/><rect x="158" y="93" width="1" height="1.2"/><rect x="160" y="93" width="1" height="1.2"/><rect x="160" y="96" width="1" height="1.2"/><rect x="160" y="102" width="1" height="1.2"/><rect x="162" y="102" width="1" height="1.2"/><rect x="78" y="83" width="1" height="1.2"/><rect x="80" y="83" width="1" height="1.2"/><rect x="76" y="86" width="1" height="1.2"/><rect x="78" y="86" width="1" height="1.2"/><rect x="76" y="89" width="1" height="1.2"/><rect x="80" y="89" width="1" height="1.2"/><rect x="78" y="101" width="1" height="1.2"/><rect x="94" y="77" width="1" height="1.2"/><rect x="96" y="77" width="1" height="1.2"/><rect x="96" y="80" width="1" height="1.2"/><rect x="96" y="92" width="1" height="1.2"/><rect x="96" y="95" width="1" height="1.2"/></g>
+    <path d="M118 99 123.5 89 127 99 131.5 87.5 136 99 140 90 145 99Z" fill="#eaf3ff" opacity=".9"/><rect x="116" y="98.5" width="31" height="2.5" fill="#163a70"/>
+    <circle class="blink" cx="56" cy="63.4" r="1.4" fill="#ff4f6e"/><circle class="blink" cx="56" cy="63.4" r="3.4" fill="#ff4f6e" opacity=".3"/>
+    </g>
     <path d="M0 106q60-18 130-6t130-8 140 6v22H0z" fill="#f4f9ff"/>
     <path d="M0 113q80-10 170-2t230-5v14H0z" fill="#d8efff"/>
     <path d="M300 104q22-3 44 1t50-2" stroke="#ffffff" stroke-width="1.4" fill="none" opacity=".8"/>
@@ -1185,7 +1212,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116204042';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261116234233';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
