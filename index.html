@@ -484,7 +484,7 @@ var DAYS=[
   {t:'8:00 PM',x:'Christmas dinner: Trattoria Di Como',s:'Booked, table for 4. Northern Italian, about a 5-minute walk through the village. Early night after.'}]},
  {date:'2026-12-26',dow:'Sat',d:'26',mon:'Dec',cls:'ski',place:'Whistler · Ski day 1',items:[
   {t:'Morning',x:'Ski fitting if not done the night before',s:'See the ski rental task.'},
-  {t:'9:00 AM',x:'Lifts open',s:'The Whistler Village Gondola is a few minutes on foot from the Westin.'},
+  {t:'9:00 AM',x:'Lifts open',s:'Lift tickets bought: 3 days for Rohan and the boys, 2 days for Ashwini, who picks one day off. The Whistler Village Gondola is a few minutes on foot from the Westin.'},
   {t:'3:30 PM',x:'Lifts close',s:'Tube park is open until 6 PM if the boys still have energy.'},
   {t:'Evening',x:'Dinner idea: Sushi Village',s:'Casual and close to the hotel. Opens 5 PM.'}]},
  {date:'2026-12-27',dow:'Sun',d:'27',mon:'Dec',cls:'ski',place:'Whistler · Ski day 2',items:[
@@ -612,7 +612,6 @@ var TASKS=[
  {id:'rentals',title:'Choose ski rentals: Black Tie or Can-Ski',day:'2026-12-25',by:'Ask the Westin concierge',detail:'Black Tie fits you in your room, possibly on Christmas night. Can-Ski is in the hotel. Ask which gets you on the 9 AM lift on Dec 26.',opts:[
    {label:'Black Tie, in-room',summary:'Going with Black Tie in-room fitting.',adds:[{date:'2026-12-25',time:'Evening',title:'In-room ski fitting · Black Tie',detail:'Type the confirmed time on the task to update this.'}]},
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
- {id:'lift',title:'Buy lift tickets for Dec 26, 27 and 28',day:'2026-12-26',by:'Before early December',detail:'Four people, three days. Advance prices beat the ticket window.',opts:[{label:'Bought',summary:'Lift tickets bought.',adds:[{date:'2026-12-26',time:'',title:'Lift tickets bought for all three ski days',detail:''}]}]},
  {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
@@ -1215,7 +1214,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261116234619';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261117024434';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
