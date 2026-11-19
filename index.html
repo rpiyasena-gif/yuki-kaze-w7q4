@@ -385,7 +385,7 @@ textarea{width:100%;min-height:110px;resize:vertical;display:block}
   <section class="view active" id="v-schedule">
     <nav class="daynav" id="daynav" aria-label="Jump to a day"></nav>
     <div class="lbl">Day by day</div>
-    <p class="intro">All times are local to where you are. Green lines were added from your task answers.</p>
+    <p class="intro">Times are local. Atlanta times are marked ET; everything else is Whistler and Vancouver time.</p>
     <div class="stack"><div class="card" id="days"></div></div>
   </section>
 
@@ -1214,7 +1214,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261117024434';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261119170620';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
