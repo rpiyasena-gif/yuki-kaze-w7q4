@@ -509,7 +509,7 @@ var DAYS=[
   {t:'4:00 PM',x:'Back at the hotel · change for dinner',s:'The only change of the day. Mott 32 is smart casual: dark jeans or trousers with a collared shirt or sweater. No ski jackets, hoodies or athletic wear at the table. You go straight to Capilano after, so wear shoes with grip that also suit a nice restaurant.'},
   {t:'5:00 PM',x:'Dinner: Mott 32 · Peking duck',s:'A 5-minute Uber or 12-minute walk, inside the Paradox Hotel. Booked by the Fairmont concierge, table for 4, with the duck pre-ordered. Bring warm waterproof coats, hats and gloves for Capilano and ask to check them. Aim to leave by 6:55.'},
   {t:'7:15 PM',x:'Free shuttle to Capilano',s:'From Canada Place, a 15-minute walk from Mott 32. About 20 minutes. Evening departures are 7:00, 7:15 and 7:45 PM, so 7:45 is the fallback if dinner runs long.'},
-  {t:'About 7:40 PM',x:'Capilano Suspension Bridge · Canyon Lights',s:'The bridge, treetops and cliff walk in full dark, with the lights at their best. The park closes at 9, and you may stay until 10. It is all outdoors, cold and often raining: coats, hats and gloves on. The bridge and walkways are wet wood and metal grating, so no smooth soles or heels. Keep phones zipped away on the bridge.'},
+  {t:'About 7:40 PM',x:'Capilano Suspension Bridge · Canyon Lights',s:'Tickets bought, all day; show the QR codes at the entrance. The bridge, treetops and cliff walk in full dark, with the lights at their best. The park closes at 9, and you may stay until 10. It is all outdoors, cold and often raining: coats, hats and gloves on. The bridge and walkways are wet wood and metal grating, so no smooth soles or heels. Keep phones zipped away on the bridge.'},
   {t:'About 9:30 PM',x:'Shuttle back to the hotel',s:'Drops at Canada Place, a 5-minute walk from the Fairmont. The last shuttle leaves Capilano at 10:05 PM. Sleep in tomorrow.'}]},
  {date:'2026-12-30',dow:'Wed',d:'30',mon:'Dec',cls:'',place:'Vancouver · Granville Island, dinner and hockey',items:[
   {t:'Morning',x:'Granville Island',s:'Little Aquabus ferry across False Creek. Public Market and the Kids Market.'},
@@ -547,7 +547,7 @@ var EX_W=[
  {name:'Sea to Sky Gondola, Squamish',when:'Optional · on a different trip',blurb:'A gondola to viewing decks over Howe Sound, halfway down the highway. Not in this plan.',site:'https://www.seatoskygondola.com/',map:'Sea to Sky Gondola Squamish'}
 ];
 var EX_V=[
- {name:'Canyon Lights at Capilano Suspension Bridge',when:'Dec 29 · about 7:40 to 9:15 PM, by free shuttle',blurb:'A swaying bridge 70 m above a canyon, treetop walkways and a cliff walk, all covered in lights. Tickets bought through the Fairmont concierge are valid all day, with no timed entry. The free shuttle leaves Canada Place at 7:00, 7:15 and 7:45 PM, and the last one back leaves at 10:05 PM. All outdoors: wear warm waterproof layers, hats and gloves, and shoes with grip for wet wood and metal grating.',site:'https://www.capbridge.com/explore/canyon-lights/',map:'Capilano Suspension Bridge Park'},
+ {name:'Canyon Lights at Capilano Suspension Bridge',when:'Dec 29 · about 7:40 to 9:15 PM, by free shuttle',blurb:'A swaying bridge 70 m above a canyon, treetop walkways and a cliff walk, all covered in lights. Tickets bought for all four, valid all day; show the QR codes at the entrance. The free shuttle leaves Canada Place at 7:00, 7:15 and 7:45 PM, and the last one back leaves at 10:05 PM. All outdoors: wear warm waterproof layers, hats and gloves, and shoes with grip for wet wood and metal grating.',site:'https://www.capbridge.com/explore/canyon-lights/',map:'Capilano Suspension Bridge Park'},
  {name:'Granville Island Public Market',when:'Dec 30 morning',blurb:'Food stalls, doughnuts and buskers, plus the Kids Market. Take the little Aquabus ferry across False Creek.',site:'https://granvilleisland.com/',map:'Granville Island Public Market'},
  {name:'Canucks vs. Seattle Kraken',when:'Dec 30 · 7:30 PM · Rogers Arena',blurb:'NHL hockey. About 2.5 hours with intermissions. SkyTrain back: Stadium–Chinatown to Waterfront, two stops.',site:'https://www.nhl.com/canucks/schedule',map:'Rogers Arena Vancouver'},
  {name:'Coal Harbour seawall and Canada Place',when:'Dec 29 afternoon · the walk back from Stanley Park',blurb:'An easy flat walk along the water to your hotel, with seaplanes and North Shore mountain views. The Olympic Cauldron is across the street from the Fairmont.',map:'Coal Harbour Seawall Vancouver'},
@@ -618,7 +618,6 @@ var TASKS=[
  {id:'rentals',title:'Choose ski rentals: Black Tie or Can-Ski',day:'2026-12-25',by:'Ask the Westin concierge',detail:'Black Tie fits you in your room, possibly on Christmas night. Can-Ski is in the hotel. Ask which gets you on the 9 AM lift on Dec 26.',opts:[
    {label:'Black Tie, in-room',summary:'Going with Black Tie in-room fitting.',adds:[{date:'2026-12-25',time:'Evening',title:'In-room ski fitting · Black Tie',detail:'Type the confirmed time on the task to update this.'}]},
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
- {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
  {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]}
 ];
@@ -1219,7 +1218,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261120170904';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261120174312';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
