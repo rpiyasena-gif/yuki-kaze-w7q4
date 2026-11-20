@@ -484,12 +484,18 @@ var DAYS=[
   {t:'8:00 PM',x:'Christmas dinner: Trattoria Di Como',s:'Booked, table for 4. Northern Italian, about a 5-minute walk through the village. Early night after.'}]},
  {date:'2026-12-26',dow:'Sat',d:'26',mon:'Dec',cls:'ski',place:'Whistler · Ski day 1',items:[
   {t:'Morning',x:'Ski fitting if not done the night before',s:'See the ski rental task.'},
-  {t:'9:00 AM',x:'Lifts open',s:'Lift tickets bought: 3 days for Rohan and the boys, 2 days for Ashwini, who picks one day off. The Whistler Village Gondola is a few minutes on foot from the Westin.'},
+  {t:'9:00 AM',x:'Lifts open',s:'Lift tickets bought: 3 days for Rohan and the boys, 2 days for Ashwini, who has Dec 27 off. The Whistler Village Gondola is a few minutes on foot from the Westin.'},
   {t:'3:30 PM',x:'Lifts close',s:'Tube park is open until 6 PM if the boys still have energy.'},
   {t:'Evening',x:'Dinner idea: Sushi Village',s:'Casual and close to the hotel. Opens 5 PM.'}]},
- {date:'2026-12-27',dow:'Sun',d:'27',mon:'Dec',cls:'ski',place:'Whistler · Ski day 2',items:[
-  {t:'9:00 AM',x:'Lifts open',s:'Try the Peak 2 Peak gondola across to Blackcomb. It is included with your lift ticket.'},
-  {t:'3:30 PM',x:'Lifts close',s:''},
+ {date:'2026-12-27',dow:'Sun',d:'27',mon:'Dec',cls:'ski',place:'Whistler · Ski lesson and Scandinave Spa',items:[
+  {t:'Morning',x:'Ashwini\'s morning off',s:''},
+  {t:'9:15 AM',x:'Private ski lesson: Rohan and the boys',s:'Booked, full day for the boys. Whistler Village.'},
+  {t:'About 12 PM',x:'Family lunch in the village with Ashwini',s:''},
+  {t:'Afternoon',x:'Boys continue the private lesson',s:'Lifts close at 3:30 PM.'},
+  {t:'About 1:15 PM',x:'Taxi to Scandinave Spa',s:'About 5 minutes. Parking is limited, so take a taxi.'},
+  {t:'1:30 PM',x:'Check in and soak in the baths',s:'Check-in by 2:00 is required. Bring swimsuits, sandals and water bottles; robes, towels and locks are provided. Phones stay in the locker.'},
+  {t:'2:30 PM',x:'Duo Swedish massage · 60 minutes',s:'Booked for Rohan and Ashwini. An 18% gratuity is added automatically. No outside food; there is a bistro on site.'},
+  {t:'3:30 PM',x:'Taxi back to the Westin',s:'Back by about 4 PM.'},
   {t:'Evening',x:'Vallea Lumina forest light walk, or skating at Olympic Plaza',s:'Dinner idea: Bar Oso or Araxi.'}]},
  {date:'2026-12-28',dow:'Mon',d:'28',mon:'Dec',cls:'ski',place:'Whistler · Ski day 3',items:[
   {t:'9:00 AM',x:'Lifts open',s:'Last ski day.'},
@@ -536,7 +542,7 @@ var EX_W=[
  {name:'Vallea Lumina',when:'After dark · about 1 hour · book ahead',blurb:'A lit, story-led walk through snowy forest at Cougar Mountain, 10 minutes from the village. A shuttle runs from the village. Good for both boys.',site:'https://vallealumina.com/',map:'Vallea Lumina Whistler'},
  {name:'bubly Tube Park',when:'Last season: 10 AM to 6 PM during the holidays',blurb:'Snow tubing lanes on Blackcomb with a conveyor lift back up. Works right after the lifts close. First come, first served.',site:'https://www.whistler.com/activities/tube-park',map:'Tube Park Blackcomb Whistler'},
  {name:'Skating at Whistler Olympic Plaza',when:'Afternoons and evenings',blurb:'Outdoor rink under the Olympic rings and village lights. Skate rentals on site.',site:'https://www.whistler.com/activities/ice-skating/',map:'Whistler Olympic Plaza'},
- {name:'Scandinave Spa',when:'Parents only · ages 19 and up',blurb:'Outdoor hot pools, saunas and cold plunges in the forest, in silence. One for sore legs while the boys rest.',site:'https://www.scandinave.com/whistler/',map:'Scandinave Spa Whistler'},
+ {name:'Scandinave Spa',when:'Booked · Dec 27, 2:30 PM duo massage',blurb:'Outdoor hot pools, saunas and cold plunges in a cedar forest, in silence. Ages 16 and up on their own, 14 and 15 with a parent. Swimsuits required; robes, towels and locks provided. A 5-minute taxi from the village.',site:'https://www.scandinave.com/whistler/',map:'Scandinave Spa Whistler'},
  {name:'Audain Art Museum',when:'After skiing, or a storm day',blurb:'Northwest Coast masks and Emily Carr paintings in a striking building, a short walk from the village.',site:'https://audainartmuseum.com/',map:'Audain Art Museum Whistler'},
  {name:'Sea to Sky Gondola, Squamish',when:'Optional · on a different trip',blurb:'A gondola to viewing decks over Howe Sound, halfway down the highway. Not in this plan.',site:'https://www.seatoskygondola.com/',map:'Sea to Sky Gondola Squamish'}
 ];
@@ -1214,7 +1220,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261119170930';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261120170528';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
