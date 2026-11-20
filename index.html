@@ -620,8 +620,7 @@ var TASKS=[
    {label:'Can-Ski at the hotel',summary:'Going with Can-Ski at the Westin.',adds:[{date:'2026-12-26',time:'At opening',title:'Ski fitting at Can-Ski, inside the Westin',detail:'Go as soon as the shop opens, then straight to the gondola.'}]}]},
  {id:'capilano',title:'Buy Capilano tickets through the Fairmont concierge',day:'2026-12-29',by:'Cheayoung Lee, Fairmont VIP Concierge',detail:'Four tickets for Dec 29. Bought through the concierge they are valid all day, with no timed entry. Reply yes and pay through the secure Sertifi link they send.',opts:[]},
  {id:'miku',title:'Book Miku for lunch on Dec 30',day:'2026-12-30',by:'Optional',detail:'Around 12:30 PM, after Granville Island.',opts:[]},
- {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]},
- {id:'passports',title:'Check all four passports',day:'2026-12-25',by:'',detail:'Make sure none expire before you travel.',opts:[{label:'All valid',summary:'Passports checked.',adds:[]}]}
+ {id:'yvr',title:'Book a car to YVR for 5:30 AM on Jan 1',day:'2027-01-01',by:'Fairmont concierge',detail:'Early on New Year\'s Day, so reserve rather than rely on a taxi line.',opts:[]}
 ];
 
 /* ---------- state ---------- */
@@ -1220,7 +1219,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261120170528';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261120170904';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
