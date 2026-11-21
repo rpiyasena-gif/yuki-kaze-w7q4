@@ -858,7 +858,7 @@ function renderStatic(){
       f.vx+=(f.vxTo-f.vx)*dt*.8;f.ph+=f.fq*dt;
       f.y+=f.vy*dt;f.x+=(f.vx+Math.cos(f.ph)*f.amp+wind*(.4+f.d))*dt;f.rot+=f.vr*dt;f.tilt+=f.vt*dt;
       if(f.y>H+24||f.x<-40||f.x>W+40){fl[i]=f=make(true);if(wind>20)f.x=Math.random()*W*.8;}
-      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);f.fd=(f.fd===undefined?1:f.fd);f.fd+=((overText(f.x,f.y)?.3:1)-f.fd)*Math.min(1,dt*6);x.globalAlpha=f.a*f.fd;
+      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);f.fd=(f.fd===undefined?1:f.fd);f.fd+=((overText(f.x,f.y)?.15:1)-f.fd)*Math.min(1,dt*6);x.globalAlpha=f.a*f.fd;
       x.drawImage(f.sp,-f.s/2,-f.s/2,f.s,f.s);x.restore();
     }
     if(!document.hidden)requestAnimationFrame(loop);else setTimeout(function(){requestAnimationFrame(loop)},800);
@@ -1284,7 +1284,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261121152024';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261121152338';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
