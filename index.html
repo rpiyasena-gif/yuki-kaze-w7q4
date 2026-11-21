@@ -977,11 +977,11 @@ function scCocoa(){
 function scSkier(){
   // "Powder Day": cornice drop, big air 360 against the sun, carve, powder wipe
   function sY(x){return 600+0.0006*(x+40)*(x+40)}
-  var slope='M-60 '+sY(-60).toFixed(1);for(var x=-60;x<=780;x+=10)slope+=' L'+x+' '+sY(x).toFixed(1);slope+=' V1500 H-60Z';
+  var slope='M-60 '+sY(-60).toFixed(1);for(var x=-60;x<=1200;x+=10)slope+=' L'+x+' '+sY(x).toFixed(1);slope+=' V1500 H-60Z';
   function pine(x,y,s,c){return '<g transform="translate('+x+' '+y+') scale('+s+')"><path d="M0-46 9-30H5l11 16H8l13 18h-42l13-18h-8l11-16h-4z" fill="'+c+'"/><path d="M0-46 5-37 0-39-5-37zM-9-14l4-3 5 3 5-3 4 3-4-6h-10zM-17 4l6-4 11 4 11-4 6 4-6-8h-22z" fill="#f4f9ff"/></g>'}
-  var far='M-60 470 Q-30 440 0 424 L18 432 Q52 392 90 368 L104 380 Q120 394 136 400 Q156 366 175 342 L186 354 Q206 384 230 396 Q248 372 268 358 L280 368 Q300 396 320 408 Q340 384 360 372 L372 380 Q392 404 412 414 Q440 392 470 382 L486 394 Q520 410 548 402 Q580 376 606 366 L618 378 Q650 402 690 396 Q730 378 780 390 V1400 H-60Z';
-  var mid='M-60 556 Q-24 520 10 492 Q40 498 66 514 Q96 478 132 452 Q160 474 188 504 Q218 484 250 468 Q280 488 310 514 Q344 488 380 472 Q424 500 470 532 Q500 508 532 486 Q566 506 600 526 Q640 496 676 480 Q720 506 780 520 V1400 H-60Z';
-  var pines='';for(var i=0;i<26;i++){var px=-40+i*31+R(-8,8);pines+=pine(px.toFixed(0),(552+R(-6,10)).toFixed(0),R(.45,.7).toFixed(2),'#21487f')}
+  var far='M-60 470 Q-30 440 0 424 L18 432 Q52 392 90 368 L104 380 Q120 394 136 400 Q156 366 175 342 L186 354 Q206 384 230 396 Q248 372 268 358 L280 368 Q300 396 320 408 Q340 384 360 372 L372 380 Q392 404 412 414 Q440 392 470 382 L486 394 Q520 410 548 402 Q580 376 606 366 L618 378 Q650 402 690 396 Q730 378 780 390 L796 402 Q830 420 862 408 Q896 380 930 372 L944 384 Q980 408 1020 400 Q1060 380 1100 392 Q1150 404 1200 396 V1400 H-60Z';
+  var mid='M-60 556 Q-24 520 10 492 Q40 498 66 514 Q96 478 132 452 Q160 474 188 504 Q218 484 250 468 Q280 488 310 514 Q344 488 380 472 Q424 500 470 532 Q500 508 532 486 Q566 506 600 526 Q640 496 676 480 Q720 506 780 520 Q812 494 846 476 Q882 500 918 522 Q956 494 990 478 Q1036 504 1080 520 Q1140 496 1200 512 V1400 H-60Z';
+  var pines='';for(var i=0;i<40;i++){var px=-40+i*31+R(-8,8);pines+=pine(px.toFixed(0),(552+R(-6,10)).toFixed(0),R(.45,.7).toFixed(2),'#21487f')}
   var sk='<g id="skr0">'+
     '<g id="ski2"><rect x="-42" y="36" width="84" height="4.5" rx="2.2" fill="#3b6fc0"/><path d="M41 38q11-1 13-9" stroke="#3b6fc0" stroke-width="4.5" fill="none" stroke-linecap="round"/><rect x="33" y="36" width="8" height="4.5" fill="#ffd166"/></g>'+
     '<path d="M-4-8 C-12 2-6 12-2 20" stroke="#0f2246" stroke-width="10" fill="none" stroke-linecap="round"/>'+
@@ -1018,8 +1018,8 @@ function scSkier(){
     '<g id="skFar"><path d="'+far+'" fill="url(#skFarG)"/><path d="M175 342 165 360 177 356 183 366 190 352ZM90 368 82 382 92 379 97 388ZM268 360 260 374 270 371 276 380ZM360 372 352 386 362 383 367 392Z" fill="#fff" opacity=".85"/></g>'+
     '<g id="skMid"><path d="'+mid+'" fill="url(#skMidG)"/><path d="M130 456 120 474 133 470 139 482 146 466ZM250 470 240 488 253 484 259 495 265 480ZM380 474 371 490 383 487 388 497Z" fill="#fff" opacity=".9"/>'+pines+'</g>'+
     '<g id="skNear"><path d="'+slope+'" fill="url(#skSnow)"/>'+
-      '<path d="M-60 '+(sY(-60)+30)+' Q300 650 780 '+(sY(780)+40)+'" stroke="#d4e6fb" stroke-width="14" fill="none" opacity=".6"/>'+
-      pine(30,618,1.05,'#183a6b')+pine(392,742,1.3,'#183a6b')+pine(-10,640,.8,'#183a6b')+pine(300,(sY(300)+28).toFixed(0),1.1,'#183a6b')+pine(560,(sY(560)+26).toFixed(0),1.5,'#183a6b')+pine(640,(sY(640)+30).toFixed(0),1.7,'#183a6b')+pine(720,(sY(720)+20).toFixed(0),1.3,'#183a6b')+
+      '<path d="M-60 '+(sY(-60)+30)+' Q500 700 1200 '+(sY(1200)+60)+'" stroke="#d4e6fb" stroke-width="14" fill="none" opacity=".6"/>'+
+      pine(30,618,1.05,'#183a6b')+pine(392,742,1.3,'#183a6b')+pine(-10,640,.8,'#183a6b')+pine(300,(sY(300)+28).toFixed(0),1.1,'#183a6b')+pine(560,(sY(560)+26).toFixed(0),1.5,'#183a6b')+pine(640,(sY(640)+30).toFixed(0),1.7,'#183a6b')+pine(720,(sY(720)+20).toFixed(0),1.3,'#183a6b')+pine(820,(sY(820)+30).toFixed(0),1.6,'#183a6b')+pine(900,(sY(900)+24).toFixed(0),1.4,'#183a6b')+pine(1000,(sY(1000)+34).toFixed(0),1.8,'#183a6b')+pine(560,(sY(560)+70).toFixed(0),1.2,'#183a6b')+pine(700,(sY(700)+90).toFixed(0),1.5,'#183a6b')+
       '<path d="M186 290 Q178 306 160 312 L150 340 138 372 146 410 128 452 136 500 118 560 124 '+sY(124).toFixed(0)+' L-80 '+sY(-80).toFixed(0)+' L-80 300Z" fill="url(#skRock)"/>'+
       '<path d="M150 340 L132 360M146 410 L126 426M136 500 L116 516M128 452 L112 470" stroke="#e8f1fc" stroke-width="3" stroke-linecap="round" opacity=".7"/>'+
       '<path d="M-80 246 L120 260 Q168 266 186 290 Q178 306 160 312 Q120 318 80 312 Q20 306 -80 318Z" fill="url(#skSnow)"/>'+
@@ -1049,10 +1049,13 @@ function scSkier(){
     function warp(v){return v+0.13*Math.sin(2*Math.PI*v)}
     function state(t){
       var X,Y,rot,sc=1,cross=0,ghost=0,phase;
-      if(t<300){var e=Math.pow(t/300,1.6);X=-10+185*e;Y=(250+12*(X+80)/200)-32;rot=6;ghost=e;phase=0}
-      else if(t<1100){var u=(t-300)/800,p=warp(u),y0=234,x1=470,y1=sY(470)-30;X=175+(x1-175)*p;Y=y0+(y1-y0)*p-1200*p*(1-p);
-        var v=Math.max(0,Math.min(1,(u-.08)/.8));rot=6+360*warp(v)+ (u>.88?(u-.88)/.12*16:0);sc=1+.15*p;cross=Math.sin(Math.PI*Math.max(0,Math.min(1,(v-.25)/.5)));ghost=u<.2?1-u/.2:(u>.8?(u-.8)/.2:0);phase=1}
-      else{var c=Math.min(1,(t-1100)/650),cc=c*c;X=470-60*cc;Y=sY(470)-30+175*cc;sc=1.15+1.9*cc;rot=22-55*sm(c/.35);ghost=1;phase=2}
+      var VX=731,LX=175+VX*.8;
+      if(t<300){var tau=t/1000;X=65+.5*(VX/.3)*tau*tau;Y=(250+12*(X+80)/200)-32;rot=6;ghost=tau/.3*.6;phase=0}
+      else if(t<1100){var tau=(t-300)/1000;X=175+VX*tau;Y=234-700*tau+2000*tau*tau;
+        var land=Math.atan(2*.0006*(LX+40))*180/Math.PI;rot=6+(360+land-6)*tau/.8;sc=1+.15*tau/.8;
+        cross=Math.sin(Math.PI*Math.max(0,Math.min(1,(tau-.18)/.42)));ghost=.55;phase=1}
+      else{var c=Math.min(1,(t-1100)/650);X=LX+VX*.32*c-60*c*c;Y=sY(X)-30;var sa=Math.atan(2*.0006*(X+40))*180/Math.PI;
+        rot=sa-50*sm(c/.4);sc=1.15+1.7*c*c;ghost=1;phase=2}
       return {x:X,y:Y,rot:rot,sc:sc,cross:cross,ghost:ghost,phase:phase}
     }
     function place(node,s){node.setAttribute('transform','translate('+s.x.toFixed(1)+' '+s.y.toFixed(1)+') rotate('+s.rot.toFixed(1)+') scale('+s.sc.toFixed(3)+')')}
@@ -1065,14 +1068,14 @@ function scSkier(){
       var t=now-t0,dt=Math.min(.05,(now-last)/1000);last=now;
       var s=state(t);hist.push([t,s]);while(hist.length&&hist[0][0]<t-140)hist.shift();
       // camera follows the skier, with a jolt on landing
-      var tx=-(Math.max(s.x,200)-200)*.85,ty=-(s.y-430)*.45;if(s.phase===2){tx=-(470-200)*.85;ty=-(sY(470)-30-430)*.45-40*sm((t-1100)/400)}
-      camX+=(tx-camX)*Math.min(1,dt*9);camY+=(ty-camY)*Math.min(1,dt*9);
+      var tx=-(Math.max(s.x,200)-200)*.9,ty=-(Math.max(s.y,260)-430)*.8;if(s.phase===2)ty-=30*sm((t-1100)/400);
+      camX+=(tx-camX)*Math.min(1,dt*10);camY+=(ty-camY)*Math.min(1,dt*10);
       shake=(t>1100&&t<1260)?(1-(t-1100)/160)*7:0;var jx=shake?(Math.random()-.5)*shake:0,jy=shake?(Math.random()-.5)*shake:0;
       near.setAttribute('transform','translate('+(camX+jx).toFixed(1)+' '+(camY+jy).toFixed(1)+')');
-      midG.setAttribute('transform','translate('+(camX*.55+jx*.5).toFixed(1)+' '+(camY*.55).toFixed(1)+')');
-      farG.setAttribute('transform','translate('+(camX*.3).toFixed(1)+' '+(camY*.3).toFixed(1)+')');
-      sun.setAttribute('transform','translate('+(camX*.15).toFixed(1)+' '+(camY*.15).toFixed(1)+')');
-      var sx=210+camX*.15,syy=205+camY*.15,fx=200-sx,fy=430-syy,fc=fl.children,ks=[.55,.95,1.45,1.9];
+      midG.setAttribute('transform','translate('+(camX*.5+jx*.5).toFixed(1)+' '+(camY*.5).toFixed(1)+')');
+      farG.setAttribute('transform','translate('+(camX*.25).toFixed(1)+' '+(camY*.25).toFixed(1)+')');
+      sun.setAttribute('transform','translate('+(camX*.1).toFixed(1)+' '+(camY*.1).toFixed(1)+')');
+      var sx=210+camX*.1,syy=205+camY*.1,fx=200-sx,fy=430-syy,fc=fl.children,ks=[.55,.95,1.45,1.9];
       for(var i=0;i<fc.length;i++){fc[i].setAttribute('cx',(sx+fx*ks[i]).toFixed(1));fc[i].setAttribute('cy',(syy+fy*ks[i]).toFixed(1))}
       place(U,s);var vis=t<1430?1:Math.max(0,1-(t-1430)/120);U.setAttribute('opacity',vis.toFixed(2));
       var g1=null,g2=null;for(var j=0;j<hist.length;j++){if(!g1&&hist[j][0]>=t-110)g1=hist[j][1];if(!g2&&hist[j][0]>=t-55)g2=hist[j][1]}
@@ -1383,7 +1386,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261121181702';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261121190528';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
