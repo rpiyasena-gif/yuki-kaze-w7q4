@@ -839,6 +839,11 @@ function renderStatic(){
       a:.35+depth*.6,sp:sprites[Math.floor(Math.random()*4)],d:depth};
   }
   size();addEventListener('resize',size);
+  // text panels: flakes fade while they pass over these
+  var boxes=[],boxT=0,SEL='.view.active .card,.view.active .mapbtn,.view.active .tz>div,.view.active .note,.view.active .save,.daynav';
+  function getBoxes(){boxes=[];var els=document.querySelectorAll(SEL);for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.bottom>0&&r.top<H&&r.width>0)boxes.push([r.left,r.top,r.right,r.bottom])}}
+  function overText(px,py){for(var i=0;i<boxes.length;i++){var b=boxes[i];if(px>b[0]&&px<b[2]&&py>b[1]&&py<b[3])return true}return false}
+  addEventListener('scroll',function(){boxT=0},{passive:true});
   for(var i=0;i<52;i++)fl.push(make(false));
   function loop(t){
     var dt=Math.min((t-last)/1000||0,.05);last=t;
@@ -846,13 +851,14 @@ function renderStatic(){
     if(nextGust<0){windTo=windTo?0:(Math.random()<.5?-1:1)*(30+Math.random()*60);nextGust=windTo?1600+Math.random()*1400:5000+Math.random()*8000}
     wind+=(windTo-wind)*dt*1.4;
     x.clearRect(0,0,W,H);
+    boxT-=dt*1000;if(boxT<=0){getBoxes();boxT=250}
     for(var i=0;i<fl.length;i++){
       var f=fl[i];
       f.turn-=dt*1000;if(f.turn<0){f.vxTo=(Math.random()-.5)*34;f.turn=1500+Math.random()*3500;if(Math.random()<.25)f.vr=(Math.random()-.5)*3}
       f.vx+=(f.vxTo-f.vx)*dt*.8;f.ph+=f.fq*dt;
       f.y+=f.vy*dt;f.x+=(f.vx+Math.cos(f.ph)*f.amp+wind*(.4+f.d))*dt;f.rot+=f.vr*dt;f.tilt+=f.vt*dt;
       if(f.y>H+24||f.x<-40||f.x>W+40){fl[i]=f=make(true);if(wind>20)f.x=Math.random()*W*.8;}
-      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);x.globalAlpha=f.a;
+      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);f.fd=(f.fd===undefined?1:f.fd);f.fd+=((overText(f.x,f.y)?.3:1)-f.fd)*Math.min(1,dt*6);x.globalAlpha=f.a*f.fd;
       x.drawImage(f.sp,-f.s/2,-f.s/2,f.s,f.s);x.restore();
     }
     if(!document.hidden)requestAnimationFrame(loop);else setTimeout(function(){requestAnimationFrame(loop)},800);
@@ -1278,7 +1284,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261121151745';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261121152024';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
