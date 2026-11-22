@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="1024" height="1024">
+<defs>
+<path id="t2" d="M17 50a33 33 0 0 1 66 0"/>
+<path id="b2" d="M11.2 50a38.8 38.8 0 0 0 77.6 0"/>
+<clipPath id="cc"><circle cx="50" cy="50" r="29"/></clipPath>
+</defs>
+<rect width="100" height="100" fill="#d6304f"/>
+<circle cx="50" cy="50" r="44" fill="#0a2152"/>
+<circle cx="50" cy="50" r="42" fill="none" stroke="#ffd166" stroke-width=".7" stroke-dasharray="1.6 1.4"/>
+<g clip-path="url(#cc)">
+<rect x="20" y="20" width="60" height="60" fill="#dff3ff"/>
+<circle cx="70" cy="32" r="3.2" fill="#ffd166"/>
+<path d="M20 58 30 44 36 48 44 37 50 43 62 35 72 45 80 40V66H20z" fill="#8fb6e6"/>
+<path d="M44 37l-3 4 2-.5 1 1.5 1.5-1.5 1.5.8zM62 35l-4 4 2.5-.6 1.5 1.8 1.5-1.5 2 .8z" fill="#fff"/>
+<path d="M22 66 38 47 45 51 56 29 68 47 74 43 82 55V66z" fill="#2a66b8"/>
+<path d="M56 29l-6 11 3-1 2 3 3-3 4 2z" fill="#fff"/>
+<path d="M55 33c-3 6 2 8-1 13s3 6 0 11" stroke="#fff" stroke-width=".9" fill="none" stroke-linecap="round"/>
+<path d="M58 37c3 5-2 7 1 11s-2 6 1 9" stroke="#fff" stroke-width=".9" fill="none" stroke-linecap="round"/>
+
+<path d="M45 64 57 32" stroke="#0a2152" stroke-width=".5" stroke-dasharray="1 1"/>
+<rect x="20" y="66" width="60" height="16" fill="#12408a"/>
+<path d="M24 70h20M48 73h26M28 76h18M54 69h20" stroke="#7fdcff" stroke-width=".5" opacity=".7"/>
+<g fill="#0a2152"><rect x="25" y="56" width="4" height="10"/><rect x="30" y="51" width="5" height="15"/><rect x="36" y="57" width="4" height="9"/><path d="M41 66V48l4-2v20z"/><rect x="46" y="53" width="5" height="13"/><rect x="52" y="59" width="4" height="7"/></g>
+<g fill="#ffd166"><rect x="31" y="54" width="1" height="1"/><rect x="33" y="57" width="1" height="1"/><rect x="31" y="61" width="1" height="1"/><rect x="42.5" y="52" width="1" height="1"/><rect x="42.5" y="57" width="1" height="1"/><rect x="47.5" y="56" width="1" height="1"/><rect x="49" y="60" width="1" height="1"/><rect x="26.5" y="60" width="1" height="1"/></g>
+<rect x="57" y="63" width="19" height="3" fill="#f4f9ff"/>
+<path d="M58 63l2-6 2 6zM62 63l2-8 2 8zM66 63l2-9 2 9zM70 63l2-8 2 8zM74 63l1.5-5 1.5 5z" fill="#fff"/>
+</g>
+<circle cx="50" cy="50" r="29.3" fill="none" stroke="#ffd166" stroke-width="1"/>
+<circle cx="50" cy="50" r="31.2" fill="none" stroke="#ffd166" stroke-width=".7" stroke-dasharray="1.6 1.4"/>
+<text font-family="Inter Display" font-size="6.9" font-weight="700" letter-spacing=".55" fill="#ffd166"><textPath href="#t2" startOffset="50%" text-anchor="middle">WHISTLER · VANCOUVER</textPath></text>
+<text font-family="Inter Display" font-size="7.6" font-weight="700" letter-spacing="1.4" fill="#ffffff"><textPath href="#b2" startOffset="50%" text-anchor="middle">❄ 2026 ❄</textPath></text>
+</svg>
