@@ -989,27 +989,26 @@ function scSkier(){
   var pines='',pt=[],seed=7;function rnd(){seed=(seed*9301+49297)%233280;return seed/233280}for(var i=0;i<56;i++){var gx=-40+rnd()*1240,gy=548+Math.pow(rnd(),1.4)*230;pt.push([gx,gy])}pt.sort(function(a,b){return a[1]-b[1]});pt.forEach(function(q){var sc=.38+(q[1]-548)/230*.55+rnd()*.12;pines+=pine(q[0].toFixed(0),q[1].toFixed(0),sc.toFixed(2),q[1]>680?'#1d4378':'#21487f')})
   var sk='<g id="skr0">'+
     '<g id="ski2"><rect x="-44" y="36" width="88" height="4.5" rx="2.2" fill="#3b6fc0"/><path d="M43 38q11-1 13-9" stroke="#3b6fc0" stroke-width="4.5" fill="none" stroke-linecap="round"/><rect x="34" y="36" width="8" height="4.5" fill="#ffd166"/></g>'+
-    '<path d="M38-38 L-24 34" stroke="#aab9d3" stroke-width="1.8" stroke-linecap="round"/><circle cx="-20" cy="30" r="2.4" fill="none" stroke="#aab9d3" stroke-width="1.3"/>'+
-    '<path d="M4 18 L15-4" stroke="#0b1a38" stroke-width="7.5" stroke-linecap="round"/><path d="M15-4 L-4-21" stroke="#0b1a38" stroke-width="9.5" stroke-linecap="round"/>'+
-    '<path d="M-4 33 L-4 24 Q-3 19 1 18 L8 18 Q10 19 10 24 L13 33Z" fill="#c9d6ea" stroke="#0c1d3d" stroke-width="1.1"/>'+
-    '<path d="M38-38 L26-42 L14-52" stroke="#a81a3a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="38" cy="-38" r="3.3" fill="#0c1d3d"/>'+
-    '<path d="M10 18 L22-6" stroke="#13284f" stroke-width="8" stroke-linecap="round"/><path d="M22-6 L0-22" stroke="#13284f" stroke-width="10.5" stroke-linecap="round"/>'+
-    '<path d="M14 14 L24-4M22-10 L6-21" stroke="#3f6cb4" stroke-width="1.6" stroke-linecap="round" opacity=".85"/>'+
-    '<path d="M4 33 L4 23 Q5 19 9 18 L16 18 Q18 19 18 23 L22 33Z" fill="#eef3fb" stroke="#0c1d3d" stroke-width="1.1"/><path d="M7 24h10M7 28h11" stroke="#9fb6d8" stroke-width="1.1"/>'+
-    '<path d="M-6-24 C-6-38 4-52 14-56 Q22-57 26-50 C22-38 14-26 6-18 Q0-17-6-24Z" fill="url(#skJ)"/>'+
-    '<path d="M-6-24 Q0-17 6-18 L8-14 Q0-12-7-20Z" fill="#7d0f29"/>'+
-    '<path d="M-5-27 C-4-39 4-50 13-54" stroke="#fff" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"/>'+
-    '<path d="M24-49 C20-38 13-27 6-19" stroke="#8e1431" stroke-width="1.4" fill="none"/>'+
-    '<path d="M4-34 L19-41" stroke="#fff" stroke-width="2.6" opacity=".85" stroke-linecap="round"/>'+
-    '<path d="M17-56 Q23-61 30-58 L28-52 Q22-54 17-52Z" fill="#7fdcff"/>'+
-    '<ellipse cx="28" cy="-64" rx="9.2" ry="8.4" transform="rotate(-20 28 -64)" fill="#ffd166"/>'+
-    '<path d="M21-69 Q28-74 35-69" stroke="#fff" stroke-width="1.8" fill="none" opacity=".7" stroke-linecap="round"/><path d="M22-66 L33-72" stroke="#e0a92e" stroke-width="1.4"/>'+
-    '<path d="M19-62 Q27-65 37-64" stroke="#0c1d3d" stroke-width="2.6" fill="none"/>'+
-    '<rect x="29" y="-67" width="10" height="6" rx="3" transform="rotate(-8 34 -64)" fill="url(#skGog)" stroke="#0c1d3d" stroke-width="1.2"/>'+
-    '<path d="M31-65.5 l3.5 0" stroke="#fff" stroke-width="1.1" opacity=".9" stroke-linecap="round"/>'+
-    '<path d="M18-50 L30-38 L43-33" stroke="#e2304f" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M19-48 L29-38.5" stroke="#ff8aa0" stroke-width="1.4" opacity=".7"/>'+
-    '<circle cx="44" cy="-33" r="3.6" fill="#0c1d3d"/><path d="M44-33 L-12 38" stroke="#d8e2f2" stroke-width="2" stroke-linecap="round"/><circle cx="-8" cy="33" r="2.8" fill="none" stroke="#d8e2f2" stroke-width="1.4"/>'+
-    '<g id="glint" transform="translate(36 -65) scale(0)"><path d="M0-14 2-2 14 0 2 2 0 14-2 2-14 0-2-2Z" fill="#fff"/><circle r="4" fill="#fff"/></g>'+
+    '<path id="kpoleB" stroke="#aab9d3" stroke-width="1.8" stroke-linecap="round"/><circle id="kbasB" r="2.4" fill="none" stroke="#aab9d3" stroke-width="1.3"/>'+
+    '<path id="klegB" stroke="#0b1a38" stroke-width="9" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
+    '<g id="kbootB"><path d="M-4 33 L-4 24 Q-3 19 1 18 L8 18 Q10 19 10 24 L13 33Z" fill="#c9d6ea" stroke="#0c1d3d" stroke-width="1.1"/></g>'+
+    '<path id="karmB" stroke="#a81a3a" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle id="kgloB" r="3.3" fill="#0c1d3d"/>'+
+    '<path id="klegF" stroke="#13284f" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'+
+    '<path id="klegH" stroke="#3f6cb4" stroke-width="1.6" fill="none" stroke-linecap="round" opacity=".85"/>'+
+    '<g id="kbootF"><path d="M4 33 L4 23 Q5 19 9 18 L16 18 Q18 19 18 23 L22 33Z" fill="#eef3fb" stroke="#0c1d3d" stroke-width="1.1"/><path d="M7 24h10M7 28h11" stroke="#9fb6d8" stroke-width="1.1"/></g>'+
+    '<path id="ktorso" fill="url(#skJ)"/><path id="khem" stroke="#7d0f29" stroke-width="5" stroke-linecap="round"/>'+
+    '<path id="khi" stroke="#fff" stroke-width="2" fill="none" opacity=".55" stroke-linecap="round"/><path id="kstripe" stroke="#fff" stroke-width="2.6" opacity=".85" stroke-linecap="round"/>'+
+    '<ellipse id="kneck" rx="6" ry="4.5" fill="#7fdcff"/>'+
+    '<g id="khead">'+
+      '<ellipse cx="28" cy="-64" rx="9.2" ry="8.4" transform="rotate(-20 28 -64)" fill="#ffd166"/>'+
+      '<path d="M21-69 Q28-74 35-69" stroke="#fff" stroke-width="1.8" fill="none" opacity=".7" stroke-linecap="round"/><path d="M22-66 L33-72" stroke="#e0a92e" stroke-width="1.4"/>'+
+      '<path d="M19-62 Q27-65 37-64" stroke="#0c1d3d" stroke-width="2.6" fill="none"/>'+
+      '<rect x="29" y="-67" width="10" height="6" rx="3" transform="rotate(-8 34 -64)" fill="url(#skGog)" stroke="#0c1d3d" stroke-width="1.2"/>'+
+      '<path d="M31-65.5 l3.5 0" stroke="#fff" stroke-width="1.1" opacity=".9" stroke-linecap="round"/>'+
+      '<g id="glint" transform="translate(36 -65) scale(0)"><path d="M0-14 2-2 14 0 2 2 0 14-2 2-14 0-2-2Z" fill="#fff"/><circle r="4" fill="#fff"/></g>'+
+    '</g>'+
+    '<path id="karmF" stroke="#e2304f" stroke-width="6.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle id="kgloF" r="3.6" fill="#0c1d3d"/>'+
+    '<path id="kpoleF" stroke="#d8e2f2" stroke-width="2" stroke-linecap="round"/><circle id="kbasF" r="2.8" fill="none" stroke="#d8e2f2" stroke-width="1.4"/>'+
     '<g id="ski1"><rect x="-36" y="31" width="84" height="5" rx="2.5" fill="#0c1d3d"/><path d="M47 33q12-1 14-10" stroke="#0c1d3d" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="38" y="31" width="9" height="5" fill="#ffd166"/><rect x="-36" y="31" width="7" height="5" fill="#ffd166"/></g>'+
   '</g>';
   var h='<div class="scene sc-ski"><svg class="skisvg" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"><defs>'+
@@ -1049,6 +1048,40 @@ function scSkier(){
     var q=function(id){return el.querySelector('#'+id)};
     var U=q('skU'),G1=q('skG1'),G2=q('skG2'),near=q('skNear'),midG=q('skMid'),farG=q('skFar'),sun=q('skSunG'),fl=q('skFlare'),gate=q('skGate'),flag=q('skFlag'),shd=q('skShadow');
     var s1=svg.querySelector('#ski1'),s2=svg.querySelector('#ski2'),gl=svg.querySelector('#glint');
+    var K={};['kpoleB','kbasB','klegB','kbootB','karmB','kgloB','klegF','klegH','kbootF','ktorso','khem','khi','kstripe','kneck','khead','karmF','kgloF','kpoleF','kbasF'].forEach(function(id){K[id]=svg.querySelector('#'+id)});
+    // poses: hip, front/back knee, shoulder, head, elbows, hands, ski lift
+    var PA={h:[0,-22],kF:[22,-6],kB:[15,-4],s:[20,-52],hd:[28,-64],eF:[30,-38],hF:[43,-33],eB:[26,-42],hB:[38,-38],dy:0},
+        PL={h:[-3,-7],kF:[27,1],kB:[20,3],s:[28,-34],hd:[38,-44],eF:[38,-22],hF:[50,-12],eB:[33,-26],hB:[46,-18],dy:0},
+        PX={h:[2,-33],kF:[15,-11],kB:[9,-9],s:[15,-66],hd:[21,-79],eF:[30,-60],hF:[45,-64],eB:[26,-64],hB:[41,-70],dy:0},
+        PT={h:[0,-20],kF:[24,-28],kB:[18,-26],s:[13,-46],hd:[23,-57],eF:[30,-34],hF:[29,-22],eB:[26,-36],hB:[25,-24],dy:-17},
+        PE={h:[1,-28],kF:[19,-9],kB:[12,-7],s:[18,-59],hd:[25,-72],eF:[34,-48],hF:[48,-46],eB:[30,-52],hB:[44,-54],dy:0};
+    var KF=[[0,PA],[190,PL],[285,PL],[340,PX],[440,PT],[850,PT],[1000,PE],[1100,PE],[1165,PL],[1330,PA]];
+    function lp(a,b,u){return [a[0]+(b[0]-a[0])*u,a[1]+(b[1]-a[1])*u]}
+    function pose(t){var i=0;while(i<KF.length-2&&t>KF[i+1][0])i++;var a=KF[i],b=KF[i+1],u=sm((t-a[0])/(b[0]-a[0])),o={};
+      for(var key in a[1]){o[key]=key==='dy'?a[1].dy+(b[1].dy-a[1].dy)*u:lp(a[1][key],b[1][key],u)}return o}
+    function P2(p){return p[0].toFixed(1)+' '+p[1].toFixed(1)}
+    function drawPose(o){
+      var dy=o.dy,aF=[12,18+dy],aB=[4,18+dy];
+      K.kbootF.setAttribute('transform','translate(0 '+dy.toFixed(1)+')');K.kbootB.setAttribute('transform','translate(0 '+dy.toFixed(1)+')');
+      K.klegB.setAttribute('d','M'+P2(aB)+' L'+P2(o.kB)+' L'+P2(o.h));
+      K.klegF.setAttribute('d','M'+P2(aF)+' L'+P2(o.kF)+' L'+P2(o.h));
+      K.klegH.setAttribute('d','M'+P2(lp(aF,o.kF,.2))+' L'+P2(lp(aF,o.kF,.8)));
+      var d=[o.s[0]-o.h[0],o.s[1]-o.h[1]],L=Math.hypot(d[0],d[1]),u=[d[0]/L,d[1]/L],bk=[u[1],-u[0]],fr=[-u[1],u[0]];
+      function at(base,f,side,w){return [base[0]+d[0]*f+side[0]*w,base[1]+d[1]*f+side[1]*w]}
+      K.ktorso.setAttribute('d','M'+P2(at(o.h,0,bk,7))+' C'+P2(at(o.h,.35,bk,9))+' '+P2(at(o.h,.8,bk,8))+' '+P2(at(o.h,1.04,bk,5))+' Q'+P2(at(o.h,1.12,fr,1))+' '+P2(at(o.h,1,fr,7))+' C'+P2(at(o.h,.7,fr,8))+' '+P2(at(o.h,.3,fr,9))+' '+P2(at(o.h,0,fr,7))+' Z');
+      K.khem.setAttribute('d','M'+P2(at(o.h,.04,bk,6.5))+' L'+P2(at(o.h,.04,fr,6.5)));
+      K.khi.setAttribute('d','M'+P2(at(o.h,.12,bk,6.5))+' L'+P2(at(o.h,.85,bk,6)));
+      K.kstripe.setAttribute('d','M'+P2(at(o.h,.55,bk,5))+' L'+P2(at(o.h,.62,fr,6)));
+      var nk=lp(o.s,o.hd,.35);K.kneck.setAttribute('cx',nk[0].toFixed(1));K.kneck.setAttribute('cy',nk[1].toFixed(1));
+      K.khead.setAttribute('transform','translate('+(o.hd[0]-28).toFixed(1)+' '+(o.hd[1]+64).toFixed(1)+')');
+      var sB=at(o.h,.95,bk,1),sF=at(o.h,.95,fr,2);
+      K.karmB.setAttribute('d','M'+P2(sB)+' L'+P2(o.eB)+' L'+P2(o.hB));K.kgloB.setAttribute('cx',o.hB[0].toFixed(1));K.kgloB.setAttribute('cy',o.hB[1].toFixed(1));
+      K.karmF.setAttribute('d','M'+P2(sF)+' L'+P2(o.eF)+' L'+P2(o.hF));K.kgloF.setAttribute('cx',o.hF[0].toFixed(1));K.kgloF.setAttribute('cy',o.hF[1].toFixed(1));
+      var pv=[-.62,.785],pl=88;
+      [['kpoleB','kbasB',o.hB],['kpoleF','kbasF',o.hF]].forEach(function(q){var e=[q[2][0]+pv[0]*pl,q[2][1]+pv[1]*pl],bs=[q[2][0]+pv[0]*pl*.9,q[2][1]+pv[1]*pl*.9];
+        K[q[0]].setAttribute('d','M'+P2(q[2])+' L'+P2(e));K[q[1]].setAttribute('cx',bs[0].toFixed(1));K[q[1]].setAttribute('cy',bs[1].toFixed(1))});
+      return dy;
+    }
     var r=cv.getBoundingClientRect(),dpr=Math.min(window.devicePixelRatio||1,2),W=r.width,H=r.height;
     cv.width=W*dpr;cv.height=H*dpr;var x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);
     var k=Math.max(W/400,H/800),ox=(W-400*k)/2,oy=(H-800*k)/2;
@@ -1092,7 +1125,8 @@ function scSkier(){
       place(U,s);var vis=t<1430?1:Math.max(0,1-(t-1430)/120);U.setAttribute('opacity',vis.toFixed(2));
       var g1=null,g2=null;for(var j=0;j<hist.length;j++){if(!g1&&hist[j][0]>=t-110)g1=hist[j][1];if(!g2&&hist[j][0]>=t-55)g2=hist[j][1]}
       if(g1){place(G2,g1);G2.setAttribute('opacity',(.14*s.ghost*vis).toFixed(2))}if(g2){place(G1,g2);G1.setAttribute('opacity',(.28*s.ghost*vis).toFixed(2))}
-      s1.setAttribute('transform','rotate('+(24*s.cross).toFixed(1)+' 4 33)');s2.setAttribute('transform','rotate('+(-24*s.cross).toFixed(1)+' 4 35)');
+      var sdy=drawPose(pose(t));
+      s1.setAttribute('transform','translate(0 '+sdy.toFixed(1)+') rotate('+(24*s.cross).toFixed(1)+' 4 33)');s2.setAttribute('transform','translate(0 '+sdy.toFixed(1)+') rotate('+(-24*s.cross).toFixed(1)+' 4 35)');
       var gv=t>620&&t<900?Math.sin(Math.PI*(t-620)/280):0;gl.setAttribute('transform','translate(36 -65) rotate('+(t*.2%90).toFixed(0)+') scale('+(gv*1.5).toFixed(2)+')');
       // shadow races across the landing slope
       if(s.phase===1){var fh=sY(s.x)-(s.y+32),o=Math.max(0,1-fh/420);shd.setAttribute('cx',s.x.toFixed(1));shd.setAttribute('cy',(sY(s.x)+3).toFixed(1));shd.setAttribute('rx',(14+22*o).toFixed(1));shd.setAttribute('opacity',(.12+.3*o).toFixed(2))}
@@ -1398,7 +1432,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261122040519';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261122041117';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
