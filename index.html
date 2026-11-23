@@ -38,6 +38,13 @@ main,header{position:relative;z-index:1}
 
 /* header */
 .hero{padding:46px 20px 18px;background:radial-gradient(120% 90% at 85% 0%,rgba(127,220,255,.28) 0%,rgba(127,220,255,0) 55%),linear-gradient(175deg,#12408a 0%,#0a2152 45%,#061127 100%);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.sgw{position:absolute;top:38px;right:12px;z-index:3;display:flex;gap:6px;align-items:center}
+.sgb{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 9px;border-radius:16px;border:1px solid rgba(127,220,255,.45);background:rgba(8,26,58,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--snow);font:500 0.8125rem/1 var(--body);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sgb svg{width:16px;height:16px;color:var(--ice)}
+.sgw.on .sgb{background:rgba(127,220,255,.22);border-color:var(--ice)}
+.sgx{display:none;width:32px;height:32px;border-radius:16px;border:1px solid rgba(127,220,255,.45);background:rgba(8,26,58,.72);color:var(--snow);font-size:20px;line-height:1;cursor:pointer;padding:0}
+.sgw.on .sgx{display:block}
+@media (prefers-reduced-motion:reduce){.sgw{display:none}}
 .lights{position:absolute;top:0;left:0;right:0;height:30px;display:flex;justify-content:space-around;align-items:flex-start;border-top:2px solid #2a559c}
 .lights i{display:block;width:9px;height:13px;border-radius:50% 50% 55% 55%;margin-top:5px;animation:twinkle 2.6s ease-in-out infinite}
 .lights i:nth-child(3n+1){background:var(--berry);box-shadow:0 0 10px var(--berry)}
@@ -393,6 +400,7 @@ html.jlock,html.jlock body{overflow:hidden}
     <path d="M0 113q80-10 170-2t230-5v14H0z" fill="#d8efff"/>
     <path d="M300 104q22-3 44 1t50-2" stroke="#ffffff" stroke-width="1.4" fill="none" opacity=".8"/>
   </svg>
+  <div class="sgw" id="sgWrap"><button type="button" class="sgb" id="sgBtn" aria-pressed="false" aria-label="Snow globe: tilt and shake your phone"><svg viewBox="0 0 24 24" aria-hidden="true"><g stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"><path d="M12 2v20M3.3 7l17.4 10M3.3 17l17.4-10"/><path d="M9.5 3.5 12 6l2.5-2.5M9.5 20.5 12 18l2.5 2.5M3.6 10.4l3.4-1-1-3.4M20.4 13.6l-3.4 1 1 3.4M3.6 13.6l3.4 1-1 3.4M20.4 10.4l-3.4-1 1-3.4"/></g></svg><span>Snow globe</span></button><button type="button" class="sgx" id="sgOff" aria-label="Turn off snow globe">&times;</button></div>
   <div class="eyebrow">Family ski holiday</div>
   <h1>Whistler <span>&amp;</span> Vancouver</h1>
   <div class="meta">4 travellers · 7 nights · Dec 25, 2026 – Jan 1, 2027</div>
@@ -815,10 +823,11 @@ function renderStatic(){
   $('notes-list').innerHTML=NOTES.map(function(n){return '<div class="card pad note"><h3>'+esc(n.h)+'</h3><ul>'+n.li.map(function(l){return '<li>'+l+'</li>'}).join('')+'</ul>'+(n.site?linkRow({site:n.site}):'')+'</div>'}).join('');
 }
 
-/* ---------- snow: real flakes, each with its own fall, drift, spin and tumble ---------- */
+/* ---------- snow: real flakes; optional snow-globe mode (tilt, shake, drifts) ---------- */
 (function(){
   var c=$('snow');if(!c.getContext||REDUCE)return;
-  var x=c.getContext('2d'),W,H,dpr=Math.min(window.devicePixelRatio||1,2),fl=[],sprites=[],wind=0,windTo=0,nextGust=4000,last=0;
+  var x=c.getContext('2d'),W,H,FLOOR,dpr=Math.min(window.devicePixelRatio||1,2),fl=[],rest=[],sprites=[],wind=0,windTo=0,nextGust=4000,last=0,T=0;
+  var globe=false,gx=0,gy=1,tgx=0,tgy=1,stir=0,BIN=8,drift=[],meltFast=0,BASE=52,GBASE=72,MAXF=300;
   function sprite(kind){
     var s=64,k=document.createElement('canvas');k.width=k.height=s;var g=k.getContext('2d');
     g.translate(s/2,s/2);g.strokeStyle='#fff';g.fillStyle='#fff';g.lineCap='round';g.shadowColor='rgba(127,220,255,.9)';g.shadowBlur=4;
@@ -833,36 +842,152 @@ function renderStatic(){
     g.beginPath();g.arc(0,0,2.6,0,6.3);g.fill();return k;
   }
   for(var k=0;k<4;k++)sprites.push(sprite(k));
-  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  function floor(){var b=document.querySelector('.bar');FLOOR=b?b.getBoundingClientRect().top:H}
+  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);floor();var n=Math.ceil(W/BIN)+2;while(drift.length<n)drift.push(0);drift.length=n}
   function make(top){
     var depth=Math.random();
     return {x:Math.random()*W,y:top?-20:Math.random()*H,s:6+depth*13+Math.random()*3,vy:14+depth*34+Math.random()*14,
       vx:0,vxTo:(Math.random()-.5)*26,turn:Math.random()*3000,amp:4+Math.random()*16,ph:Math.random()*6.28,fq:.5+Math.random()*1.6,
       rot:Math.random()*6.28,vr:(Math.random()-.5)*2.4,tilt:Math.random()*6.28,vt:Math.random()<.3?0:(Math.random()-.5)*3.2,
-      a:.35+depth*.6,sp:sprites[Math.floor(Math.random()*4)],d:depth};
+      a:.35+depth*.6,sp:sprites[Math.floor(Math.random()*4)],d:depth,u:0,v:0,fd:1};
   }
+  // globe: new flakes enter from the edge opposite gravity, already moving "down"
+  function spawnG(){
+    var f=make(true),gm=Math.hypot(gx,gy),ux=gm>.15?gx/gm:0,uy=gm>.15?gy/gm:1;
+    if(Math.random()*(Math.abs(ux)+Math.abs(uy))<Math.abs(uy)){f.x=Math.random()*W;f.y=uy>0?-20:FLOOR+20}
+    else{f.y=Math.random()*FLOOR;f.x=ux>0?-20:W+20}
+    f.u=ux*f.vy;f.v=uy*f.vy;f.in=false;return f;
+  }
+  function free(px,py,ku,kv){var f=make(false);f.x=px;f.y=py;f.u=ku||0;f.v=kv||0;f.in=true;f.s*=.9;return f}
   size();addEventListener('resize',size);
   // text panels: flakes fade while they pass over these
   var boxes=[],boxT=0,SEL='.view.active .card,.view.active .mapbtn,.view.active .tz>div,.view.active .note,.view.active .save,.daynav';
   function getBoxes(){boxes=[];var els=document.querySelectorAll(SEL);for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.bottom>0&&r.top<H&&r.width>0)boxes.push([r.left,r.top,r.right,r.bottom])}}
   function overText(px,py){for(var i=0;i<boxes.length;i++){var b=boxes[i];if(px>b[0]&&px<b[2]&&py>b[1]&&py<b[3])return true}return false}
   addEventListener('scroll',function(){boxT=0},{passive:true});
-  for(var i=0;i<52;i++)fl.push(make(false));
+  for(var i=0;i<BASE;i++)fl.push(make(false));
+
+  // shake: kick everything up against gravity, stir the water, lift the drifts and the flakes resting on walls
+  function shake(s){
+    if(!globe)return;
+    var gm=Math.hypot(gx,gy),ux=gm>.15?gx/gm:0,uy=gm>.15?gy/gm:1;
+    stir=Math.min(stir+s*140,280);
+    for(var i=0;i<fl.length;i++){var f=fl[i],r=Math.random();f.u+=(Math.random()-.5)*s*420-ux*s*r*520;f.v+=(Math.random()-.5)*s*420-uy*s*r*520}
+    for(var b=0;b<drift.length;b++){
+      var h=drift[b],n=Math.floor(h/3);
+      for(var j=0;j<n&&fl.length<MAXF;j++){var r2=.4+Math.random();fl.push(free(b*BIN+Math.random()*BIN,FLOOR-Math.random()*h-2,(Math.random()-.5)*s*380,-s*r2*560))}
+      drift[b]=h*(1-Math.min(1,s));
+    }
+    while(rest.length&&fl.length<MAXF){var q=rest.pop();fl.push(free(q.x,q.y,-q.nx*s*400+(Math.random()-.5)*200,-q.ny*s*400+(Math.random()-.5)*200))}
+    rest.length=0;
+  }
+
+  // sensors: tilt from orientation (consistent across iOS/Android), shake from motion
+  function onOri(e){
+    if(e.beta==null)return;
+    var b=e.beta*Math.PI/180,g=(e.gamma||0)*Math.PI/180,dx=Math.sin(g)*Math.cos(b),dy=Math.sin(b);
+    var a=((screen.orientation&&screen.orientation.angle)||window.orientation||0)*Math.PI/180;
+    tgx=dx*Math.cos(a)+dy*Math.sin(a);tgy=-dx*Math.sin(a)+dy*Math.cos(a);
+  }
+  var lastShake=0,prevG=null;
+  function onMot(e){
+    var a=e.acceleration,m;
+    if(a&&a.x!=null)m=Math.hypot(a.x,a.y,a.z);
+    else{var g=e.accelerationIncludingGravity;if(!g||g.x==null)return;m=prevG?Math.hypot(g.x-prevG[0],g.y-prevG[1],g.z-prevG[2])*.8:0;prevG=[g.x,g.y,g.z]}
+    if(m>11){var n=Date.now();if(n-lastShake>140){lastShake=n;shake(Math.min(1.6,(m-8)/14))}}
+  }
+  var btn=$('sgBtn'),off=$('sgOff'),wrap=$('sgWrap');
+  function listen(){addEventListener('deviceorientation',onOri);addEventListener('devicemotion',onMot)}
+  function setUI(){wrap.classList.toggle('on',globe);btn.setAttribute('aria-pressed',globe?'true':'false');btn.querySelector('span').textContent=globe?'Shake':'Snow globe'}
+  function enable(){
+    globe=true;meltFast=0;setUI();
+    for(var i=0;i<fl.length;i++){var f=fl[i];f.u=(f.vx+Math.cos(f.ph)*f.amp)*.5;f.v=f.vy;f.in=f.y>0&&f.y<FLOOR}
+    while(fl.length<GBASE)fl.push(spawnG());
+    try{
+      if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==='function'){
+        var p=[DeviceMotionEvent.requestPermission()];
+        if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')p.push(DeviceOrientationEvent.requestPermission());
+        Promise.all(p).then(function(r){if(r.indexOf('granted')>-1)listen()}).catch(function(){});
+      }else listen();
+    }catch(e){}
+  }
+  function disable(){
+    globe=false;setUI();removeEventListener('deviceorientation',onOri);removeEventListener('devicemotion',onMot);
+    tgx=0;tgy=1;meltFast=1;
+    rest.forEach(function(q){fl.push(free(q.x,q.y,0,0))});rest.length=0;
+  }
+  if(btn){btn.addEventListener('click',function(){if(!globe)enable();else shake(1)});off.addEventListener('click',disable)}
+
   function loop(t){
-    var dt=Math.min((t-last)/1000||0,.05);last=t;
+    var dt=Math.min((t-last)/1000||0,.05);last=t;T+=dt;
     nextGust-=dt*1000;
     if(nextGust<0){windTo=windTo?0:(Math.random()<.5?-1:1)*(30+Math.random()*60);nextGust=windTo?1600+Math.random()*1400:5000+Math.random()*8000}
     wind+=(windTo-wind)*dt*1.4;
     x.clearRect(0,0,W,H);
-    boxT-=dt*1000;if(boxT<=0){getBoxes();boxT=250}
+    boxT-=dt*1000;if(boxT<=0){getBoxes();floor();boxT=250}
+    gx+=(tgx-gx)*Math.min(1,dt*4);gy+=(tgy-gy)*Math.min(1,dt*4);
+    var gm=Math.hypot(gx,gy),ux=gm>.15?gx/gm:0,uy=gm>.15?gy/gm:1,G=Math.max(gm,.45),qx=uy,qy=-ux;
+    stir*=Math.exp(-dt*.7);
+    var target=globe?GBASE:BASE;
     for(var i=0;i<fl.length;i++){
       var f=fl[i];
       f.turn-=dt*1000;if(f.turn<0){f.vxTo=(Math.random()-.5)*34;f.turn=1500+Math.random()*3500;if(Math.random()<.25)f.vr=(Math.random()-.5)*3}
       f.vx+=(f.vxTo-f.vx)*dt*.8;f.ph+=f.fq*dt;
-      f.y+=f.vy*dt;f.x+=(f.vx+Math.cos(f.ph)*f.amp+wind*(.4+f.d))*dt;f.rot+=f.vr*dt;f.tilt+=f.vt*dt;
-      if(f.y>H+24||f.x<-40||f.x>W+40){fl[i]=f=make(true);if(wind>20)f.x=Math.random()*W*.8;}
-      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);f.fd=(f.fd===undefined?1:f.fd);f.fd+=((overText(f.x,f.y)?.15:1)-f.fd)*Math.min(1,dt*6);x.globalAlpha=f.a*f.fd;
+      if(!globe){
+        f.y+=f.vy*dt;f.x+=(f.vx+Math.cos(f.ph)*f.amp+wind*(.4+f.d))*dt;
+        if(f.y>H+24||f.x<-40||f.x>W+40||f.y<-60){if(fl.length>target){fl.splice(i,1);i--;continue}fl[i]=f=make(true);if(wind>20)f.x=Math.random()*W*.8;}
+      }else{
+        // relax toward falling at terminal speed along gravity, with sway and the breeze across it
+        var side=f.vx+Math.cos(f.ph)*f.amp+wind*(.4+f.d),tu=ux*f.vy*G+qx*side,tv=uy*f.vy*G+qy*side,kk=Math.min(1,dt*1.0);
+        f.u+=(tu-f.u)*kk;f.v+=(tv-f.v)*kk;
+        if(stir>1){f.u+=Math.cos(f.y*.011+T*1.3+f.ph)*stir*dt*3.2;f.v+=Math.sin(f.x*.011-T*1.1+f.ph)*stir*dt*3.2}
+        f.x+=f.u*dt;f.y+=f.v*dt;
+        if(!f.in&&f.x>0&&f.x<W&&f.y>0&&f.y<FLOOR)f.in=true;
+        if(!f.in&&(f.x<-80||f.x>W+80||f.y<-80||f.y>FLOOR+80)){fl[i]=spawnG();continue}
+        var bi=Math.max(0,Math.min(drift.length-1,Math.floor(f.x/BIN))),top=FLOOR-drift[bi];
+        if(f.y>=top-f.s*.25&&f.v>0){
+          if(uy>.55){ // lands on the drift
+            var dep=f.s*.9;drift[bi]+=dep*.5;if(bi>0)drift[bi-1]+=dep*.25;if(bi<drift.length-1)drift[bi+1]+=dep*.25;
+            if(fl.length>target){fl.splice(i,1);i--}else fl[i]=spawnG();continue;
+          }
+          f.y=top-f.s*.25;f.v*=-.15;
+        }
+        if(f.in){
+          var wall=null;
+          if(f.x<0&&f.u<0)wall=[-1,0,0,f.y];else if(f.x>W&&f.u>0)wall=[1,0,W,f.y];else if(f.y<0&&f.v<0)wall=[0,-1,f.x,0];
+          if(wall){
+            if(ux*wall[0]+uy*wall[1]>.5&&stir<40){rest.push({x:wall[2]-wall[0]*Math.random()*5,y:wall[3]-wall[1]*Math.random()*5,s:f.s*.9,sp:f.sp,rot:f.rot,a:f.a,nx:wall[0],ny:wall[1],life:18+Math.random()*20});
+              if(rest.length>140)rest.shift();if(fl.length>target){fl.splice(i,1);i--}else fl[i]=spawnG();continue}
+            if(wall[0]){f.x=wall[2];f.u*=-.3}else{f.y=0;f.v*=-.3}
+          }
+        }
+      }
+      f.rot+=f.vr*dt;f.tilt+=f.vt*dt;
+      x.save();x.translate(f.x,f.y);x.rotate(f.rot);x.scale(1,f.vt?Math.cos(f.tilt):1);f.fd+=((overText(f.x,f.y)?.15:1)-f.fd)*Math.min(1,dt*6);x.globalAlpha=f.a*f.fd;
       x.drawImage(f.sp,-f.s/2,-f.s/2,f.s,f.s);x.restore();
+    }
+    // flakes resting on the side or top walls: slide off when the globe tilts away, melt in time
+    for(var r=rest.length-1;r>=0;r--){
+      var q=rest[r];q.life-=dt;
+      if(!globe||ux*q.nx+uy*q.ny<.3){if(fl.length<MAXF)fl.push(free(q.x,q.y,0,0));rest.splice(r,1);continue}
+      if(q.life<=0){rest.splice(r,1);continue}
+      x.save();x.translate(q.x,q.y);x.rotate(q.rot);x.globalAlpha=q.a*Math.min(1,q.life/3);x.drawImage(q.sp,-q.s/2,-q.s/2,q.s,q.s);x.restore();
+    }
+    // the drift along the bottom: settles into soft slopes, melts slowly, slides off when tilted
+    var any=false,lam=meltFast?.6:.025;
+    for(var b=0;b<drift.length;b++){
+      var h=drift[b];if(h<=.05){drift[b]=0;continue}any=true;
+      var l=b>0?drift[b-1]:h,rr=b<drift.length-1?drift[b+1]:h;h+=((l+rr)/2-h)*Math.min(1,dt*2.5);
+      h-=h*lam*dt;if(h>24)h=24;
+      if(globe&&uy<.55){var take=Math.min(h,dt*24);h-=take;if(Math.random()<take/3&&fl.length<MAXF)fl.push(free(b*BIN+Math.random()*BIN,FLOOR-h-3,ux*20,-10))}
+      drift[b]=h;
+    }
+    if(any){
+      x.save();x.beginPath();x.moveTo(-2,FLOOR+2);x.lineTo(-2,FLOOR-drift[0]);
+      for(var d=0;d<drift.length-1;d++){var x0=d*BIN+BIN/2,x1=x0+BIN;x.quadraticCurveTo(x0,FLOOR-drift[d],(x0+x1)/2,FLOOR-(drift[d]+drift[d+1])/2)}
+      x.lineTo(W+2,FLOOR-drift[drift.length-1]);x.lineTo(W+2,FLOOR+2);x.closePath();
+      var gr=x.createLinearGradient(0,FLOOR-30,0,FLOOR);gr.addColorStop(0,'rgba(255,255,255,.95)');gr.addColorStop(1,'rgba(200,226,255,.85)');
+      x.fillStyle=gr;x.shadowColor='rgba(127,220,255,.9)';x.shadowBlur=8;x.fill();x.restore();
     }
     if(!document.hidden)requestAnimationFrame(loop);else setTimeout(function(){requestAnimationFrame(loop)},800);
   }
@@ -1432,7 +1557,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261122041735';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261123124037';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
