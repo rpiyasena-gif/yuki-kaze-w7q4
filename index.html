@@ -842,8 +842,8 @@ function renderStatic(){
     g.beginPath();g.arc(0,0,2.6,0,6.3);g.fill();return k;
   }
   for(var k=0;k<4;k++)sprites.push(sprite(k));
-  function floor(){var b=document.querySelector('.bar');FLOOR=b?b.getBoundingClientRect().top:H}
-  function size(){W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);floor();var n=Math.ceil(W/BIN)+2;while(drift.length<n)drift.push(0);drift.length=n}
+  function floor(){var b=document.querySelector('.bar'),cr=c.getBoundingClientRect();FLOOR=b?b.getBoundingClientRect().top-cr.top:H;if(FLOOR>H)FLOOR=H}
+  function size(){var cr=c.getBoundingClientRect();W=Math.round(cr.width)||innerWidth;H=Math.round(cr.height)||innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);floor();var n=Math.ceil(W/BIN)+2;while(drift.length<n)drift.push(0);drift.length=n}
   function make(top){
     var depth=Math.random();
     return {x:Math.random()*W,y:top?-20:Math.random()*H,s:6+depth*13+Math.random()*3,vy:14+depth*34+Math.random()*14,
@@ -924,7 +924,7 @@ function renderStatic(){
     if(nextGust<0){windTo=windTo?0:(Math.random()<.5?-1:1)*(30+Math.random()*60);nextGust=windTo?1600+Math.random()*1400:5000+Math.random()*8000}
     wind+=(windTo-wind)*dt*1.4;
     x.clearRect(0,0,W,H);
-    boxT-=dt*1000;if(boxT<=0){getBoxes();floor();boxT=250}
+    boxT-=dt*1000;if(boxT<=0){var cr=c.getBoundingClientRect();if(Math.abs(cr.width-W)>1||Math.abs(cr.height-H)>1)size();getBoxes();floor();boxT=250}
     gx+=(tgx-gx)*Math.min(1,dt*4);gy+=(tgy-gy)*Math.min(1,dt*4);
     var gm=Math.hypot(gx,gy),ux=gm>.15?gx/gm:0,uy=gm>.15?gy/gm:1,G=Math.max(gm,.45),qx=uy,qy=-ux;
     stir*=Math.exp(-dt*.7);
@@ -1557,7 +1557,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261123124037';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261123164211';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
