@@ -902,11 +902,23 @@ function renderStatic(){
 /* ---------- snow globe: opens full screen, loaded only when first asked for ---------- */
 (function(){
   var btn=$('sgBtn'),ov=$('sgOv'),cl=$('sgClose');if(!btn||!ov)return;
+  // phone motion: asked for on the tap that opens the globe, then passed into it
+  var mot=false;
+  function fwd(m){var f=ov.querySelector('iframe');try{if(f&&f.contentWindow&&f.contentWindow.globeMotion)f.contentWindow.globeMotion(m)}catch(e){}}
+  function onO(e){fwd({beta:e.beta,gamma:e.gamma,angle:(screen.orientation&&screen.orientation.angle)||window.orientation||0})}
+  function onM(e){var a=e.acceleration;if(!a||a.x==null)return;fwd({mag:Math.hypot(a.x,a.y,a.z),ax:a.x,ay:a.y})}
+  function listen(){if(mot)return;mot=true;addEventListener('deviceorientation',onO);addEventListener('devicemotion',onM)}
+  function askMotion(){try{
+    if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==='function'){
+      var p=[DeviceMotionEvent.requestPermission()];if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')p.push(DeviceOrientationEvent.requestPermission());
+      Promise.all(p).then(function(r){if(r.indexOf('granted')>-1)listen()}).catch(function(){});
+    }else listen()}catch(e){}}
   function open(){
-    if(!ov.querySelector('iframe')){var f=document.createElement('iframe');f.src='globe.html';f.title='Whistler and Vancouver snow globe';f.setAttribute('allow','accelerometer');ov.insertBefore(f,cl)}
+    askMotion();
+    if(!ov.querySelector('iframe')){var f=document.createElement('iframe');f.src='globe.html';f.title='Whistler and Vancouver snow globe';f.setAttribute('allow','accelerometer; gyroscope');ov.insertBefore(f,cl)}
     ov.classList.add('on');ov.setAttribute('aria-hidden','false');document.documentElement.classList.add('jlock');
   }
-  function close(){ov.classList.remove('on');ov.setAttribute('aria-hidden','true');document.documentElement.classList.remove('jlock');var f=ov.querySelector('iframe');if(f)f.remove()}
+  function close(){if(mot){mot=false;removeEventListener('deviceorientation',onO);removeEventListener('devicemotion',onM)}ov.classList.remove('on');ov.setAttribute('aria-hidden','true');document.documentElement.classList.remove('jlock');var f=ov.querySelector('iframe');if(f)f.remove()}
   btn.addEventListener('click',open);cl.addEventListener('click',close);
   addEventListener('keydown',function(e){if(e.key==='Escape'&&ov.classList.contains('on'))close()});
 })();
@@ -1474,7 +1486,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261124234411';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261124235801';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
