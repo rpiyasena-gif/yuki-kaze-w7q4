@@ -107,10 +107,13 @@ function shake(s,dx,dy){
 // ---------- view: fills the screen with the glass; pinch to zoom, drag to look around, tap to shake ----------
 var hint=document.getElementById('globeHint'),W,H,dpr,vs=1,vtx=0,vty=0,s0=1,sMin=1,sMax=3;
 function clampView(){var bx=GA.bg.x*vs,by=GA.bg.y*vs,bw=GA.bg.w*vs,bh=GA.bg.h*vs;
+  // fully zoomed out the globe sits centred and locked; panning opens up gradually as you zoom in
+  var cx=W/2-660*vs,cy=H/2-((-DT+1160)/2)*vs,f=Math.max(0,Math.min(1,(vs/s0-1)/.6));
+  vtx=cx+Math.max(-f*W,Math.min(f*W,vtx-cx));vty=cy+Math.max(-f*H,Math.min(f*H,vty-cy));
   vtx=bw<=W?(W-bw)/2-bx:Math.min(-bx,Math.max(W-bw-bx,vtx));vty=bh<=H?(H-bh)/2-by:Math.min(-by,Math.max(H-bh-by,vty))}
 function homeView(){vs=s0;vtx=W/2-660*vs;vty=H/2-((-DT+1160)/2)*vs;clampView()}
 function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
-  var oldS0=s0;s0=Math.max(Math.min(W/1060,H/(1240+DT)),W/GA.bg.w,H/GA.bg.h);sMin=Math.max(W/GA.bg.w,H/GA.bg.h);sMax=Math.max(s0,W/1060)*2.5;
+  var oldS0=s0;s0=Math.max(Math.min(W/1060,H/(1240+DT)),W/GA.bg.w,H/GA.bg.h);sMin=s0;sMax=Math.max(s0,W/1060)*2.5;
   if(!size.done){size.done=1;homeView()}else{vs=Math.max(sMin,Math.min(sMax,vs*s0/oldS0));clampView()}}
 size();addEventListener('resize',size);
 function toWorld(px,py){return{x:(px-vtx)/vs,y:(py-vty)/vs}}
