@@ -25,14 +25,14 @@ var skiers=[{r:0,d:1},{r:1,d:0},{r:1,d:9},{r:2,d:4},{r:2,d:12}].map(function(k,i
 var spray=[];
 function drawSkiers(dt){
   for(var i=0;i<skiers.length;i++){var k=skiers[i],r=RUNS[k.r];
-    if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=10+Math.random()*6;k.ph=Math.random()*6.28;k.fq=2.2+Math.random()*1.2;k.w=4+Math.random()*3}continue}
-    k.s+=k.v*dt;k.ph+=k.fq*dt;if(k.s>=r.len){k.s=-1;k.wait=3+Math.random()*9;continue}
+    if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=3+Math.random()*2;k.ph=Math.random()*6.28;k.fq=.55+Math.random()*.35;k.w=1.6+Math.random()*1.2}continue}
+    k.s+=k.v*dt;k.ph+=k.fq*dt;if(k.s>=r.len){k.s=-1;k.wait=2+Math.random()*6;continue}
     var P=runAt(r,k.s),sc=.75+(P.y-250)/200*.55,nx=-P.ty,ny=P.tx,lat=Math.sin(k.ph)*k.w*sc,dl=Math.cos(k.ph);
     var X=P.x+nx*lat,Y=P.y+ny*lat,fa=Math.min(1,k.s/12,(r.len-k.s)/12);
     // heading swings with the carve; body leans into the turn
     var hx=P.tx+nx*dl*.9,hy=P.ty+ny*dl*.9,hl=Math.hypot(hx,hy);hx/=hl;hy/=hl;
-    if(Math.abs(dl)>.8&&Math.random()<dt*14)spray.push({x:X,y:Y,vx:-nx*dl*5+(Math.random()-.5)*3,vy:-2-Math.random()*2,t:0});
-    var rr=1.5*sc;x.save();x.globalAlpha=fa*.95;x.fillStyle='#141824';x.beginPath();x.arc(X,Y-rr*.6,rr,0,6.29);x.fill();x.fillStyle=k.c;x.globalAlpha=fa*.8;x.beginPath();x.arc(X,Y-rr*1.1,rr*.55,0,6.29);x.fill();
+    if(false)spray.push({x:X,y:Y,vx:-nx*dl*5+(Math.random()-.5)*3,vy:-2-Math.random()*2,t:0});
+    var rr=1.05*sc;x.save();x.globalAlpha=fa*.95;x.fillStyle='#141824';x.beginPath();x.arc(X,Y-rr*.6,rr,0,6.29);x.fill();x.fillStyle=k.c;x.globalAlpha=fa*.8;x.beginPath();x.arc(X,Y-rr*1.1,rr*.55,0,6.29);x.fill();
     x.restore()}
   x.globalCompositeOperation='lighter';
   for(i=spray.length-1;i>=0;i--){var p=spray[i];p.t+=dt;if(p.t>.7){spray.splice(i,1);continue}p.vy+=10*dt;p.x+=p.vx*dt;p.y+=p.vy*dt;x.globalAlpha=.45*(1-p.t/.7);var z=.8+p.t*1.2;x.drawImage(FLAKE,p.x-z,p.y-z,z*2,z*2)}
@@ -44,7 +44,7 @@ function refl(im,wlo,key){if(RF[key])return RF[key];if(!im.complete||!im.natural
   g.globalCompositeOperation='destination-in';var gr=g.createLinearGradient(0,0,0,h);gr.addColorStop(0,'rgba(0,0,0,.85)');gr.addColorStop(.5,'rgba(0,0,0,.35)');gr.addColorStop(1,'rgba(0,0,0,0)');g.fillStyle=gr;g.fillRect(0,0,w,h);
   return RF[key]=k}
 function drawRefl(k,cx0,wl,sc,flip){if(!k)return;var w=k.width*sc,h=k.height*sc;
-  for(var y=0;y<k.height;y+=2){var o=(1.2+y*.18)*Math.sin(y*.55+T*2.7)+.8*Math.sin(y*.21-T*1.6),al=.55+.3*Math.sin(y*.9-T*3.3);
+  for(var y=0;y<k.height;y+=2){var o=(.45+y*.05)*Math.sin(y*.55+T*2.7)+.3*Math.sin(y*.21-T*1.6),al=.55+.3*Math.sin(y*.9-T*3.3);
     x.globalAlpha=Math.max(0,al);x.save();x.translate(cx0+o,0);if(flip)x.scale(-1,1);x.drawImage(k,0,y,k.width,2,-w/2,wl+1+y*sc,w,2*sc+.5);x.restore()}
   x.globalAlpha=1}
 function spr(size,draw){var k=document.createElement('canvas');k.width=k.height=size;draw(k.getContext('2d'),size);return k}
@@ -137,8 +137,8 @@ function frame(now){
   x.globalCompositeOperation='source-over';x.globalAlpha=1;
   // harbour: rippling reflections, a yacht cruising slowly, then the snow bank, trees and seaplane on top
   var G=GA.water;if(water.complete){
-    for(var y=0;y<G.h;y+=2){var ramp=Math.min(1,y/18),a=(3+6*y/G.h)*ramp*(1+energy*1.5);
-      var sh=a*(.62*Math.sin(y*.37+T*2.3)+.38*Math.sin(y*.12-T*1.5))+a*.25*Math.sin(y*.9+T*4.1),sy=Math.max(0,Math.min(G.h-2,y+Math.round(1.4*ramp*Math.sin(y*.55+T*3.2))));
+    for(var y=0;y<G.h;y+=2){var ramp=Math.min(1,y/18),a=(.7+1.6*y/G.h)*ramp*(1+energy*1.2);
+      var sh=a*(.62*Math.sin(y*.37+T*2.3)+.38*Math.sin(y*.12-T*1.5))+a*.25*Math.sin(y*.9+T*4.1),sy=Math.max(0,Math.min(G.h-2,y+Math.round(.6*ramp*Math.sin(y*.55+T*3.2))));
       x.drawImage(water,0,sy,G.w,2,G.x+sh,G.y+y,G.w,2)}}
   // seaplane taxis left to right, further out on the water
   var pu=((T+20)%96)/80;
