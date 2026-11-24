@@ -49,6 +49,11 @@ var RUNS=[{w:5,p:[[745,262],[800,285],[860,304],[910,316],[960,326],[1010,337],[
 function runAt(r,s){for(var i=1;i<r.p.length;i++)if(s<=r.L[i]||i===r.p.length-1){var a=r.p[i-1],b=r.p[i],t=Math.min(1,(s-r.L[i-1])/(r.L[i]-r.L[i-1])),dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy);return{x:a[0]+dx*t,y:a[1]+dy*t,tx:dx/d,ty:dy/d}}}
 var JK=['#b9706a','#7186ad','#b3a06a','#6f9a82','#b88462'];
 var skiers=[{r:0,d:2},{r:1,d:0},{r:1,d:14},{r:2,d:6},{r:2,d:22}].map(function(k,i){k.s=-1;k.wait=k.d;k.c=JK[i];return k});
+var LUM=null;function lumAt(px,py){if(!LUM){if(!base.complete||!base.naturalWidth)return 0;var k=document.createElement('canvas');k.width=328;k.height=Math.round((IH+DT)/4);var q=k.getContext('2d');q.drawImage(base,0,0,328,k.height);
+    var d=q.getImageData(0,0,k.width,k.height).data;LUM={w:k.width,h:k.height,d:new Uint8Array(k.width*k.height)};for(var i2=0;i2<LUM.d.length;i2++)LUM.d[i2]=(d[i2*4]*.4+d[i2*4+1]*.45+d[i2*4+2]*.15)|0}
+  var ix=Math.max(0,Math.min(LUM.w-1,(px/4)|0)),iy=Math.max(0,Math.min(LUM.h-1,((py+DT)/4)|0)),s=0;
+  for(var dy=-1;dy<=1;dy++)for(var dx=-1;dx<=1;dx++){var jx=Math.max(0,Math.min(LUM.w-1,ix+dx)),jy=Math.max(0,Math.min(LUM.h-1,iy+dy));s+=LUM.d[jy*LUM.w+jx]}return s/9}
+function mixC(h,t){var r=parseInt(h.substr(1,2),16),g2=parseInt(h.substr(3,2),16),b=parseInt(h.substr(5,2),16);return 'rgb('+((r+(255-r)*t)|0)+','+((g2+(236-g2)*t)|0)+','+((b+(200-b)*t)|0)+')'}
 function drawSkiers(dt){
   for(var i=0;i<skiers.length;i++){var k=skiers[i],r=RUNS[k.r];
     if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=1.6+Math.random()*1.2;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2}continue}
@@ -57,9 +62,10 @@ function drawSkiers(dt){
     if(k.s>=r.len){k.s=-1;k.wait=4+Math.random()*10;continue}
     var P=runAt(r,k.s),sc=.75+(P.y-250)/200*.5,nx=-P.ty,ny=P.tx,lat=w*(2/Math.PI)*Math.asin(.96*Math.sin(k.ph));
     var X=P.x+nx*lat,Y=P.y+ny*lat,fa=Math.min(1,k.s/10,(r.len-k.s)/10),h=3.1*sc,ln=.35*Math.cos(k.ph)*sc;
+    var lit=Math.max(0,Math.min(1,(lumAt(X,Y)-175)/60));k.lit=(k.lit||0)+(lit-(k.lit||0))*Math.min(1,dt*3);var lt=k.lit*.6;
     x.globalAlpha=fa*.75;x.lineCap='round';x.lineWidth=.85*sc;
-    x.strokeStyle='#6f7684';x.beginPath();x.moveTo(X,Y);x.lineTo(X+ln*.5,Y-h*.45);x.stroke();
-    x.strokeStyle=k.c;x.beginPath();x.moveTo(X+ln*.5,Y-h*.45);x.lineTo(X+ln,Y-h);x.stroke()}
+    x.strokeStyle=mixC('#6f7684',lt);x.beginPath();x.moveTo(X,Y);x.lineTo(X+ln*.5,Y-h*.45);x.stroke();
+    x.strokeStyle=mixC(k.c,lt);x.beginPath();x.moveTo(X+ln*.5,Y-h*.45);x.lineTo(X+ln,Y-h);x.stroke()}
   x.globalAlpha=1}
 function refl(im,wlo,key){if(RF[key])return RF[key];if(!im.complete||!im.naturalWidth)return null;
   var w=im.naturalWidth,h=Math.round(wlo*.8),k=document.createElement('canvas');k.width=w;k.height=h;var g=k.getContext('2d');
