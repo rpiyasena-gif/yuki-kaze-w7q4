@@ -180,6 +180,12 @@ function makeRefl(){
   var cs=q.createRadialGradient(656,yb(656)+8,0,656,yb(656)+8,660);cs.addColorStop(0,'rgba(0,0,0,.5)');cs.addColorStop(1,'rgba(0,0,0,0)');
   q.save();q.translate(0,yb(656)+8);q.scale(1,.05);q.translate(0,-(yb(656)+8));q.fillStyle=cs;q.fillRect(-100,-800,IW+200,1800);q.restore();
   k.TOP=TOP;return k}
+function makeVig(){
+  // curved vignette: darkness rises from the bottom edge and wraps up into the lower corners
+  var X=-2600,Y=-400,Wd=6512,Hd=4400,s=.125,k=document.createElement('canvas');k.width=Wd*s;k.height=Hd*s;var q=k.getContext('2d');q.scale(s,s);q.translate(-X,-Y);
+  q.save();q.translate(657,560);q.scale(1.25,1);var gr=q.createRadialGradient(0,0,560,0,0,980);gr.addColorStop(0,'rgba(0,0,0,0)');gr.addColorStop(.45,'rgba(0,0,0,.55)');gr.addColorStop(1,'rgba(0,0,0,1)');q.fillStyle=gr;q.fillRect(-4000,-4000,8000,8000);q.restore();
+  q.globalCompositeOperation='destination-in';var vg=q.createLinearGradient(0,500,0,1100);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,1)');q.fillStyle=vg;q.fillRect(X,Y,Wd,Hd);
+  k.X=X;k.Y=Y;k.W=Wd;k.H=Hd;return k}
 function frame(now){pickRS();
   var dt=Math.min((now-last)/1000||0,.1);last=now;T+=dt;
   GX+=(tGX-GX)*Math.min(1,dt*3);GY+=(tGY-GY)*Math.min(1,dt*3);
@@ -193,7 +199,7 @@ function frame(now){pickRS();
     var mx=Math.round(c.width*.35),my=Math.round(c.height*.35),st=frame.st||document.createElement('canvas');
     if(st.width!==c.width+2*mx||st.height!==c.height+2*my){st.width=c.width+2*mx;st.height=c.height+2*my}
     var sx2=st.getContext('2d');sx2.setTransform(1,0,0,1,0,0);sx2.fillStyle='#120804';sx2.fillRect(0,0,st.width,st.height);
-    sx2.setTransform(k,0,0,k,vtx*dpr+mx,vty*dpr+my);sx2.drawImage(BGI,BG.x,BG.y,BG.w,BG.h);if(!frame.rf)frame.rf=makeRefl();sx2.drawImage(frame.rf,0,frame.rf.TOP);sx2.drawImage(base,0,-DT,IW,IH+DT);
+    sx2.setTransform(k,0,0,k,vtx*dpr+mx,vty*dpr+my);sx2.drawImage(BGI,BG.x,BG.y,BG.w,BG.h);if(!frame.rf)frame.rf=makeRefl();sx2.drawImage(frame.rf,0,frame.rf.TOP);if(!frame.vg)frame.vg=makeVig();sx2.drawImage(frame.vg,frame.vg.X,frame.vg.Y,frame.vg.W,frame.vg.H);sx2.drawImage(base,0,-DT,IW,IH+DT);
     frame.st=st;frame.mx=mx;frame.my=my;frame.sk=key;frame.svs=vs;frame.svx=vtx;frame.svy=vty}
   var rr=vs/frame.svs;
   x.setTransform(1,0,0,1,0,0);x.globalAlpha=1;x.globalCompositeOperation='source-over';
