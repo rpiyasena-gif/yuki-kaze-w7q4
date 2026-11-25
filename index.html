@@ -906,14 +906,19 @@ function renderStatic(){
   var mot=false;
   function fwd(m){var f=ov.querySelector('iframe');try{if(f&&f.contentWindow&&f.contentWindow.globeMotion)f.contentWindow.globeMotion(m)}catch(e){}}
   function onO(e){fwd({beta:e.beta,gamma:e.gamma,angle:(screen.orientation&&screen.orientation.angle)||window.orientation||0})}
-  function onM(e){var a=e.acceleration;if(!a||a.x==null)return;fwd({mag:Math.hypot(a.x,a.y,a.z),ax:a.x,ay:a.y})}
+  var pg=null;
+  function onM(e){var a=e.acceleration,m,ax=0,ay=0;
+    if(a&&a.x!=null){m=Math.hypot(a.x,a.y,a.z);ax=a.x;ay=a.y}
+    else{var g=e.accelerationIncludingGravity;if(!g||g.x==null)return;if(!pg){pg=[g.x,g.y,g.z];return}ax=g.x-pg[0];ay=g.y-pg[1];m=Math.hypot(ax,ay,g.z-pg[2]);pg=[g.x,g.y,g.z]}
+    fwd({mag:m,ax:ax,ay:ay})}
   function listen(){if(mot)return;mot=true;addEventListener('deviceorientation',onO);addEventListener('devicemotion',onM)}
   var asked=false;
-  function askMotion(){if(mot||asked)return;asked=true;try{
-    if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==='function'){
-      var p=[DeviceMotionEvent.requestPermission()];if(window.DeviceOrientationEvent&&typeof DeviceOrientationEvent.requestPermission==='function')p.push(DeviceOrientationEvent.requestPermission());
-      Promise.all(p).then(function(r){if(r.indexOf('granted')>-1)listen()}).catch(function(){asked=false});
-    }else listen()}catch(e){}}
+  function askMotion(){if(mot||asked)return;asked=true;
+    var DM=window.DeviceMotionEvent,DO=window.DeviceOrientationEvent;
+    if(DM&&typeof DM.requestPermission==='function'){
+      // ask for motion first (this is the one that shows the prompt), then orientation; each works on its own
+      DM.requestPermission().then(function(r){if(r==='granted'){listen();if(DO&&typeof DO.requestPermission==='function')DO.requestPermission().catch(function(){})}else asked=false}).catch(function(){asked=false});
+    }else listen()}
   function open(){
     askMotion();
     if(!ov.querySelector('iframe')){var f=document.createElement('iframe');f.src='globe.html';f.title='Whistler and Vancouver snow globe';f.setAttribute('allow','accelerometer; gyroscope');ov.insertBefore(f,cl)}
@@ -1487,7 +1492,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261124235945';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261125000526';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
