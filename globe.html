@@ -48,7 +48,10 @@ function drawRoom(dt){
 var RUNS=[{w:5,p:[[745,262],[800,285],[860,304],[910,316],[960,326],[1010,337],[1040,344]]},{w:15,p:[[1035,366],[985,376],[940,388],[900,400],[860,412],[820,425],[785,438],[760,450]]},{w:8,p:[[845,318],[862,335],[885,352],[898,368],[890,384],[872,398],[855,412],[820,425],[785,438],[760,450]]}].map(function(r){var p=r.p,L=[0];for(var i=1;i<p.length;i++)L.push(L[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]));r.L=L;r.len=L[L.length-1];return r});
 function runAt(r,s){for(var i=1;i<r.p.length;i++)if(s<=r.L[i]||i===r.p.length-1){var a=r.p[i-1],b=r.p[i],t=Math.min(1,(s-r.L[i-1])/(r.L[i]-r.L[i-1])),dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy);return{x:a[0]+dx*t,y:a[1]+dy*t,tx:dx/d,ty:dy/d}}}
 var JK=['#b9706a','#7186ad','#b3a06a','#6f9a82','#b88462'];
-var skiers=[{r:0,d:2},{r:1,d:0},{r:1,d:14},{r:2,d:6},{r:2,d:22}].map(function(k,i){k.s=-1;k.wait=k.d;k.c=JK[i];return k});
+var skiers=[0,0,0,1,1,1,1,2,2,2].map(function(r,i){var k={r:r,c:JK[i%JK.length]};
+  // most start already partway down the mountain; a few wait at the top
+  if(i%4===3){k.s=-1;k.wait=3+Math.random()*15}else{k.s=RUNS[r].len*(.05+.85*Math.random());k.v=1.6+Math.random()*1.2;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2}
+  return k});
 var LUM=null;function lumAt(px,py){if(!LUM){if(!base.complete||!base.naturalWidth)return 0;var k=document.createElement('canvas');k.width=328;k.height=Math.round((IH+DT)/4);var q=k.getContext('2d');q.drawImage(base,0,0,328,k.height);
     var d=q.getImageData(0,0,k.width,k.height).data;LUM={w:k.width,h:k.height,d:new Uint8Array(k.width*k.height)};for(var i2=0;i2<LUM.d.length;i2++)LUM.d[i2]=(d[i2*4]*.4+d[i2*4+1]*.45+d[i2*4+2]*.15)|0}
   var ix=Math.max(0,Math.min(LUM.w-1,(px/4)|0)),iy=Math.max(0,Math.min(LUM.h-1,((py+DT)/4)|0)),s=0;
