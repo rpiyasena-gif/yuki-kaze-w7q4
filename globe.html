@@ -125,7 +125,8 @@ function clampView(){var bx=GA.bg.x*vs,by=GA.bg.y*vs,bw=GA.bg.w*vs,bh=GA.bg.h*vs
   vtx=cx+Math.max(-f*W,Math.min(f*W,vtx-cx));vty=cy+Math.max(-f*H,Math.min(f*H,vty-cy));
   vtx=bw<=W?(W-bw)/2-bx:Math.min(-bx,Math.max(W-bw-bx,vtx));vty=bh<=H?(H-bh)/2-by:Math.min(-by,Math.max(H-bh-by,vty))}
 function homeView(){vs=s0;vtx=W/2-660*vs;vty=H/2-((-DT+1160)/2)*vs;clampView()}
-function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
+var DPR0=Math.min(devicePixelRatio||1,2),RS=.7;
+function size(){dpr=DPR0*RS;W=innerWidth;H=innerHeight;c.width=Math.round(W*dpr);c.height=Math.round(H*dpr);
   var oldS0=s0;s0=Math.max(Math.min(W/1060,H/(1240+DT)),W/GA.bg.w,H/GA.bg.h);sMin=Math.max(W/GA.bg.w,H/GA.bg.h);sMax=Math.max(s0,W/1060)*2.5;
   if(!size.done){size.done=1;homeView()}else{vs=Math.max(sMin,Math.min(sMax,vs*s0/oldS0));clampView()}}
 size();addEventListener('resize',size);
@@ -152,7 +153,8 @@ function release(e){var had=ptrs[e.pointerId];delete ptrs[e.pointerId];var ids=O
   tap=null}
 c.addEventListener('pointerup',release);c.addEventListener('pointercancel',function(e){delete ptrs[e.pointerId];pinch=null;tap=null});
 document.addEventListener('gesturestart',function(e){e.preventDefault()});
-function frame(now){
+function pickRS(){var want=vs>s0*1.45?1:(vs<s0*1.3?.7:RS);if(want!==RS&&!pinch&&!Object.keys(ptrs).length){RS=want;dpr=DPR0*RS;c.width=Math.round(W*dpr);c.height=Math.round(H*dpr)}}
+function frame(now){pickRS();
   var dt=Math.min((now-last)/1000||0,.05);last=now;T+=dt;
   GX+=(tGX-GX)*Math.min(1,dt*3);GY+=(tGY-GY)*Math.min(1,dt*3);
   stir*=Math.exp(-dt*.55);energy*=Math.exp(-dt*.5);
