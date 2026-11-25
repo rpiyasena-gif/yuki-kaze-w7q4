@@ -32,7 +32,8 @@ for(var fz=0;fz<26;fz++){var fp=fireP({});fp.t=Math.random()*fp.life;FIRE.push(f
 var ATL=img(GA.atlas),CC=GA.C,FR=(function(){var a=P2W(706,212);return{sx:706,sy:212+EXT,sw:120,sh:155,x:a[0],y:a[1],w:120/PS,h:155/PS}})();
 var TOPL=GA.topl.map(function(p){var w=P2W(p[0],p[1]);var fd=.55+.45*Math.max(0,1+p[1]/235);return{x:w[0],y:w[1],c:p[2],fd:fd,r:(12+Math.random()*5)/PS,f:.3+Math.random()*.7,ph:Math.random()*6.28,blink:Math.random()<.3}});
 var TW2=GA.tw2.map(function(p){return{x:657+(p[0]-657)*SCL,y:1199+(p[1]-1199)*SCL,ax:p[2],ay:p[3],f:.3+Math.random()*.7,ph:Math.random()*6.28,blink:Math.random()<.3}});
-function drawRoom(dt){
+function drawRoom(dt){x.save();x.beginPath();x.rect(-6000,-6000,14000,14000);x.ellipse(CX,CY,R+6,RY+6,0,0,6.2832);x.rect(20,820,1272,500);x.clip('evenodd');drawRoom2(dt);x.restore()}
+function drawRoom2(dt){
   // the fire: glowing embers breathe; soft flame tongues lick up from the logs, flare and die away
   var fv=.55+.2*Math.sin(T*1.7)+.13*Math.sin(T*4.3+1)+.08*Math.sin(T*7.9+2);
   x.globalCompositeOperation='lighter';x.globalAlpha=Math.max(0,fv*.3);x.drawImage(BGI,FR.sx,FR.sy,FR.sw,FR.sh,FR.x,FR.y,FR.w,FR.h);
