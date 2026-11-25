@@ -98,7 +98,7 @@ var flares=[{x:136,y:692,s:1},{x:1131,y:266,s:.8},{x:1250,y:560,s:.55},{x:245,y:
 var fl=[],TARGET=650,MAXF=1300,stir=0,T=0,last=0,wob=0,wobV=0,wobX=0,wobY=0,energy=0;
 function inside(px,py,m){var dx=(px-CX)/(R-m),dy=(py-CY)/(RY-m);return dx*dx+dy*dy<1}
 function flake(px,py){var d=Math.random(),g=Math.random()<.28;
-  return{x:px,y:py,vx:0,vy:0,d:d,g:g,s:g?2+Math.random()*2:3+d*5+Math.random()*2,term:16+d*34+Math.random()*10,ph:Math.random()*6.28,fq:.6+Math.random()*1.4,amp:6+Math.random()*14,rest:0,life:0,fade:0,tw:Math.random()*6.28}}
+  return{x:px,y:py,vx:0,vy:0,d:d,g:g,s:g?2.2+Math.random()*2.2:(3.6+d*6.5+Math.random()*2.5)*(Math.random()<.12?1.6:1),term:16+d*34+Math.random()*10,ph:Math.random()*6.28,fq:.6+Math.random()*1.4,amp:6+Math.random()*14,rest:0,life:0,fade:0,tw:Math.random()*6.28}}
 function spawnTop(){var y=CY-RY+8+Math.random()*90,h=R*Math.sqrt(Math.max(0,1-(y-CY)*(y-CY)/(RY*RY)))-20,f=flake(CX+(Math.random()*2-1)*h,y);f.fade=0;f.vy=f.term;return f}
 for(var i=0;i<800;i++){var px,py;do{px=CX+(Math.random()*2-1)*R;py=CY-RY+Math.random()*(fy(px)-(CY-RY))}while(!inside(px,py,15));var f=flake(px,py);f.fade=1;fl.push(f)}
 var GX=0,GY=1,tGX=0,tGY=1,lastMot=0;
