@@ -38,7 +38,7 @@ main,header{position:relative;z-index:1}
 
 /* header */
 .hero{padding:46px 20px 18px;background:radial-gradient(120% 90% at 85% 0%,rgba(127,220,255,.28) 0%,rgba(127,220,255,0) 55%),linear-gradient(175deg,#12408a 0%,#0a2152 45%,#061127 100%);position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
-.sgw{position:absolute;z-index:3;right:12px;display:flex;align-items:center;transition:opacity .35s}
+.sgw{position:absolute;z-index:3;top:38px;right:12px;display:flex;align-items:center;transition:opacity .35s}
 .sgw.off{opacity:0;pointer-events:none}
 .sgw .sgb{white-space:nowrap}
 .sgb{display:flex;align-items:center;gap:6px;height:32px;padding:0 12px 0 9px;border-radius:16px;border:1px solid rgba(127,220,255,.45);background:rgba(8,26,58,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:var(--snow);font:500 0.8125rem/1 var(--body);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -901,10 +901,10 @@ function renderStatic(){
   requestAnimationFrame(loop);
 })();
 
-/* ---------- snow globe button: top right, tucked just below the gondola cable ---------- */
+/* ---------- snow globe button: top right under the lights; the gondola cable runs below it ---------- */
 (function(){var w=$('sgWrap'),cb=document.querySelector('.cable'),hero=document.querySelector('.hero');if(!w||!cb||!hero)return;
-  function place(){var r=cb.getBoundingClientRect(),hr=hero.getBoundingClientRect(),bw=w.offsetWidth,x0=hr.right-12-bw;
-    var y=r.bottom-(x0-r.left)*(r.height/r.width)-hr.top;w.style.top=Math.max(38,Math.round(y+36))+'px'}
+  function place(){var hr=hero.getBoundingClientRect(),W=hr.width,bb=w.offsetTop+w.offsetHeight,yr=bb+6,y0=Math.max(yr+14,118);
+    var ang=Math.atan((y0-yr)/(1.2*W));cb.style.top=y0+'px';cb.style.transform='rotate('+(-ang*180/Math.PI).toFixed(2)+'deg)'}
   place();addEventListener('resize',place);setTimeout(place,300);if(document.fonts)document.fonts.ready.then(place)})();
 /* ---------- snow globe: opens full screen, loaded only when first asked for ---------- */
 (function(){
@@ -1500,7 +1500,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261126141802';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261126142559';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>

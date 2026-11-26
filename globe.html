@@ -51,8 +51,19 @@ function drawRoom2(dt){
 var RUNS=[{w:5,p:[[745,262],[800,285],[860,304],[910,316],[960,326],[1010,337],[1040,344]]},{w:15,p:[[1035,366],[985,376],[940,388],[900,400],[860,412],[820,425],[785,438],[760,450]]},{w:8,p:[[845,318],[862,335],[885,352],[898,368],[890,384],[872,398],[855,412],[820,425],[785,438],[760,450]]}].map(function(r){var p=r.p,L=[0];for(var i=1;i<p.length;i++)L.push(L[i-1]+Math.hypot(p[i][0]-p[i-1][0],p[i][1]-p[i-1][1]));r.L=L;r.len=L[L.length-1];return r});
 function runAt(r,s){for(var i=1;i<r.p.length;i++)if(s<=r.L[i]||i===r.p.length-1){var a=r.p[i-1],b=r.p[i],t=Math.min(1,(s-r.L[i-1])/(r.L[i]-r.L[i-1])),dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy);return{x:a[0]+dx*t,y:a[1]+dy*t,tx:dx/d,ty:dy/d}}}
 var JK=['#b9706a','#7186ad','#b3a06a','#6f9a82','#b88462'];
-var skiers=[1,1,1,1,1,1,1,1,2,2,2,2,2,2,2].map(function(r,i){return{r:r,c:JK[i%JK.length],s:-2,wait:0}});var skPlaced=false;
-function placeSkiers(){if(lumAt(800,400)<=0)return false;
+var skiers=[1,1,1,1,1,1,2,2,2,2,2,2].map(function(r,i){return{r:r,c:JK[i%JK.length],s:-2,wait:0}});var skPlaced=false;
+var WM=null;function white(px,py){var ix=px|0,iy=(py+DT)|0;if(ix<0||iy<0||ix>=WM.w||iy>=WM.h)return false;return WM.d[iy*WM.w+ix]}
+function buildCorr(){var k=document.createElement('canvas');k.width=IW;k.height=IH+DT;var q=k.getContext('2d');q.drawImage(base,0,0);
+  var x0=700,y0=200+DT,ww=420,hh=320,d=q.getImageData(x0,y0,ww,hh).data;WM={w:IW,h:IH+DT,d:new Uint8Array(IW*(IH+DT))};
+  for(var yy=0;yy<hh;yy++)for(var xx=0;xx<ww;xx++){var o=(yy*ww+xx)*4,r=d[o],gg=d[o+1],b=d[o+2],l=.3*r+.55*gg+.15*b;WM.d[(yy+y0)*IW+xx+x0]=(l>150&&b>95)?1:0}
+  // soften: a pixel counts as snow if most of its 3x3 neighbourhood is snow
+  RUNS.forEach(function(r){r.cor=[];for(var s=0;s<=r.len;s+=2){var P=runAt(r,s),nx=-P.ty,ny=P.tx,ok=[];
+    for(var o=-22;o<=22;o++){var c=0;for(var a=-1;a<=1;a++)for(var b2=-1;b2<=1;b2++)c+=white(P.x+nx*o+a,P.y+ny*o+b2);ok.push(c>=8)}
+    var lo=0,hi=0;if(ok[22]){lo=0;while(lo>-22&&ok[22+lo-1])lo--;hi=0;while(hi<22&&ok[22+hi+1])hi++}
+    else{var best=99;for(var o2=0;o2<45;o2++)if(ok[o2]&&Math.abs(o2-22)<Math.abs(best))best=o2-22;if(best===99){lo=hi=0}else{lo=hi=best;while(lo>-22&&ok[22+lo-1])lo--;while(hi<22&&ok[22+hi+1])hi++}}
+    r.cor.push([lo+2,hi-2])}})}
+function corAt(r,s){var i=Math.max(0,Math.min(r.cor.length-1,Math.round(s/2))),c=r.cor[i];return c[1]<c[0]?[(c[0]+c[1])/2,(c[0]+c[1])/2]:c}
+function placeSkiers(){if(lumAt(800,400)<=0)return false;if(!WM)buildCorr();
   skiers.forEach(function(k,i){var r=RUNS[k.r],best=null,bl=-1;
     for(var j=0;j<40;j++){var s=r.len*(.04+.92*Math.random()),P=runAt(r,s),L=lumAt(P.x,P.y);var near=skiers.some(function(o){return o!==k&&o.r===k.r&&o.s>=0&&Math.abs(o.s-s)<8});if(!near&&L>bl){bl=L;best=s}}
     k.s=best;k.v=1.6+Math.random()*1.2;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2});return true}
@@ -87,9 +98,9 @@ function drawSkiers(dt){
   for(var i=0;i<skiers.length;i++){var k=skiers[i],r=RUNS[k.r];
     if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=1.6+Math.random()*1.2;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2}continue}
     // mostly sideways across the slope, slowly losing height; a smooth turn at each edge
-    var w=r.w*.85;k.ph+=Math.PI*k.lat/(2*w)*dt;k.s+=k.v*dt*(.55+.45*Math.abs(Math.cos(k.ph)));
+    var C=corAt(r,k.s),mid=(C[0]+C[1])/2,w=Math.max(.5,(C[1]-C[0])/2*.85);k.ph+=Math.PI*k.lat/(2*Math.max(3,w))*dt;k.s+=k.v*dt*(.55+.45*Math.abs(Math.cos(k.ph)));
     if(k.s>=r.len){k.s=-1;k.wait=4+Math.random()*10;continue}
-    var P=runAt(r,k.s),sc=.75+(P.y-250)/200*.5,nx=-P.ty,ny=P.tx,lat=w*(2/Math.PI)*Math.asin(.96*Math.sin(k.ph));
+    var P=runAt(r,k.s),sc=.75+(P.y-250)/200*.5,nx=-P.ty,ny=P.tx,tl=mid+w*(2/Math.PI)*Math.asin(.96*Math.sin(k.ph));k.lt2=(k.lt2===undefined?tl:k.lt2+(tl-k.lt2)*Math.min(1,dt*2));var lat=k.lt2;
     var X=P.x+nx*lat,Y=P.y+ny*lat,fa=Math.min(1,k.s/10,(r.len-k.s)/10),h=3.1*sc,ln=.35*Math.cos(k.ph)*sc;
     var lit=Math.max(0,Math.min(1,(lumAt(X,Y)-175)/60));k.lit=(k.lit||0)+(lit-(k.lit||0))*Math.min(1,dt*3);var lt=k.lit*.6;
     x.globalAlpha=fa*.75;x.lineCap='round';x.lineWidth=.85*sc;
