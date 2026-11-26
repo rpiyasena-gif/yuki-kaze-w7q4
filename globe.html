@@ -68,7 +68,7 @@ function corAt(r,s){var f=Math.max(0,Math.min(r.cor.length-1.001,s/2)),i=f|0,t=f
 function placeSkiers(){if(lumAt(800,400)<=0)return false;if(!WM)buildCorr();
   skiers.forEach(function(k,i){var r=RUNS[k.r],best=null,bl=-1;
     for(var j=0;j<40;j++){var s=r.len*(.04+.92*Math.random()),P=runAt(r,s),L=lumAt(P.x,P.y);var near=skiers.some(function(o){return o!==k&&o.r===k.r&&o.s>=0&&Math.abs(o.s-s)<8});if(!near&&L>bl){bl=L;best=s}}
-    k.s=best;k.v=1.1+Math.random()*.7;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2});return true}
+    k.s=best;k.v=1.4+Math.random()*1.4;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2;k.vp=Math.random()*6.28});return true}
 var LUM=null;function lumAt(px,py){if(!LUM){if(!base.complete||!base.naturalWidth)return 0;var k=document.createElement('canvas');k.width=328;k.height=Math.round((IH+DT)/4);var q=k.getContext('2d');q.drawImage(base,0,0,328,k.height);
     var d=q.getImageData(0,0,k.width,k.height).data;LUM={w:k.width,h:k.height,d:new Uint8Array(k.width*k.height)};for(var i2=0;i2<LUM.d.length;i2++)LUM.d[i2]=(d[i2*4]*.4+d[i2*4+1]*.45+d[i2*4+2]*.15)|0}
   var ix=Math.max(0,Math.min(LUM.w-1,(px/4)|0)),iy=Math.max(0,Math.min(LUM.h-1,((py+DT)/4)|0)),s=0;
@@ -98,9 +98,9 @@ function drawPeople(dt){
 function drawSkiers(dt){
   if(!skPlaced){skPlaced=placeSkiers();if(!skPlaced)return}
   for(var i=0;i<skiers.length;i++){var k=skiers[i],r=RUNS[k.r];
-    if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=1.1+Math.random()*.7;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2}continue}
+    if(k.s<0){k.wait-=dt;if(k.wait<=0){k.s=0;k.v=1.4+Math.random()*1.4;k.vp=Math.random()*6.28;k.ph=Math.random()*6.28;k.lat=3.5+Math.random()*2}continue}
     // mostly sideways across the slope, slowly losing height; a smooth turn at each edge
-    var C=corAt(r,k.s),mid=(C[0]+C[1])/2,w=Math.max(.5,(C[1]-C[0])/2*.85);k.ph+=.32*dt*(k.lat/4.5);k.s+=k.v*dt*(.55+.45*Math.abs(Math.cos(k.ph)));
+    var C=corAt(r,k.s),mid=(C[0]+C[1])/2,w=Math.max(.5,(C[1]-C[0])/2*.85);k.vp=(k.vp||0)+dt*.15;var vv=k.v*(1+.18*Math.sin(k.vp));k.ph+=.4*dt*(k.lat/4.5)*(vv/2);k.s+=vv*dt*(.55+.45*Math.abs(Math.cos(k.ph)));
     if(k.s>=r.len){k.s=-1;k.wait=4+Math.random()*10;continue}
     var P=runAt(r,k.s),sc=.75+(P.y-250)/200*.5,nx=-P.ty,ny=P.tx,tl=mid+w*(2/Math.PI)*Math.asin(.96*Math.sin(k.ph));k.lt2=(k.lt2===undefined?tl:k.lt2+(tl-k.lt2)*Math.min(1,dt*1.2));var lat=k.lt2;
     var X=P.x+nx*lat,Y=P.y+ny*lat,fa=Math.min(1,k.s/10,(r.len-k.s)/10),h=3.1*sc,ln=.35*Math.cos(k.ph)*sc;
