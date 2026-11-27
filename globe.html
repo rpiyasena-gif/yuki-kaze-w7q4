@@ -37,6 +37,10 @@ function drawRoom2(dt){
   var fv=.55+.2*Math.sin(T*1.7)+.13*Math.sin(T*4.3+1)+.08*Math.sin(T*7.9+2);
   x.globalCompositeOperation='lighter';x.globalAlpha=Math.max(0,fv*.3);x.drawImage(BGI,FR.sx,FR.sy,FR.sw,FR.sh,FR.x,FR.y,FR.w,FR.h);
   var gl=P2W(1140,850);x.globalAlpha=.16+.1*fv;x.drawImage(dsk('255,120,40'),gl[0]-230,gl[1]-170,460,300);
+  // firelight spilling into the room: a wide warm glow that flickers, reaching into the opening view
+  var fk=.5+.28*Math.sin(T*3.1)+.14*Math.sin(T*7.7+1.3)+.08*Math.sin(T*13.1+.4);
+  var gw=P2W(1150,860);x.globalAlpha=Math.max(0,.03+.34*fk);x.drawImage(dsk('255,135,50'),gw[0]-460,gw[1]-360,820,720);
+  x.globalCompositeOperation='source-over';x.globalAlpha=Math.max(0,(1-fk)*.25);x.drawImage(dsk('12,5,2'),gw[0]-300,gw[1]-260,560,520);x.globalCompositeOperation='lighter';
   for(var fi=0;fi<FIRE.length;fi++){var p=FIRE[fi];p.t+=dt;if(p.t>p.life){fireP(p);continue}
     var u=p.t/p.life,yy3=p.y0-p.rise*(u*(1.2-.2*u)),xx3=p.x0+p.sway*Math.sin(u*3+p.ph)*u,wd=p.w*(1-.6*u),ht=p.h*(.7+.6*u),al=Math.sin(Math.PI*Math.min(1,u*1.6))*(1-u)*p.a;
     x.globalAlpha=al*(.75+.35*fv);x.drawImage(dsk(u<.35?'255,215,140':(u<.7?'255,150,60':'230,80,30')),xx3-wd/2,yy3-ht,wd,ht*1.1)}
