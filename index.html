@@ -541,7 +541,7 @@ var DAYS=[
  {date:'2026-12-28',dow:'Mon',d:'28',mon:'Dec',cls:'ski',place:'Whistler · Ski day 3',items:[
   {t:'9:00 AM',x:'Lifts open',s:'Last ski day.'},
   {t:'3:30 PM',x:'Lifts close · return rental skis',s:''},
-  {t:'Evening',x:'Vallea Lumina forest light walk, or skating at Olympic Plaza',s:'Dinner idea: Bar Oso or Araxi.'}]},
+  {t:'Evening',x:'Skating at Olympic Plaza',s:'Dinner idea: Bar Oso or Araxi.'}]},
  {date:'2026-12-29',dow:'Tue',d:'29',mon:'Dec',cls:'',place:'Whistler to Vancouver · Stanley Park, duck, Canyon Lights',items:[
   {t:'Morning',x:'Sleep in, big brunch, pack',s:'Make it a big one: it carries you to dinner. Check-out at the Westin is 11:00 AM.'},
   {t:'11:00 AM',x:'Luxury Transport SUV to Vancouver',s:'Booked, pickup at the Westin. About 2 hours down the Sea-to-Sky and over the Lions Gate Bridge. Tip already included.'},
@@ -580,7 +580,6 @@ var DAYS=[
 
 var EX_W=[
  {name:'Peak 2 Peak Gondola',when:'On any ski day · included with your lift ticket',blurb:'The 11-minute ride between Whistler and Blackcomb peaks, 436 m above the valley. Wait for a glass-floor cabin.',site:'https://www.whistlerblackcomb.com/',map:'Peak 2 Peak Gondola Whistler'},
- {name:'Vallea Lumina',when:'After dark · about 1 hour · book ahead',blurb:'A lit, story-led walk through snowy forest at Cougar Mountain, 10 minutes from the village. A shuttle runs from the village. Good for both boys.',site:'https://vallealumina.com/',map:'Vallea Lumina Whistler'},
  {name:'bubly Tube Park',when:'Last season: 10 AM to 6 PM during the holidays',blurb:'Snow tubing lanes on Blackcomb with a conveyor lift back up. Works right after the lifts close. First come, first served.',site:'https://www.whistler.com/activities/tube-park',map:'Tube Park Blackcomb Whistler'},
  {name:'Skating at Whistler Olympic Plaza',when:'Afternoons and evenings',blurb:'Outdoor rink under the Olympic rings and village lights. Skate rentals on site.',site:'https://www.whistler.com/activities/ice-skating/',map:'Whistler Olympic Plaza'},
  {name:'Scandinave Spa',when:'Booked · Dec 27, 2:30 PM duo massage',blurb:'Outdoor hot pools, saunas and cold plunges in a cedar forest, in silence. Ages 16 and up on their own, 14 and 15 with a parent. Swimsuits required; robes, towels and locks provided. A 5-minute taxi from the village.',site:'https://www.scandinave.com/whistler/',map:'Scandinave Spa Whistler'},
@@ -1500,7 +1499,7 @@ function useLocal(){
 })();
 </script>
 <script>
-(function(){var B='20261126232155';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
+(function(){var B='20261127114604';function chk(){fetch('version.json?'+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){if(j&&j.v&&j.v!==B){var k='rl-'+j.v;try{if(sessionStorage.getItem(k))return;sessionStorage.setItem(k,'1')}catch(e){}location.replace(location.pathname+'?v='+encodeURIComponent(j.v))}}).catch(function(){})}
 chk();document.addEventListener('visibilitychange',function(){if(!document.hidden)chk()});window.addEventListener('pageshow',chk)})();
 </script>
 </body>
